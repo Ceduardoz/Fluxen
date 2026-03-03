@@ -1,14 +1,15 @@
 import styles from "./styles.module.css";
 import {
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
+  ResponsiveContainer, // Tamanho do Gráfico
+  AreaChart, // Gráfico da área
+  Area, // Linha e preenchimento da área
+  XAxis, // Horizontal
+  YAxis, // Vertical
+  Tooltip, // Tooltip
+  CartesianGrid, // Grade de fundo
 } from "recharts";
 
+// dados Mock
 const data = [
   { time: "10:00", value: 1200 },
   { time: "10:30", value: 4200 },
@@ -20,6 +21,7 @@ const data = [
   { time: "13:30", value: 11000 },
 ];
 
+// formatar valores no padrão brasileiro
 function formatMoney(v) {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",
@@ -28,6 +30,7 @@ function formatMoney(v) {
   }).format(Number(v));
 }
 
+// Tooltip customizado do gráfico
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
 
@@ -66,7 +69,7 @@ export default function WalletAnalyticsChart() {
 
           <CartesianGrid
             vertical={false}
-            stroke="rgba(0,0,0,0.08)"
+            stroke="var(--text-muted)"
             strokeDasharray="4 4"
           />
 
@@ -74,13 +77,13 @@ export default function WalletAnalyticsChart() {
             dataKey="time"
             tickLine={false}
             axisLine={false}
-            tick={{ fill: "rgba(0,0,0,0.55)", fontSize: 12 }}
+            tick={{ fill: "var(--text)", fontSize: 12 }}
           />
 
           <YAxis
             tickLine={false}
             axisLine={false}
-            tick={{ fill: "rgba(0,0,0,0.55)", fontSize: 12 }}
+            tick={{ fill: "var(--text)", fontSize: 12 }}
             tickFormatter={(v) => (v >= 1000 ? `${Math.round(v / 1000)}k` : v)}
           />
 

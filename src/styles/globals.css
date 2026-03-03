@@ -15,9 +15,9 @@
   --shadow-soft: 0 10px 30px rgba(31, 36, 48, 0.08);
 
   /* ========== Texto ========== */
-  --text: #1f2430; /* texto principal (em cards brancos) */
+  --text: #1f2430; /* texto principal */
   --text-muted: #6b7280; /* texto secundário */
-  --text-inverse: #f3f3f3; /* texto em fundos roxos (sidebar) */
+  --text-inverse: #f3f3f3; /* texto em fundos coloridos */
 
   /* ========== Marca ========== */
   --brand: #672ff6;
@@ -36,7 +36,7 @@
   --focus-ring-strong: rgba(43, 68, 244, 0.35); /* ring azul */
 
   /* ========== Componentes ========== */
-  --input-bg: #f3f1ff; /* input com leve lavanda */
+  --input-bg: #f3f1ff;
   --input-border: #dfdaf7;
   --input-placeholder: #9aa3b2;
 
@@ -53,15 +53,15 @@
   --success-bg: rgba(22, 163, 74, 0.12);
   --success-border: rgba(22, 163, 74, 0.25);
 
-  --error: #fd1d47; /* seu vermelho de marca */
+  --error: #fd1d47;
   --error-bg: rgba(253, 29, 71, 0.12);
   --error-border: rgba(253, 29, 71, 0.28);
 
-  --warning: #ff630d; /* laranja de marca */
+  --warning: #ff630d;
   --warning-bg: rgba(255, 99, 13, 0.14);
   --warning-border: rgba(255, 99, 13, 0.28);
 
-  --info: #2b44f4; /* azul de marca */
+  --info: #2b44f4;
   --info-bg: rgba(43, 68, 244, 0.12);
   --info-border: rgba(43, 68, 244, 0.26);
 
@@ -76,6 +76,16 @@
   --accent-red-2: #ff6b8b;
 
   min-height: 100%;
+}
+
+:root[data-theme="light"] {
+  /* ========== Base Dark ========== */
+  --bg-app: #252525; /* fundo dark */
+  --bg-surface: #313131; /* cards / painéis */
+  --bg-surface-2: #858585; /* superfície sutil (inputs, áreas internas) */
+
+  /* ========== text ========== */
+  --text: #f3f3f3;
 }
 
 body {
