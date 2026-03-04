@@ -1,6 +1,6 @@
 .wrapper {
-  height: 20rem;
-  width: 49rem;
+  width: 100%;
+  height: clamp(260px, 35vh, 460px);
   --chart-color: var(--accent-red-1);
 }
 

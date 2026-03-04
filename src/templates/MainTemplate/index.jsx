@@ -5,10 +5,14 @@ import Header from "../../components/Header";
 // Template geral do app
 export default function MainTemplate({ children }) {
   return (
-    <div className={styles.appShell}>
-      <Sidebar />
-      <Header />
-      <main className={styles.main}>{children}</main>
+    <div className={styles.page}>
+      <div className={styles.frame}>
+        <div className={styles.appShell}>
+          <Sidebar />
+          <Header />
+          <main className={styles.main}>{children}</main>
+        </div>
+      </div>
     </div>
   );
 }

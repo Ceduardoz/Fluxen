@@ -1,0 +1,14 @@
+.content {
+  display: flex;
+  justify-self: start;
+  gap: 2rem;
+  width: 100%;
+  height: 25%;
+  padding: 2rem 0;
+}
+
+.currentGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

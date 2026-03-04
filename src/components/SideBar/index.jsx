@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import styles from "./styles.module.css";
 
 export default function SideBar() {
@@ -10,10 +12,8 @@ export default function SideBar() {
 
       {/* Menu principal. */}
       <nav className={styles.menu}>
-        <a href="#">Dashboard</a>
-        <a href="#">Transações</a>
-        <a href="#">Categorias</a>
-        <a href="#">Relatórios</a>
+        <Link to="/">Dashboard</Link>
+        <Link to="/transations">Transações</Link>
       </nav>
     </aside>
   );

@@ -6,7 +6,7 @@ import GraphCard from "../../../components/GraphsCard";
 // Card para cada gráfico do dashboard
 export default function DashboardGraphs() {
   return (
-    <div className={styles.content}>
+    <div className={styles.graphs}>
       <GraphCard title="Carteira Analítica">
         <WalletAnalyticsChart />
       </GraphCard>
