@@ -1,43 +1,41 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   EditIcon,
   Trash2,
   ArrowBigRightDash,
   ArrowBigLeftDash,
 } from "lucide-react";
-import { transactionsMock } from "../../mockData/mockData";
 import styles from "./styles.module.css";
 
-export default function TransactionsTable() {
-  // Dados mock
-  const [transactions, setTransactions] = useState(transactionsMock);
-  // Paginação
-  const [currentPage, setCurrentPage] = useState(1);
+function formatDate(date) {
+  if (!date) return "-";
+  return new Date(date).toLocaleDateString("pt-BR");
+}
 
+function formatMoney(value) {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(Number(value || 0));
+}
+
+function formatType(type) {
+  if (type === "INCOME") return "Receita";
+  if (type === "EXPENSE") return "Despesa";
+  if (type === "TRANSFER") return "Transferência";
+  return type;
+}
+
+export default function TransactionsTable({ transactions = [] }) {
+  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
-  useEffect(() => {
-    async function loadTransactions() {
-      try {
-        const response = await fetch("http://localhost:3000/transactions");
-        const data = await response.json();
-        setTransactions(data);
-      } catch {
-        // está aqui para o eslint parar de reclamar, por enquanto está usando mock
-      }
-    }
+  const totalPages = Math.max(1, Math.ceil(transactions.length / itemsPerPage));
 
-    loadTransactions();
-  }, []);
-
-  // Definindo a página
-  const totalPages = Math.ceil(transactions.length / itemsPerPage);
-
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentTransactions = transactions.slice(
-    startIndex,
-    startIndex + itemsPerPage,
-  );
+  const currentTransactions = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return transactions.slice(startIndex, startIndex + itemsPerPage);
+  }, [transactions, currentPage]);
 
   return (
     <div className={styles.containerTable}>
@@ -57,43 +55,43 @@ export default function TransactionsTable() {
 
         <tbody>
           {currentTransactions.length > 0 ? (
-            currentTransactions.map((item) => (
-              <tr key={item.id}>
-                <td>{item.date}</td>
-                <td>{item.title}</td>
-                <td>{item.category}</td>
-                <td>
-                  <span
+            currentTransactions.map((item) => {
+              const isExpense = item.type === "EXPENSE";
+
+              return (
+                <tr key={item.id}>
+                  <td>{formatDate(item.date)}</td>
+                  <td>{item.title}</td>
+                  <td>{item.category?.name || item.category || "-"}</td>
+                  <td>
+                    <span
+                      className={isExpense ? styles.expense : styles.income}
+                    >
+                      {formatType(item.type)}
+                    </span>
+                  </td>
+                  <td
                     className={
-                      item.type === "expense" ? styles.expense : styles.income
+                      isExpense ? styles.expenseValue : styles.incomeValue
                     }
                   >
-                    {item.type}
-                  </span>
-                </td>
-                <td
-                  className={
-                    item.type === "expense"
-                      ? styles.expenseValue
-                      : styles.incomeValue
-                  }
-                >
-                  R$ {item.amount}
-                </td>
-                <td>
-                  <button
-                    className={`${styles.iconesTable} ${styles.editIcon}`}
-                  >
-                    <EditIcon size={18} />
-                  </button>
-                  <button
-                    className={`${styles.iconesTable} ${styles.deleteIcon}`}
-                  >
-                    <Trash2 size={18} />
-                  </button>
-                </td>
-              </tr>
-            ))
+                    {formatMoney(item.amount)}
+                  </td>
+                  <td>
+                    <button
+                      className={`${styles.iconesTable} ${styles.editIcon}`}
+                    >
+                      <EditIcon size={18} />
+                    </button>
+                    <button
+                      className={`${styles.iconesTable} ${styles.deleteIcon}`}
+                    >
+                      <Trash2 size={18} />
+                    </button>
+                  </td>
+                </tr>
+              );
+            })
           ) : (
             <tr>
               <td colSpan="6">Nenhuma transação encontrada.</td>
@@ -102,7 +100,6 @@ export default function TransactionsTable() {
         </tbody>
       </table>
 
-      {/* Paginação */}
       <div className={styles.pagination}>
         <button
           disabled={currentPage === 1}
