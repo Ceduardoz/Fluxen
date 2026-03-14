@@ -1,26 +1,24 @@
-import { transactionsMock } from "../../mockData/mockData";
-
 import styles from "./styles.module.css";
 import {
-  ResponsiveContainer, // Tamanho do Gráfico
-  AreaChart, // Gráfico da área
-  Area, // Linha e preenchimento da área
-  XAxis, // Horizontal
-  YAxis, // Vertical
-  Tooltip, // Tooltip
-  CartesianGrid, // Grade de fundo
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
 } from "recharts";
 
-// formatar valores no padrão brasileiro
-function formatMoney(v) {
+// formatar dinheiro
+function formatMoney(value) {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
     maximumFractionDigits: 0,
-  }).format(Number(v));
+  }).format(Number(value || 0));
 }
 
-// Tooltip customizado do gráfico
+// tooltip custom
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
 
@@ -34,14 +32,33 @@ function CustomTooltip({ active, payload, label }) {
   );
 }
 
-export default function WalletAnalyticsChart() {
-  const chartData = transactionsMock.map((t) => ({
-    time: new Date(t.date).toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-    }),
-    value: t.amount,
-  }));
+export default function WalletAnalyticsChart({ transactions = [] }) {
+  // remove transferências e ordena por data
+  const filteredTransactions = transactions
+    .filter((transaction) => transaction.type !== "TRANSFER")
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  const chartData = filteredTransactions.reduce((acc, transaction) => {
+    const amount =
+      transaction.type === "EXPENSE"
+        ? -Number(transaction.amount || 0)
+        : Number(transaction.amount || 0);
+
+    const previousBalance = acc.length > 0 ? acc[acc.length - 1].value : 0;
+
+    const newBalance = previousBalance + amount;
+
+    acc.push({
+      time: new Date(transaction.date).toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+      }),
+      value: newBalance,
+    });
+
+    return acc;
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <ResponsiveContainer width="100%" height="100%">
@@ -49,6 +66,7 @@ export default function WalletAnalyticsChart() {
           data={chartData}
           margin={{ top: 8, right: 10, left: 0, bottom: 0 }}
         >
+          {/* Gradiente da área */}
           <defs>
             <linearGradient id="walletFill" x1="0" y1="0" x2="0" y2="1">
               <stop
@@ -64,12 +82,14 @@ export default function WalletAnalyticsChart() {
             </linearGradient>
           </defs>
 
+          {/* grade */}
           <CartesianGrid
             vertical={false}
             stroke="var(--text-muted)"
             strokeDasharray="4 4"
           />
 
+          {/* eixo X */}
           <XAxis
             dataKey="time"
             tickLine={false}
@@ -77,15 +97,20 @@ export default function WalletAnalyticsChart() {
             tick={{ fill: "var(--text)", fontSize: 12 }}
           />
 
+          {/* eixo Y */}
           <YAxis
             tickLine={false}
             axisLine={false}
             tick={{ fill: "var(--text)", fontSize: 12 }}
-            tickFormatter={(v) => (v >= 1000 ? `${Math.round(v / 1000)}k` : v)}
+            tickFormatter={(v) =>
+              Math.abs(v) >= 1000 ? `${Math.round(v / 1000)}k` : v
+            }
           />
 
+          {/* tooltip */}
           <Tooltip content={<CustomTooltip />} />
 
+          {/* área */}
           <Area
             type="monotone"
             dataKey="value"
