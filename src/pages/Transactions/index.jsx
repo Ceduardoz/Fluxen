@@ -98,9 +98,9 @@ export default function Transactions() {
       </div>
 
       {loading ? (
-        <p>Carregando transações...</p>
+        <p className={styles.loadingAPI}>Carregando transações...</p>
       ) : error ? (
-        <p>{error}</p>
+        <p className={styles.loadingAPI}>{error}</p>
       ) : (
         <>
           <WalletAnalyticsChart transactions={filteredTransactions} />

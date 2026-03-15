@@ -26,3 +26,9 @@
   align-items: center;
   gap: 1rem;
 }
+
+.loadingAPI {
+  font-size: 2em;
+  text-align: center;
+  line-height: 75vh;
+}

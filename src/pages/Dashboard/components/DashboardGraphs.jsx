@@ -28,9 +28,10 @@ export default function DashboardGraphs({ dashboardData }) {
           },
         ]
       : [
-          { name: "Saldo em conta", value: 0 },
-          { name: "Despesas", value: 0 },
-          { name: "Cofre", value: 0 },
+          // Dados ficticios para vizualiação sem logar
+          { name: "Saldo em conta", value: 500 },
+          { name: "Despesas", value: 300 },
+          { name: "Cofre", value: 1000 },
         ];
 
   return (
