@@ -1,0 +1,14 @@
+.page {
+  overflow: hidden;
+  background-color: var(--bg-surface-2);
+}
+
+.main {
+  width: 95%;
+  height: 90%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  margin: 0 auto;
+  border-radius: 0.8rem;
+}

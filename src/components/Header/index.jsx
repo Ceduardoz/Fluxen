@@ -1,18 +1,25 @@
 import { useState, useEffect } from "react";
-import { SunIcon, Moon } from "lucide-react";
+import { SunIcon, Moon, User } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import DefaultButton from "../DefaultButton";
 import styles from "./styles.module.css";
-import { useLocation } from "react-router-dom";
 
 export default function Header() {
-  // Definindo o texto de acordo com a página renderizada
+  const navigate = useNavigate();
   const localtion = useLocation();
 
   const titles = {
     "/": "Bem Vindo, usuário",
     "/transacoes": "Transações",
   };
+
+  function handleIsLogged() {
+    let isLogged = false;
+
+    if (!isLogged) return navigate("/auth");
+    return navigate("/settingsAuth");
+  }
 
   const pageTitle = titles[localtion.pathname] || "dashboard";
 
@@ -50,6 +57,10 @@ export default function Header() {
       <h4 className={styles.NameUser}>{pageTitle}</h4>
 
       <div className={styles.icones}>
+        <DefaultButton onClick={handleIsLogged}>
+          <User />
+        </DefaultButton>
+
         {/* Botão mudança de tema. */}
         <DefaultButton
           aria-label="mudar tema"

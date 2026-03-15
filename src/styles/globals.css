@@ -12,7 +12,7 @@
   --bg-surface-2: #fbfbff; /* superfície sutil (inputs, áreas internas) */
 
   --border-subtle: #e9e9f2; /* bordas leves */
-  --shadow-soft: 0 10px 30px rgba(31, 36, 48, 0.08);
+  --shadow-soft: 0px 10px 30px rgba(31, 36, 48, 0.08);
 
   /* ========== Texto ========== */
   --text: #1f2430; /* texto principal */
