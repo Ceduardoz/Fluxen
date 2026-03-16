@@ -17,10 +17,11 @@ export default function Auth() {
     password: "",
     confirmPassword: "",
   });
+
   const [isRegister, setIsRegister] = useState(false);
   const [error, setError] = useState({});
   const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState(["success" | "error"]);
+  const [messageType, setMessageType] = useState(undefined);
 
   const navigate = useNavigate();
 
@@ -36,6 +37,7 @@ export default function Auth() {
   async function handleLoginSubmit(e) {
     e.preventDefault();
     setMessage("");
+    setError({});
 
     const user = {
       email: formData.email,
@@ -44,47 +46,68 @@ export default function Auth() {
 
     const res = loginSchemas.safeParse(user);
 
-    if (!res.success) return setError(res.error.flatten().fieldErrors);
-
-    setError({});
+    if (!res.success) {
+      setError(res.error.flatten().fieldErrors);
+      return;
+    }
 
     try {
       const response = await postLogin(res.data);
+
       setMessageType("success");
       setMessage("Login feito com sucesso");
+
+      console.log(response);
 
       setTimeout(() => {
         navigate("/");
       }, 1500);
-      console.log(response);
     } catch (e) {
       setMessageType("error");
-      setMessage(e.response?.data?.message || "Error ao fazer Login");
+      setMessage(e.response?.data?.message || "Erro ao fazer login");
+      console.log(e.response?.data);
     }
   }
 
   async function handleRegisterSubmit(e) {
     e.preventDefault();
     setMessage("");
+    setError({});
 
     const res = registerSchemas.safeParse(formData);
 
-    if (!res.success) return setError(res.error.flatten().fieldErrors);
+    if (!res.success) {
+      setError(res.error.flatten().fieldErrors);
+      return;
+    }
 
-    setError({});
+    const user = {
+      name: res.data.name,
+      email: res.data.email,
+      password: res.data.password,
+    };
 
     try {
-      const response = await postRegister(res.data);
+      const response = await postRegister(user);
+
       setMessageType("success");
-      setMessage("cadastro feito com sucesso");
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
+      setMessage("Cadastro feito com sucesso");
 
       console.log(response);
+
+      setTimeout(() => {
+        setIsRegister(false);
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        });
+      }, 1500);
     } catch (e) {
       setMessageType("error");
-      setMessage(e.response?.data?.message || "Error ao cadastrar");
+      setMessage(e.response?.data?.message || "Erro ao cadastrar");
+      console.log(e.response?.data);
     }
   }
 
@@ -100,12 +123,12 @@ export default function Auth() {
             <div className={`${styles.card} ${styles.right}`}>
               <header className={styles.logoArea}>
                 <Logo />
-                <h2>Finance</h2>
+                <h2 className={styles.nameLogo}>Finance</h2>
               </header>
 
               <h3 className={styles.title}>Login</h3>
 
-              <Message message={message} type={messageType ?? undefined} />
+              <Message message={message} type={messageType} />
 
               <form onSubmit={handleLoginSubmit} className={styles.form}>
                 <div className={styles.inputGroup}>
@@ -118,7 +141,9 @@ export default function Auth() {
                     onChange={handleChange}
                   />
                 </div>
-                {error.email && <p>{error.email[0]}</p>}
+                {error.email && (
+                  <p className={styles.formError}>{error.email[0]}</p>
+                )}
 
                 <div className={styles.inputGroup}>
                   <Lock className={styles.inputIcon} size={20} />
@@ -133,7 +158,9 @@ export default function Auth() {
                     esqueceu senha?
                   </button>
                 </div>
-                {error.password && <p>{error.password[0]}</p>}
+                {error.password && (
+                  <p className={styles.formError}>{error.password[0]}</p>
+                )}
 
                 <label className={styles.checkboxRow}>
                   <input type="checkbox" defaultChecked />
@@ -150,7 +177,11 @@ export default function Auth() {
                 <button
                   type="button"
                   className={styles.switchButton}
-                  onClick={() => setIsRegister(true)}
+                  onClick={() => {
+                    setIsRegister(true);
+                    setMessage("");
+                    setError({});
+                  }}
                 >
                   Cadastrar
                 </button>
@@ -160,12 +191,12 @@ export default function Auth() {
             <div className={`${styles.card} ${styles.left}`}>
               <header className={styles.logoArea}>
                 <Logo />
-                <h2>Finance</h2>
+                <h2 className={styles.nameLogo}>Finance</h2>
               </header>
 
               <h3 className={styles.title}>Criar nova conta</h3>
 
-              <Message message={message} type={messageType ?? undefined} />
+              <Message message={message} type={messageType} />
 
               <form onSubmit={handleRegisterSubmit} className={styles.form}>
                 <div className={styles.inputGroup}>
@@ -178,7 +209,9 @@ export default function Auth() {
                     onChange={handleChange}
                   />
                 </div>
-                {error.name && <p>{error.name[0]}</p>}
+                {error.name && (
+                  <p className={styles.formError}>{error.name[0]}</p>
+                )}
 
                 <div className={styles.inputGroup}>
                   <Mail className={styles.inputIcon} size={20} />
@@ -190,7 +223,9 @@ export default function Auth() {
                     onChange={handleChange}
                   />
                 </div>
-                {error.email && <p>{error.email[0]}</p>}
+                {error.email && (
+                  <p className={styles.formError}>{error.email[0]}</p>
+                )}
 
                 <div className={styles.inputGroup}>
                   <Lock className={styles.inputIcon} size={20} />
@@ -202,7 +237,9 @@ export default function Auth() {
                     onChange={handleChange}
                   />
                 </div>
-                {error.password && <p>{error.password[0]}</p>}
+                {error.password && (
+                  <p className={styles.formError}>{error.password[0]}</p>
+                )}
 
                 <div className={styles.inputGroup}>
                   <EyeOff className={styles.inputIcon} size={20} />
@@ -214,7 +251,9 @@ export default function Auth() {
                     onChange={handleChange}
                   />
                 </div>
-                {error.confirmPassword && <p>{error.confirmPassword[0]}</p>}
+                {error.confirmPassword && (
+                  <p className={styles.formError}>{error.confirmPassword[0]}</p>
+                )}
 
                 <button type="submit" className={styles.primaryButton}>
                   Cadastrar
@@ -226,7 +265,11 @@ export default function Auth() {
                 <button
                   type="button"
                   className={styles.switchButton}
-                  onClick={() => setIsRegister(false)}
+                  onClick={() => {
+                    setIsRegister(false);
+                    setMessage("");
+                    setError({});
+                  }}
                 >
                   Login
                 </button>

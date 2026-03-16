@@ -71,8 +71,12 @@
   margin: 10px 0px;
 }
 
-.logoArea h1,
-.logoArea h2 {
+.nameLogo {
+  color: var(--accent-orange-1);
+  font-weight: 700;
+}
+
+.logoArea h1 {
   font-weight: 400;
   color: var(--text-inverse);
 }
@@ -116,7 +120,7 @@
   color: var(--input-placeholder);
 }
 
-p {
+.formError {
   color: var(--error);
 }
 
