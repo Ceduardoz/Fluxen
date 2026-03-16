@@ -16,7 +16,7 @@
   justify-content: center;
   flex-direction: column;
   width: 500px;
-  height: 600px;
+  height: 650px;
   background-color: var(--bg-app);
   padding: 38px 34px 30px;
   backdrop-filter: blur(10px);
@@ -29,7 +29,7 @@
   justify-content: center;
   align-items: center;
   width: 500px;
-  height: 600px;
+  height: 650px;
   position: relative;
   overflow: hidden;
   transition: transform 0.6s ease;
@@ -88,7 +88,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 1rem;
 }
 
 .inputGroup {
@@ -109,11 +109,15 @@
   outline: none;
   background: transparent;
   font-size: 0.8rem;
-  color: var(--input-placeholder);
+  color: var(--text-muted);
 }
 
 .inputGroup input::placeholder {
-  color: var(--text-muted);
+  color: var(--input-placeholder);
+}
+
+p {
+  color: var(--error);
 }
 
 .inputIcon {

@@ -78,7 +78,7 @@
   min-height: 100%;
 }
 
-:root[data-theme="light"] {
+:root[data-theme="dark"] {
   /* ========== Base Dark ========== */
   --bg-app: #252525; /* fundo dark */
   --bg-surface: #313131; /* cards / painéis */
