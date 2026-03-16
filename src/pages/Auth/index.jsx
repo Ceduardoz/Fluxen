@@ -59,7 +59,7 @@ export default function Auth() {
       console.log(response);
     } catch (e) {
       setMessageType("error");
-      setMessage(e.response?.data?.message || "error ao fazer Login");
+      setMessage(e.response?.data?.message || "Error ao fazer Login");
     }
   }
 
@@ -84,7 +84,7 @@ export default function Auth() {
       console.log(response);
     } catch (e) {
       setMessageType("error");
-      setMessage(e.response?.data?.message || "error ao cadastrar");
+      setMessage(e.response?.data?.message || "Error ao cadastrar");
     }
   }
 

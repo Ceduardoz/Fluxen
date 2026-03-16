@@ -1,14 +1,23 @@
 .successMsg {
+  width: 200px;
   background-color: var(--success);
-  color: var(--background-secundary-color);
+  color: var(--text);
   padding: 10px;
   border-radius: 4px;
   margin-bottom: 16px;
+  text-align: center;
+  font-weight: 700;
+  margin: 10px auto;
 }
 
 .errorMsg {
+  width: 200px;
   background-color: var(--error);
-  color: var(--background-secundary-color);
+  color: var(--text);
   padding: 10px;
   border-radius: 4px;
+  margin-bottom: 16px;
+  text-align: center;
+  font-weight: 700;
+  margin: 10px auto;
 }

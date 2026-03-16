@@ -74,7 +74,7 @@
 .logoArea h1,
 .logoArea h2 {
   font-weight: 400;
-  color: var(--text);
+  color: var(--text-inverse);
 }
 
 .title {
