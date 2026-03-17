@@ -1,12 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { CirclePlus } from "lucide-react";
 
-import api from "../../services/server";
+import { getTransactions } from "../../services/transactionsServices";
 import MainTemplate from "../../templates/MainTemplate";
 import DefaultModal from "../../components/DefaultModal";
 import FinanceForm from "../../components/FinanceForm";
 import TransactionsTable from "../../components/TransactionsTable";
-import WalletAnalyticsChart from "../../components/WalletAnalyticsChart";
 
 import styles from "./styles.module.css";
 
@@ -21,12 +20,9 @@ export default function Transactions() {
   useEffect(() => {
     async function loadTransactions() {
       try {
-        const response = await api.get("/transactions");
-        const data = response.data;
+        const response = await getTransactions();
 
-        console.log("Transações da API:", data);
-
-        setTransactions(Array.isArray(data) ? data : []);
+        setTransactions(Array.isArray(response) ? response : []);
       } catch (error) {
         console.error("Erro ao buscar transações:", error);
         setError("Não foi possível carregar as transações.");
@@ -103,7 +99,6 @@ export default function Transactions() {
         <p className={styles.loadingAPI}>{error}</p>
       ) : (
         <>
-          <WalletAnalyticsChart transactions={filteredTransactions} />
           <TransactionsTable transactions={filteredTransactions} />
         </>
       )}
