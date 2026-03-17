@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../services/server";
 
-import { useAuthGuard } from "../../hook/useAuthGuard";
+import { useAuthGuard } from "../../hooks/useAuthGuard";
 import SummaryCards from "./components/SummaryCards";
 import DashboardGraphs from "./components/DashboardGraphs";
 import MainTemplate from "../../templates/MainTemplate";
