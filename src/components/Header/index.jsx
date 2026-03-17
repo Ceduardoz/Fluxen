@@ -2,15 +2,26 @@ import { useState, useEffect } from "react";
 import { SunIcon, Moon, User } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { getMe } from "../../services/authServices";
 import DefaultButton from "../DefaultButton";
 import styles from "./styles.module.css";
 
 export default function Header() {
   const navigate = useNavigate();
+  const [user, setUser] = useState("");
   const localtion = useLocation();
 
+  useEffect(() => {
+    async function loadUser() {
+      const user = await getMe();
+      setUser(user);
+    }
+
+    loadUser();
+  }, []);
+
   const titles = {
-    "/": "Bem Vindo, usuário",
+    "/": `Bem Vindo, ${user.name || "usuário"}`,
     "/transacoes": "Transações",
   };
 
@@ -23,9 +34,6 @@ export default function Header() {
 
   const pageTitle = titles[localtion.pathname] || "dashboard";
 
-  // Pegar o tema pelo localStorage
-  // Evita leitura desnecessária do localStorage a cada render.
-  // Garante fallback seguro para "light".
   const [theme, setTheme] = useState(() => {
     const storageTheme = localStorage.getItem("theme");
     if (storageTheme === "dark" || storageTheme === "light") {

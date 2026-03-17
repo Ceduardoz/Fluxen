@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import api from "../../services/server";
 
+import { useAuthGuard } from "../../hook/useAuthGuard";
 import SummaryCards from "./components/SummaryCards";
 import DashboardGraphs from "./components/DashboardGraphs";
 import MainTemplate from "../../templates/MainTemplate";
 
 export default function Dashboard() {
+  useAuthGuard();
+
   const [summaryCards, setSummaryCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState({
