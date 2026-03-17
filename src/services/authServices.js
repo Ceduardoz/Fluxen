@@ -9,3 +9,8 @@ export async function postLogin(data) {
   const response = await api.post("/auth/login", data);
   return response.data;
 }
+
+export async function getMe(data) {
+  const response = await api.get("/auth/me", data);
+  return response.data;
+}

@@ -57,7 +57,7 @@ export default function Auth() {
       setMessageType("success");
       setMessage("Login feito com sucesso");
 
-      console.log(response);
+      localStorage.setItem("token", response.token);
 
       setTimeout(() => {
         navigate("/");
