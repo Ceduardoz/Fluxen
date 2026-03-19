@@ -4,7 +4,7 @@ import { CirclePlus } from "lucide-react";
 import { getTransactions } from "../../services/transactionsServices";
 import MainTemplate from "../../templates/MainTemplate";
 import DefaultModal from "../../components/DefaultModal";
-import FinanceForm from "../../components/FinanceForm";
+import { FinanceForm } from "../../components/Forms";
 import TransactionsTable from "../../components/TransactionsTable";
 
 import styles from "./styles.module.css";

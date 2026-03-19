@@ -1,0 +1,30 @@
+.buttonDefault {
+  width: 100%;
+  height: 60px;
+  border: none;
+  border-radius: 0.8rem;
+  background: linear-gradient(
+    90deg,
+    var(--brand-600) 30%,
+    var(--brand-400) 100%
+  );
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.buttonDefault:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+}
+
+.buttonIcon {
+  background-color: transparent;
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+}

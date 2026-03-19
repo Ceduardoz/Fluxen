@@ -1,0 +1,37 @@
+.side {
+  background-color: var(--bg-app);
+  display: flex;
+}
+
+.imageSide {
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 650px;
+  transition:
+    transform 0.6s ease,
+    border-radius 0.6s ease;
+}
+
+.imageLogin {
+  transform: translateX(0);
+  border-radius: 0 1.8rem 1.8rem 0;
+}
+
+.imageRegister {
+  transform: translateX(-500px);
+  border-radius: 1.8rem 0 0 1.8rem;
+}
+
+.imageContent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
