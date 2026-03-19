@@ -26,7 +26,7 @@ export default function Header() {
   };
 
   function handleIsLogged() {
-    let isLogged = false;
+    let isLogged = localStorage.getItem("token");
 
     if (!isLogged) return navigate("/auth");
     return navigate("/settingsAuth");
