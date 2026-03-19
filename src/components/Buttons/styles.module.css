@@ -1,4 +1,8 @@
 .buttonDefault {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
   width: 100%;
   height: 60px;
   border: none;

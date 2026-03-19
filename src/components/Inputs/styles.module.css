@@ -11,3 +11,19 @@
 .inputDefault::placeholder {
   color: var(--input-placeholder);
 }
+
+.TransactionInput {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: var(--input-bg);
+  font-size: 1.4rem;
+  color: var(--text-muted);
+  padding: 1rem;
+  border-radius: 0.8rem;
+}
+
+.TransactionInput::placeholder {
+  color: var(--input-placeholder);
+}

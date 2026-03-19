@@ -8,6 +8,8 @@ import { FinanceForm } from "../../components/Forms";
 import TransactionsTable from "../../components/TransactionsTable";
 
 import styles from "./styles.module.css";
+import { DefaultButton } from "../../components/Buttons";
+import { TransactionInput } from "../../components/Inputs";
 
 export default function Transactions() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,7 +59,7 @@ export default function Transactions() {
   return (
     <MainTemplate>
       <div className={styles.filter}>
-        <input
+        <TransactionInput
           type="search"
           name="search"
           className={styles.inputsFilter}
@@ -67,7 +69,7 @@ export default function Transactions() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <input
+        <TransactionInput
           type="month"
           name="month"
           id="month"
@@ -76,13 +78,10 @@ export default function Transactions() {
           onChange={(e) => setSelectedMonth(e.target.value)}
         />
 
-        <button
-          className={`${styles.OpenModalBtn} ${styles.inputsFilter}`}
-          onClick={() => setIsModalOpen(true)}
-        >
+        <DefaultButton onClick={() => setIsModalOpen(true)}>
           <CirclePlus />
           Adicionar Transação
-        </button>
+        </DefaultButton>
 
         <DefaultModal
           isOpen={isModalOpen}
