@@ -6,7 +6,6 @@ import { getCategories } from "../../services/categoryServices";
 
 import MainTemplate from "../../templates/MainTemplate";
 import DefaultModal from "../../components/DefaultModal";
-import { FinanceForm } from "../../components/Forms";
 import TransactionsTable from "../../components/TransactionsTable";
 
 import styles from "./styles.module.css";
@@ -28,31 +27,37 @@ export default function Transactions() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
 
+  async function loadTransactions() {
+    try {
+      const responseTransactions = await getTransactions();
+      const transactionsData = normalizeArray(responseTransactions);
+      setTransactions(transactionsData);
+      setError("");
+    } catch (error) {
+      console.error("Erro ao buscar transações:", error);
+      setError("Não foi possível carregar as transações.");
+      setTransactions([]);
+    }
+  }
+
+  async function loadCategories() {
+    try {
+      const responseCategories = await getCategories();
+      const categoriesData = normalizeArray(responseCategories);
+      setCategories(categoriesData);
+    } catch (error) {
+      console.error("Erro ao buscar categorias:", error);
+      setCategories([]);
+    }
+  }
+
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      setError("");
 
-      try {
-        const responseTransactions = await getTransactions();
-        const transactionsData = normalizeArray(responseTransactions);
-        setTransactions(transactionsData);
-      } catch (error) {
-        console.error("Erro ao buscar transações:", error);
-        setError("Não foi possível carregar as transações.");
-        setTransactions([]);
-      }
+      await Promise.all([loadTransactions(), loadCategories()]);
 
-      try {
-        const responseCategories = await getCategories();
-        const categoriesData = normalizeArray(responseCategories);
-        setCategories(categoriesData);
-      } catch (error) {
-        console.error("Erro ao buscar categorias:", error);
-        setCategories([]);
-      } finally {
-        setLoading(false);
-      }
+      setLoading(false);
     }
 
     loadData();
@@ -125,9 +130,10 @@ export default function Transactions() {
         <DefaultModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
+          categories={categories}
+          onTransactionCreated={loadTransactions}
         >
           <h2>Adicionar Finanças</h2>
-          <FinanceForm />
         </DefaultModal>
       </div>
 
@@ -138,7 +144,7 @@ export default function Transactions() {
       ) : (
         <TransactionsTable
           transactions={filteredTransactions}
-          categories={transactionsWithCategory}
+          categories={categories}
         />
       )}
     </MainTemplate>

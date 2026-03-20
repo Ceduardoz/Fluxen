@@ -1,9 +1,28 @@
 import styles from "./styles.module.css";
 import { DefaultInput } from "../Inputs";
+import { DefaultButton } from "../Buttons";
 
-export const FinanceForm = () => {
+export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
+  function handleChange(e) {
+    const { name, value, type } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "number" ? (value === "" ? "" : Number(value)) : value,
+    }));
+  }
+
+  function handleCategoryChange(e) {
+    const value = e.target.value;
+
+    setFormData((prev) => ({
+      ...prev,
+      categoryId: value === "" ? undefined : Number(value),
+    }));
+  }
+
   return (
-    <form className={styles.form}>
+    <div className={styles.form}>
       <div className={styles.field}>
         <label htmlFor="title">Título</label>
         <input
@@ -11,6 +30,8 @@ export const FinanceForm = () => {
           name="title"
           type="text"
           placeholder="Ex: Mercado do mês"
+          value={formData.title}
+          onChange={handleChange}
         />
       </div>
 
@@ -22,6 +43,8 @@ export const FinanceForm = () => {
           type="number"
           step="0.01"
           placeholder="0,00"
+          value={formData.amount}
+          onChange={handleChange}
         />
       </div>
 
@@ -30,33 +53,56 @@ export const FinanceForm = () => {
 
         <div className={styles.radioGroup}>
           <label>
-            <input type="radio" name="type" value="income" />
+            <input
+              type="radio"
+              name="type"
+              value="INCOME"
+              checked={formData.type === "INCOME"}
+              onChange={handleChange}
+            />
             Receita
           </label>
 
           <label>
-            <input type="radio" name="type" value="expense" />
+            <input
+              type="radio"
+              name="type"
+              value="EXPENSE"
+              checked={formData.type === "EXPENSE"}
+              onChange={handleChange}
+            />
             Despesa
           </label>
         </div>
       </div>
 
       <div className={styles.field}>
-        <label htmlFor="category">Categoria</label>
-        <select id="category" name="category">
+        <label htmlFor="categoryId">Categoria</label>
+        <select
+          id="categoryId"
+          name="categoryId"
+          value={formData.categoryId ?? ""}
+          onChange={handleCategoryChange}
+        >
+          {console.log(categories)}
           <option value="">Selecione uma categoria</option>
-          <option value="salary">Salário</option>
-          <option value="food">Alimentação</option>
-          <option value="transport">Transporte</option>
-          <option value="leisure">Lazer</option>
-          <option value="health">Saúde</option>
-          <option value="other">Outros</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
         </select>
       </div>
 
       <div className={styles.field}>
         <label htmlFor="date">Data</label>
-        <input id="date" name="date" type="date" />
+        <input
+          id="date"
+          name="date"
+          type="date"
+          value={formData.date}
+          onChange={handleChange}
+        />
       </div>
 
       <div className={styles.field}>
@@ -65,13 +111,13 @@ export const FinanceForm = () => {
           id="description"
           name="description"
           placeholder="Observações sobre a transação"
+          value={formData.description}
+          onChange={handleChange}
         />
       </div>
 
-      <button type="submit" className={styles.submitButton}>
-        Adicionar
-      </button>
-    </form>
+      <DefaultButton type="submit">Adicionar</DefaultButton>
+    </div>
   );
 };
 
