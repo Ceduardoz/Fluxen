@@ -49,9 +49,9 @@
   --btn-secondary-text: var(--brand);
 
   /* ========== Estados ========== */
-  --success: #16a34a;
-  --success-bg: rgba(22, 163, 74, 0.12);
-  --success-border: rgba(22, 163, 74, 0.25);
+  --success: #42bf70;
+  --success-bg: rgba(44, 214, 107, 0.12);
+  --success-border: rgba(39, 198, 97, 0.25);
 
   --error: #fd1d47;
   --error-bg: rgba(253, 29, 71, 0.12);

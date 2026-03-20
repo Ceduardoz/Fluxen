@@ -62,7 +62,7 @@ export default function TransactionsTable({ transactions = [] }) {
                 <tr key={item.id}>
                   <td>{formatDate(item.date)}</td>
                   <td>{item.title}</td>
-                  <td>{item.category?.name || item.category || "-"}</td>
+                  <td>{item.categoryName || "-"}</td>
                   <td>
                     <span
                       className={isExpense ? styles.expense : styles.income}
