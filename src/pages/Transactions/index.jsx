@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { CirclePlus } from "lucide-react";
 
-import { getTransactions } from "../../services/transactionsServices";
+import {
+  getTransactions,
+  deleteTransaction,
+} from "../../services/transactionsServices";
 import { getCategories } from "../../services/categoryServices";
 
 import MainTemplate from "../../templates/MainTemplate";
@@ -100,6 +103,12 @@ export default function Transactions() {
     });
   }, [transactionsWithCategory, searchTerm, selectedMonth]);
 
+  async function handleDeleteTransaction(id) {
+    const response = await deleteTransaction(id);
+    await loadTransactions();
+    return response;
+  }
+
   return (
     <MainTemplate>
       <div className={styles.filter}>
@@ -145,6 +154,7 @@ export default function Transactions() {
         <TransactionsTable
           transactions={filteredTransactions}
           categories={categories}
+          onDelete={handleDeleteTransaction}
         />
       )}
     </MainTemplate>

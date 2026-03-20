@@ -78,14 +78,13 @@ export const DefaultModal = ({
         {children}
 
         <form onSubmit={handleTransactionsSubmit}>
+          {message && <p className={styles.message}>{message}</p>}
           <FinanceForm
             formData={formData}
             setFormData={setFormData}
             categories={categories}
           />
         </form>
-
-        {message && <p className={styles.message}>{message}</p>}
       </div>
     </div>
   );

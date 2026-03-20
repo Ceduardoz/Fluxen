@@ -26,7 +26,7 @@ function formatType(type) {
   return type;
 }
 
-export default function TransactionsTable({ transactions = [] }) {
+export default function TransactionsTable({ transactions = [], onDelete }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
@@ -83,7 +83,9 @@ export default function TransactionsTable({ transactions = [] }) {
                     >
                       <EditIcon size={18} />
                     </button>
+
                     <button
+                      onClick={() => onDelete(item.id)}
                       className={`${styles.iconesTable} ${styles.deleteIcon}`}
                     >
                       <Trash2 size={18} />

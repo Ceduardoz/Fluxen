@@ -50,10 +50,12 @@ td {
 }
 
 .editIcon {
+  cursor: pointer;
   color: var(--info);
 }
 
 .deleteIcon {
+  cursor: pointer;
   color: var(--error);
 }
 

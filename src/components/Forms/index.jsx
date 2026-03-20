@@ -25,7 +25,7 @@ export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
     <div className={styles.form}>
       <div className={styles.field}>
         <label htmlFor="title">Título</label>
-        <input
+        <DefaultInput
           id="title"
           name="title"
           type="text"
@@ -37,7 +37,7 @@ export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
 
       <div className={styles.field}>
         <label htmlFor="amount">Valor</label>
-        <input
+        <DefaultInput
           id="amount"
           name="amount"
           type="number"
@@ -53,7 +53,7 @@ export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
 
         <div className={styles.radioGroup}>
           <label>
-            <input
+            <DefaultInput
               type="radio"
               name="type"
               value="INCOME"
@@ -64,7 +64,7 @@ export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
           </label>
 
           <label>
-            <input
+            <DefaultInput
               type="radio"
               name="type"
               value="EXPENSE"
@@ -96,7 +96,7 @@ export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
 
       <div className={styles.field}>
         <label htmlFor="date">Data</label>
-        <input
+        <DefaultInput
           id="date"
           name="date"
           type="date"
