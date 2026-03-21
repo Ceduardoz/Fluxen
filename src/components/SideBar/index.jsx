@@ -24,6 +24,13 @@ export default function SideBar() {
       >
         Transações
       </NavLink>
+
+      <NavLink
+        to="/categorias"
+        className={({ isActive }) => (isActive ? `${styles.active}` : "")}
+      >
+        Categories
+      </NavLink>
     </aside>
   );
 }

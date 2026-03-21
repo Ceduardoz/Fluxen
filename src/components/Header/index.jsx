@@ -23,6 +23,7 @@ export default function Header() {
   const titles = {
     "/": `Bem Vindo, ${user.name || "usuário"}`,
     "/transacoes": "Transações",
+    "/categorias": "Categorias",
   };
 
   function handleIsLogged() {

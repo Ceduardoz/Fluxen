@@ -8,8 +8,8 @@ import {
 import { getCategories } from "../../services/categoryServices";
 
 import MainTemplate from "../../templates/MainTemplate";
-import DefaultModal from "../../components/DefaultModal";
-import TransactionsTable from "../../components/TransactionsTable";
+import DefaultModal from "../../components/Modal";
+import { TransactionsTable } from "../../components/Table";
 
 import styles from "./styles.module.css";
 import { DefaultButton } from "../../components/Buttons";
@@ -164,7 +164,7 @@ export default function Transactions() {
 
   return (
     <MainTemplate>
-      <div className={styles.filter}>
+      <section className={styles.filter}>
         <TransactionInput
           type="search"
           name="search"
@@ -204,7 +204,7 @@ export default function Transactions() {
             {selectedTransaction ? "Editar Finanças" : "Adicionar Finanças"}
           </h2>
         </DefaultModal>
-      </div>
+      </section>
 
       {loading ? (
         <p className={styles.loadingAPI}>Carregando transações...</p>

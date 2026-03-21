@@ -1,4 +1,4 @@
-import styles from "../styles.module.css";
+import styles from "./styles.module.css";
 import SummaryCardItem from "./SummaryCardItem";
 
 // imprimir todos os cards

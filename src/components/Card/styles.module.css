@@ -1,3 +1,17 @@
+.currentGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  height: 25%;
+  padding: 1rem 0;
+}
+
 .card {
   display: flex;
   justify-content: center;

@@ -1,11 +1,10 @@
 import { ChartNoAxesCombined } from "lucide-react";
-import styles from "../styles.module.css";
-import DefaultCard from "../../../components/DefaultCard";
+import styles from "./styles.module.css";
+import Card from "./Card";
 
-// Card de cada div dos status (4 divs)
 export default function SummaryCardItem({ variant, title, value }) {
   return (
-    <DefaultCard variant={variant}>
+    <Card variant={variant}>
       <h2>{title}</h2>
 
       <div className={styles.currentGroup}>
@@ -16,6 +15,6 @@ export default function SummaryCardItem({ variant, title, value }) {
 
         <ChartNoAxesCombined size={50} />
       </div>
-    </DefaultCard>
+    </Card>
   );
 }

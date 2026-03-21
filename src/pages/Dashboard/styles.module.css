@@ -1,17 +1,3 @@
-.content {
-  display: flex;
-  gap: 2rem;
-  width: 100%;
-  height: 25%;
-  padding: 1rem 0;
-}
-
-.currentGroup {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 /* área dos cards (SummaryCards) — deixa separado */
 .cardsRow {
   display: flex;
