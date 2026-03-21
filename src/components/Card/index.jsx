@@ -1,5 +1,7 @@
 import styles from "./styles.module.css";
+export { default as ContainerCard } from "./ContainerCard";
 import SummaryCardItem from "./SummaryCardItem";
+export { default as CategoryCardItem } from "./CategoryCardItem";
 
 // imprimir todos os cards
 export default function SummaryCards({ cards }) {

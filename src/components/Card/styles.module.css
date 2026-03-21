@@ -15,6 +15,7 @@
 .card {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   gap: 1rem;
   color: var(--text-inverse);
@@ -25,6 +26,84 @@
   padding: 0.8rem;
 }
 
+.card:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.1);
+}
+
+/* VARIANTS (Categories) */
+.default {
+  background-color: var(--bg-app);
+}
+
+.food {
+  background-image: linear-gradient(
+    165deg,
+    var(--accent-food-1),
+    var(--accent-food-2)
+  );
+}
+
+.housing {
+  background-image: linear-gradient(
+    165deg,
+    var(--accent-housing-1),
+    var(--accent-housing-2)
+  );
+}
+
+.salary {
+  background-image: linear-gradient(
+    165deg,
+    var(--accent-salary-1),
+    var(--accent-salary-2)
+  );
+}
+
+.leisure {
+  background-image: linear-gradient(
+    165deg,
+    var(--accent-leisure-1),
+    var(--accent-leisure-2)
+  );
+}
+.education {
+  background-image: linear-gradient(
+    165deg,
+    var(--accent-education-1),
+    var(--accent-education-2)
+  );
+}
+.transport {
+  background-image: linear-gradient(
+    165deg,
+    var(--accent-transport-1),
+    var(--accent-transport-2)
+  );
+}
+.others {
+  background-image: linear-gradient(
+    165deg,
+    var(--accent-others-1),
+    var(--accent-others-2)
+  );
+}
+.health {
+  background-image: linear-gradient(
+    165deg,
+    var(--accent-health-1),
+    var(--accent-health-2)
+  );
+}
+.subscriptions {
+  background-image: linear-gradient(
+    165deg,
+    var(--accent-subscriptions-1),
+    var(--accent-subscriptions-2)
+  );
+}
+
+/* VARIANTS (Categories) */
 .balance {
   background-image: linear-gradient(
     165deg,

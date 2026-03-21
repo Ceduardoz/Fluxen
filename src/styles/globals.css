@@ -65,7 +65,7 @@
   --info-bg: rgba(43, 68, 244, 0.12);
   --info-border: rgba(43, 68, 244, 0.26);
 
-  /* ========== Colors cards ========== */
+  /* ========== Colors Dashboard ========== */
   --accent-purple-1: #7a4dff;
   --accent-purple-2: #a78bfa;
   --accent-blue-1: #3b82f6;
@@ -74,6 +74,26 @@
   --accent-orange-2: #fe8d7a;
   --accent-red-1: #ff2d5a;
   --accent-red-2: #ff6b8b;
+
+  /* ========== Colors Categories ========== */
+  --accent-food-1: #fc4069;
+  --accent-food-2: #ff92aa;
+  --accent-leisure-1: #fcae40;
+  --accent-leisure-2: #dcb885;
+  --accent-salary-1: #40fc9b;
+  --accent-salary-2: #a1f9cb;
+  --accent-housing-1: #b9ac79;
+  --accent-housing-2: #f5f2e7;
+  --accent-education-1: #545cf4;
+  --accent-education-2: #9fa3ef;
+  --accent-health-1: #ffdf5e;
+  --accent-health-2: #fce380;
+  --accent-others-1: #f971d0;
+  --accent-others-2: #ff96df;
+  --accent-transport-1: #bd6019;
+  --accent-transport-2: #d18347;
+  --accent-subscriptions-1: #ab43d4;
+  --accent-subscriptions-2: #cb81e9;
 
   min-height: 100%;
 }
