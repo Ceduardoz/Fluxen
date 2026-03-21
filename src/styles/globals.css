@@ -14,7 +14,7 @@
   --border-subtle: #e9e9f2; /* bordas leves */
   --shadow-soft: 0px 10px 30px rgba(31, 36, 48, 0.08);
 
-  /* ========== Texto ========== */
+  /* ========== Text ========== */
   --text: #1f2430; /* texto principal */
   --text-muted: #6b7280; /* texto secundário */
   --text-inverse: #f3f3f3; /* texto em fundos coloridos */
@@ -27,7 +27,7 @@
 
   --brand-blue: #2b44f4;
 
-  /* ========== Interação ========== */
+  /* ========== Interations ========== */
   --hover-on-brand: rgba(255, 255, 255, 0.15); /* hover em sidebar roxa */
   --hover-on-surface: rgba(31, 36, 48, 0.06); /* hover em cards brancos */
   --active-on-surface: rgba(31, 36, 48, 0.1);
@@ -35,7 +35,7 @@
   --focus-ring: rgba(103, 47, 246, 0.35); /* ring roxo */
   --focus-ring-strong: rgba(43, 68, 244, 0.35); /* ring azul */
 
-  /* ========== Componentes ========== */
+  /* ========== Components ========== */
   --input-bg: #f3f1ff;
   --input-border: #dfdaf7;
   --input-placeholder: #9aa3b2;
@@ -65,7 +65,7 @@
   --info-bg: rgba(43, 68, 244, 0.12);
   --info-border: rgba(43, 68, 244, 0.26);
 
-  /* ========== Cores extras ========== */
+  /* ========== Colors cards ========== */
   --accent-purple-1: #7a4dff;
   --accent-purple-2: #a78bfa;
   --accent-blue-1: #3b82f6;

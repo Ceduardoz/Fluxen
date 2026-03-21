@@ -8,6 +8,7 @@ import {
   patchTransaction,
 } from "../../services/transactionsServices";
 import { FinanceForm } from "../Forms";
+import { DefaultButton } from "../Buttons";
 import Message from "../Message";
 
 const EMPTY_TRANSACTION_FORM = {
@@ -65,7 +66,7 @@ export const DefaultModal = ({
         setMessage("Transação atualizada com sucesso");
       } else {
         await postTransactions(payload);
-        setMessageType("error");
+        setMessageType("success");
         setMessage("Transação criada com sucesso");
       }
 
@@ -78,6 +79,7 @@ export const DefaultModal = ({
       }, 800);
     } catch (e) {
       console.log(e);
+      setMessageType("error");
       setMessage("Erro ao salvar transação");
     }
   }
@@ -99,6 +101,9 @@ export const DefaultModal = ({
             setFormData={setFormData}
             categories={categories}
           />
+          <DefaultButton type="submit">
+            {transactionToEdit ? "Editar" : "Adicionar"}
+          </DefaultButton>
         </form>
       </div>
     </div>

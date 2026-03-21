@@ -1,11 +1,13 @@
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rem;
+  margin-bottom: 2rem;
 }
 
 .field {
   display: flex;
+  justify-content: space-around;
   flex-direction: column;
   gap: 0.45rem;
 }
@@ -14,6 +16,7 @@
 .field span {
   font-size: 0.95rem;
   font-weight: 600;
+  margin: 1rem 0.8rem 0rem;
   color: var(--text);
 }
 
@@ -21,6 +24,7 @@
 .field select,
 .field textarea {
   width: 100%;
+  margin: 0rem 0.8rem;
   padding: 0.85rem 1rem;
   border: 1px solid var(--border-subtle);
   border-radius: 10px;
@@ -76,22 +80,6 @@
   width: auto;
   margin: 0;
   accent-color: var(--brand);
-}
-
-.submitButton {
-  margin-top: 0.5rem;
-  border: none;
-  border-radius: 10px;
-  padding: 0.95rem 1rem;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  background: var(--brand-600);
-  color: var(--text-inverse);
-  transition:
-    transform 0.15s ease,
-    opacity 0.2s ease,
-    box-shadow 0.2s ease;
 }
 
 .submitButton:hover {

@@ -17,7 +17,6 @@ export default function DashboardGraphs({ dashboardData = {} }) {
     async function loadTransactions() {
       try {
         const response = await getTransactions();
-        console.log("response.data:", response);
 
         const data = Array.isArray(response) ? response : [];
         setTransactions(data);
