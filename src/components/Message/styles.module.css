@@ -1,5 +1,5 @@
 .successMsg {
-  width: 200px;
+  width: 350px;
   background-color: var(--success);
   color: var(--text);
   padding: 10px;
@@ -11,7 +11,7 @@
 }
 
 .errorMsg {
-  width: 200px;
+  width: 350px;
   background-color: var(--error);
   color: var(--text);
   padding: 10px;

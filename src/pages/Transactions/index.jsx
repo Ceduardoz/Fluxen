@@ -21,8 +21,44 @@ function normalizeArray(response) {
   return [];
 }
 
+const EMPTY_TRANSACTION_FORM = {
+  title: "",
+  description: "",
+  amount: "",
+  type: "EXPENSE",
+  date: "",
+  accountId: 13,
+  categoryId: undefined,
+  toAccountId: undefined,
+};
+
+function formatDateForInput(date) {
+  if (!date) return "";
+  return String(date).split("T")[0];
+}
+
+function mapTransactionToFormData(transaction) {
+  if (!transaction) return EMPTY_TRANSACTION_FORM;
+
+  return {
+    title: transaction.title || "",
+    description: transaction.description || "",
+    amount: transaction.amount ?? "",
+    type: transaction.type || "EXPENSE",
+    date: formatDateForInput(transaction.date),
+    accountId: transaction.accountId || 13,
+    categoryId:
+      transaction.categoryId ??
+      transaction.category_id ??
+      transaction.idCategory ??
+      undefined,
+    toAccountId: transaction.toAccountId ?? undefined,
+  };
+}
+
 export default function Transactions() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -57,9 +93,7 @@ export default function Transactions() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-
       await Promise.all([loadTransactions(), loadCategories()]);
-
       setLoading(false);
     }
 
@@ -104,10 +138,29 @@ export default function Transactions() {
   }, [transactionsWithCategory, searchTerm, selectedMonth]);
 
   async function handleDeleteTransaction(id) {
-    const response = await deleteTransaction(id);
+    const confirmDelete = confirm("Deseja realmente excluir esta transação?");
+    if (!confirmDelete) return;
+
+    await deleteTransaction(id);
     await loadTransactions();
-    return response;
   }
+
+  function handleOpenCreateModal() {
+    setSelectedTransaction(null);
+    setIsModalOpen(true);
+  }
+
+  function handleOpenEditModal(transaction) {
+    setSelectedTransaction(transaction);
+    setIsModalOpen(true);
+  }
+
+  function handleCloseModal() {
+    setIsModalOpen(false);
+    setSelectedTransaction(null);
+  }
+
+  const modalInitialData = mapTransactionToFormData(selectedTransaction);
 
   return (
     <MainTemplate>
@@ -131,18 +184,25 @@ export default function Transactions() {
           onChange={(e) => setSelectedMonth(e.target.value)}
         />
 
-        <DefaultButton onClick={() => setIsModalOpen(true)}>
+        <DefaultButton onClick={handleOpenCreateModal}>
           <CirclePlus />
           Adicionar Transação
         </DefaultButton>
 
         <DefaultModal
+          key={
+            selectedTransaction ? `edit-${selectedTransaction.id}` : "create"
+          }
           isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+          onClose={handleCloseModal}
           categories={categories}
           onTransactionCreated={loadTransactions}
+          transactionToEdit={selectedTransaction}
+          initialData={modalInitialData}
         >
-          <h2>Adicionar Finanças</h2>
+          <h2>
+            {selectedTransaction ? "Editar Finanças" : "Adicionar Finanças"}
+          </h2>
         </DefaultModal>
       </div>
 
@@ -153,8 +213,8 @@ export default function Transactions() {
       ) : (
         <TransactionsTable
           transactions={filteredTransactions}
-          categories={categories}
           onDelete={handleDeleteTransaction}
+          onEdit={handleOpenEditModal}
         />
       )}
     </MainTemplate>

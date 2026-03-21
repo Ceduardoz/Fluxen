@@ -15,7 +15,7 @@ export async function deleteTransaction(id) {
   return response.data;
 }
 
-export async function patchTransaction(id) {
-  const response = await api.patch(`/transactions/${id}`);
+export async function patchTransaction(id, data) {
+  const response = await api.patch(`/transactions/${id}`, data);
   return response.data;
 }

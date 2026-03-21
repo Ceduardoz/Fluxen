@@ -84,7 +84,6 @@ export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
           value={formData.categoryId ?? ""}
           onChange={handleCategoryChange}
         >
-          {console.log(categories)}
           <option value="">Selecione uma categoria</option>
           {categories.map((category) => (
             <option key={category.id} value={category.id}>

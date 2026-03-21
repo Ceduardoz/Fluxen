@@ -3,28 +3,36 @@ import { CircleX } from "lucide-react";
 
 import styles from "./styles.module.css";
 import { transactionsSchemas } from "../../schemas/transactionsSchemas";
-import { postTransactions } from "../../services/transactionsServices";
+import {
+  postTransactions,
+  patchTransaction,
+} from "../../services/transactionsServices";
 import { FinanceForm } from "../Forms";
+import Message from "../Message";
+
+const EMPTY_TRANSACTION_FORM = {
+  title: "",
+  description: "",
+  amount: "",
+  type: "EXPENSE",
+  date: "",
+  accountId: 13,
+  categoryId: undefined,
+  toAccountId: undefined,
+};
 
 export const DefaultModal = ({
   isOpen,
   onClose,
   categories = [],
   onTransactionCreated,
+  transactionToEdit,
+  initialData = EMPTY_TRANSACTION_FORM,
   children,
 }) => {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    amount: "",
-    type: "EXPENSE",
-    date: "",
-    accountId: 3,
-    categoryId: undefined,
-    toAccountId: undefined,
-  });
-
+  const [formData, setFormData] = useState(initialData);
   const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState(undefined);
 
   if (!isOpen) return null;
 
@@ -39,32 +47,38 @@ export const DefaultModal = ({
       return;
     }
 
+    const payload = {
+      title: res.data.title,
+      description: res.data.description || "",
+      amount: res.data.amount,
+      type: res.data.type,
+      date: res.data.date.toISOString(),
+      accountId: res.data.accountId,
+      ...(res.data.categoryId ? { categoryId: res.data.categoryId } : {}),
+      ...(res.data.toAccountId ? { toAccountId: res.data.toAccountId } : {}),
+    };
+
     try {
-      await postTransactions(res.data);
-
-      setMessage("Transação criada com sucesso");
-
-      setFormData({
-        title: "",
-        description: "",
-        amount: "",
-        type: "EXPENSE",
-        date: "",
-        accountId: 1,
-        categoryId: undefined,
-        toAccountId: undefined,
-      });
+      if (transactionToEdit) {
+        await patchTransaction(transactionToEdit.id, payload);
+        setMessageType("success");
+        setMessage("Transação atualizada com sucesso");
+      } else {
+        await postTransactions(payload);
+        setMessageType("error");
+        setMessage("Transação criada com sucesso");
+      }
 
       if (onTransactionCreated) {
-        onTransactionCreated();
+        await onTransactionCreated();
       }
 
       setTimeout(() => {
         onClose();
-      }, 1000);
+      }, 800);
     } catch (e) {
-      console.error("Erro ao criar transação:", e);
-      setMessage("Erro ao criar transação");
+      console.log(e);
+      setMessage("Erro ao salvar transação");
     }
   }
 
@@ -78,7 +92,8 @@ export const DefaultModal = ({
         {children}
 
         <form onSubmit={handleTransactionsSubmit}>
-          {message && <p className={styles.message}>{message}</p>}
+          <Message message={message} type={messageType} />
+
           <FinanceForm
             formData={formData}
             setFormData={setFormData}
