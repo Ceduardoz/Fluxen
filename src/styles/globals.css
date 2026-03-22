@@ -12,7 +12,7 @@
   --bg-surface-2: #fbfbff; /* superfície sutil (inputs, áreas internas) */
 
   --border-subtle: #e9e9f2; /* bordas leves */
-  --shadow-soft: 0px 10px 30px rgba(31, 36, 48, 0.08);
+  --shadow-soft: rgba(31, 36, 48, 0.905);
 
   /* ========== Text ========== */
   --text: #1f2430; /* texto principal */
@@ -44,17 +44,17 @@
   --btn-primary-hover: #5f27f3;
   --btn-primary-text: #ffffff;
 
-  --btn-secondary-bg: rgba(103, 47, 246, 0.1);
-  --btn-secondary-hover: rgba(103, 47, 246, 0.16);
+  --btn-secondary-bg: rgba(233, 233, 233, 0.734);
+  --btn-secondary-hover: rgba(233, 233, 233, 0.588);
   --btn-secondary-text: var(--brand);
 
   /* ========== Estados ========== */
   --success: #42bf70;
-  --success-bg: rgba(44, 214, 107, 0.12);
+  --success-bg: rgba(23, 150, 70, 0.581);
   --success-border: rgba(39, 198, 97, 0.25);
 
   --error: #fd1d47;
-  --error-bg: rgba(253, 29, 71, 0.12);
+  --error-bg: rgba(253, 29, 70, 0.488);
   --error-border: rgba(253, 29, 71, 0.28);
 
   --warning: #ff630d;
@@ -80,7 +80,7 @@
   --accent-food-2: #ff92aa;
   --accent-leisure-1: #fcae40;
   --accent-leisure-2: #dcb885;
-  --accent-salary-1: #40fc9b;
+  --accent-salary-1: #35d984;
   --accent-salary-2: #a1f9cb;
   --accent-housing-1: #b9ac79;
   --accent-housing-2: #f5f2e7;
@@ -92,8 +92,6 @@
   --accent-others-2: #ff96df;
   --accent-transport-1: #bd6019;
   --accent-transport-2: #d18347;
-  --accent-subscriptions-1: #ab43d4;
-  --accent-subscriptions-2: #cb81e9;
 
   min-height: 100%;
 }
@@ -105,6 +103,7 @@
   --bg-surface-2: #858585; /* superfície sutil (inputs, áreas internas) */
 
   --active-on-surface: rgba(149, 158, 180, 0.1);
+  --shadow-soft: rgba(31, 36, 48, 0.905);
 
   /* ========== text ========== */
   --text: #f3f3f3;

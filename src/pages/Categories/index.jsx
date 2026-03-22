@@ -18,7 +18,6 @@ export default function Categories() {
     Lazer: "leisure",
     Transporte: "transport",
     Educação: "education",
-    Assinaturas: "subscriptions",
     Outros: "others",
     Saúde: "health",
   };
@@ -30,8 +29,10 @@ export default function Categories() {
 
         setSummaryCards(
           data.map((category) => ({
+            id: category.userId,
             variant: categoryVariantMap[category.name] || "default",
             title: category.name,
+            categoryType: category.categoryType,
           })),
         );
       } catch (e) {
@@ -45,24 +46,44 @@ export default function Categories() {
   return (
     <MainTemplate>
       <div className={styles.categoriesWrapper}>
-        <section className={`${styles.field} ${styles.fieldCategoriesGlobals}`}>
-          <h2>Categorias</h2>
+        <section className={`${styles.field}`}>
+          <h2 className={styles.title}>Categorias</h2>
           <div className={styles.cardsGrid}>
-            {summaryCards.map((card) => (
-              <CategoryCardItem
-                key={card.title}
-                variant={card.variant}
-                title={card.title}
-              />
-            ))}
+            {summaryCards
+              .filter((card) => card.id === null)
+              .map((card) => (
+                <CategoryCardItem
+                  key={card.title}
+                  variant={card.variant}
+                  title={card.title}
+                  type={card.categoryType}
+                  isCustom={card.id === null ? false : true}
+                />
+              ))}
           </div>
         </section>
 
-        <section className={`${styles.field} ${styles.fieldCategoriesPrivate}`}>
-          <h2 className={styles.title}>Minhas Categorias </h2>
-          <ButtonIcon>
-            <CirclePlus />
-          </ButtonIcon>
+        <section className={`${styles.field}`}>
+          <h2 className={styles.title}>
+            Minhas Categorias{" "}
+            <ButtonIcon>
+              <CirclePlus />
+            </ButtonIcon>
+          </h2>
+
+          <div className={styles.cardsGrid}>
+            {summaryCards
+              .filter((card) => card.id !== null)
+              .map((card) => (
+                <CategoryCardItem
+                  key={card.title}
+                  variant={card.variant}
+                  title={card.title}
+                  type={card.categoryType}
+                  isCustom={card.id === null ? false : true}
+                />
+              ))}
+          </div>
         </section>
       </div>
     </MainTemplate>
