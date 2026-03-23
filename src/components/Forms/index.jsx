@@ -1,6 +1,5 @@
 import styles from "./styles.module.css";
 import { DefaultInput } from "../Inputs";
-import { DefaultButton } from "../Buttons";
 
 export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
   function handleChange(e) {
@@ -14,12 +13,28 @@ export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
 
   function handleCategoryChange(e) {
     const value = e.target.value;
+    const categoryId = value === "" ? undefined : Number(value);
+
+    const selectedCategory = categories.find(
+      (category) => category.id === categoryId,
+    );
 
     setFormData((prev) => ({
       ...prev,
-      categoryId: value === "" ? undefined : Number(value),
+      categoryId,
+      type:
+        selectedCategory && selectedCategory.name !== "Outros"
+          ? selectedCategory.categoryType
+          : prev.type,
     }));
   }
+
+  const selectedCategory = categories.find(
+    (category) => category.id === formData.categoryId,
+  );
+
+  const isOthersCategory = selectedCategory?.name === "Outros";
+  const shouldDisableTypeRadio = selectedCategory && !isOthersCategory;
 
   return (
     <div className={styles.form}>
@@ -52,7 +67,7 @@ export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
         <div className={styles.field}>
           <span>Tipo</span>
 
-          <div className={styles.radioGroup}>
+          <div className={`${styles.radioGroup}`}>
             <label>
               <DefaultInput
                 type="radio"
@@ -60,6 +75,7 @@ export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
                 value="INCOME"
                 checked={formData.type === "INCOME"}
                 onChange={handleChange}
+                disabled={shouldDisableTypeRadio}
               />
               Receita
             </label>
@@ -71,6 +87,7 @@ export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
                 value="EXPENSE"
                 checked={formData.type === "EXPENSE"}
                 onChange={handleChange}
+                disabled={shouldDisableTypeRadio}
               />
               Despesa
             </label>
