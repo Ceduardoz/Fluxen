@@ -2,7 +2,10 @@ import { useState } from "react";
 import { CircleX } from "lucide-react";
 
 import styles from "./styles.module.css";
-import { transactionsSchemas } from "../../schemas/transactionsSchemas";
+import {
+  transactionsSchemas,
+  updateTransactionSchema,
+} from "../../schemas/transactionsSchemas";
 import {
   postTransactions,
   patchTransaction,
@@ -17,7 +20,7 @@ const EMPTY_TRANSACTION_FORM = {
   amount: "",
   type: "EXPENSE",
   date: "",
-  accountId: 13,
+  accountId: 14,
   categoryId: undefined,
   toAccountId: undefined,
 };
@@ -41,9 +44,14 @@ export const DefaultModal = ({
     e.preventDefault();
     setMessage("");
 
-    const res = transactionsSchemas.safeParse(formData);
+    const schema = transactionToEdit
+      ? updateTransactionSchema
+      : transactionsSchemas;
+
+    const res = schema.safeParse(formData);
 
     if (!res.success) {
+      setMessageType("error");
       setMessage("Preencha os campos corretamente");
       return;
     }
@@ -53,7 +61,7 @@ export const DefaultModal = ({
       description: res.data.description || "",
       amount: res.data.amount,
       type: res.data.type,
-      date: res.data.date.toISOString(),
+      date: res.data.date,
       accountId: res.data.accountId,
       ...(res.data.categoryId ? { categoryId: res.data.categoryId } : {}),
       ...(res.data.toAccountId ? { toAccountId: res.data.toAccountId } : {}),

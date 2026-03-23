@@ -9,7 +9,9 @@ import styles from "./styles.module.css";
 
 function formatDate(date) {
   if (!date) return "-";
-  return new Date(date).toLocaleDateString("pt-BR");
+
+  const [year, month, day] = date.split("T")[0].split("-");
+  return `${day}/${month}/${year}`;
 }
 
 function formatMoney(value) {

@@ -27,7 +27,7 @@ const EMPTY_TRANSACTION_FORM = {
   amount: "",
   type: "EXPENSE",
   date: "",
-  accountId: 13,
+  accountId: 14,
   categoryId: undefined,
   toAccountId: undefined,
 };
@@ -59,6 +59,7 @@ function mapTransactionToFormData(transaction) {
 export default function Transactions() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [modalVersion, setModalVersion] = useState(0);
   const [transactions, setTransactions] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -147,11 +148,17 @@ export default function Transactions() {
 
   function handleOpenCreateModal() {
     setSelectedTransaction(null);
+    setModalVersion((prev) => prev + 1);
     setIsModalOpen(true);
   }
 
   function handleOpenEditModal(transaction) {
-    setSelectedTransaction(transaction);
+    const freshTransaction = transactions.find(
+      (item) => item.id === transaction.id,
+    );
+
+    setSelectedTransaction(freshTransaction || transaction);
+    setModalVersion((prev) => prev + 1);
     setIsModalOpen(true);
   }
 
@@ -190,9 +197,7 @@ export default function Transactions() {
         </DefaultButton>
 
         <DefaultModal
-          key={
-            selectedTransaction ? `edit-${selectedTransaction.id}` : "create"
-          }
+          key={`${selectedTransaction ? `edit-${selectedTransaction.id}` : "create"}-${modalVersion}`}
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           categories={categories}
