@@ -5,12 +5,14 @@ import {
   ArrowBigRightDash,
   ArrowBigLeftDash,
 } from "lucide-react";
+
+import { hexToRgba } from "../../utils/colors";
 import styles from "./styles.module.css";
 
 function formatDate(date) {
   if (!date) return "-";
 
-  const [year, month, day] = date.split("T")[0].split("-");
+  const [year, month, day] = String(date).split("T")[0].split("-");
   return `${day}/${month}/${year}`;
 }
 
@@ -59,12 +61,31 @@ export const TransactionsTable = ({ transactions = [], onDelete, onEdit }) => {
           {currentTransactions.length > 0 ? (
             currentTransactions.map((item) => {
               const isExpense = item.type === "EXPENSE";
+              const categoryColor = item.category?.color || "#6b7280";
 
               return (
                 <tr key={item.id}>
                   <td>{formatDate(item.date)}</td>
                   <td>{item.title}</td>
-                  <td>{item.categoryName || "-"}</td>
+
+                  <td>
+                    {item.category ? (
+                      <span
+                        className={styles.categoryBadge}
+                        style={{
+                          backgroundColor: hexToRgba(categoryColor),
+                          color: categoryColor,
+                        }}
+                      >
+                        {item.category.name}
+                      </span>
+                    ) : (
+                      <span className={styles.categoryFallback}>
+                        Sem categoria
+                      </span>
+                    )}
+                  </td>
+
                   <td>
                     <span
                       className={isExpense ? styles.expense : styles.income}
@@ -72,6 +93,7 @@ export const TransactionsTable = ({ transactions = [], onDelete, onEdit }) => {
                       {formatType(item.type)}
                     </span>
                   </td>
+
                   <td
                     className={
                       isExpense ? styles.expenseValue : styles.incomeValue
@@ -79,6 +101,7 @@ export const TransactionsTable = ({ transactions = [], onDelete, onEdit }) => {
                   >
                     {formatMoney(item.amount)}
                   </td>
+
                   <td>
                     <button
                       onClick={() => onEdit(item)}

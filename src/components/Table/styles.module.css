@@ -42,6 +42,14 @@ th {
 td {
   border-bottom: 2px solid var(--active-on-surface);
 }
+
+.categoryBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.8rem;
+  border-radius: 0.4rem;
+}
 .iconesTable {
   margin: 0rem 0.4rem;
   color: var(--text);

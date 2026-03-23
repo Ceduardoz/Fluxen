@@ -51,6 +51,7 @@ function mapTransactionToFormData(transaction) {
       transaction.categoryId ??
       transaction.category_id ??
       transaction.idCategory ??
+      transaction.category?.id ??
       undefined,
     toAccountId: transaction.toAccountId ?? undefined,
   };
@@ -71,6 +72,9 @@ export default function Transactions() {
     try {
       const responseTransactions = await getTransactions();
       const transactionsData = normalizeArray(responseTransactions);
+
+      console.log("TRANSACTIONS API:", transactionsData);
+
       setTransactions(transactionsData);
       setError("");
     } catch (error) {
@@ -101,31 +105,12 @@ export default function Transactions() {
     loadData();
   }, []);
 
-  const transactionsWithCategory = useMemo(() => {
-    return transactions.map((transaction) => {
-      const foundCategory = categories.find((category) => {
-        return (
-          category.id === transaction.categoryId ||
-          category.id === transaction.category_id ||
-          category.id === transaction.idCategory
-        );
-      });
-
-      return {
-        ...transaction,
-        categoryName:
-          transaction.category?.name ||
-          foundCategory?.name ||
-          transaction.category ||
-          "-",
-      };
-    });
-  }, [transactions, categories]);
-
   const filteredTransactions = useMemo(() => {
-    return transactionsWithCategory.filter((transaction) => {
+    return transactions.filter((transaction) => {
       const title = String(transaction.title || "").toLowerCase();
-      const categoryName = String(transaction.categoryName || "").toLowerCase();
+      const categoryName = String(
+        transaction.category?.name || "",
+      ).toLowerCase();
       const term = searchTerm.toLowerCase();
 
       const matchesSearch = title.includes(term) || categoryName.includes(term);
@@ -136,7 +121,7 @@ export default function Transactions() {
 
       return matchesSearch && matchesMonth;
     });
-  }, [transactionsWithCategory, searchTerm, selectedMonth]);
+  }, [transactions, searchTerm, selectedMonth]);
 
   async function handleDeleteTransaction(id) {
     const confirmDelete = confirm("Deseja realmente excluir esta transação?");

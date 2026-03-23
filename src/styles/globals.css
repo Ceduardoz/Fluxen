@@ -40,7 +40,7 @@
   --input-border: #dfdaf7;
   --input-placeholder: #9aa3b2;
 
-  --btn-primary-bg: var(--brand);
+  --btn-primary-bg: #481bc3;
   --btn-primary-hover: #5f27f3;
   --btn-primary-text: #ffffff;
 
@@ -88,7 +88,7 @@
   --accent-education-2: #9fa3ef;
   --accent-health-1: #ffdf5e;
   --accent-health-2: #fce380;
-  --accent-others-1: #f971d0;
+  --accent-others-1: #12cde5;
   --accent-others-2: #ff96df;
   --accent-transport-1: #bd6019;
   --accent-transport-2: #d18347;
