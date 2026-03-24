@@ -1,6 +1,6 @@
 import { ChartNoAxesCombined } from "lucide-react";
 import styles from "./styles.module.css";
-import ContainerCard from "./ContainerCard";
+import ContainerCard from "../ContainerCard";
 
 export default function SummaryCardItem({ variant, title, value }) {
   return (

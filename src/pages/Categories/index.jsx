@@ -10,7 +10,7 @@ import {
 
 import { ButtonIcon } from "../../components/Buttons";
 import MainTemplate from "../../templates/MainTemplate";
-import { CategoryCardItem } from "../../components/Card";
+import CategoryCardItem from "../../components/Card/CategoryCardItem";
 import { ConfirmModal } from "../../components/Modal/";
 import CategoryFormModal from "../../components/Modal/CategoryModal";
 
@@ -140,8 +140,6 @@ export default function Categories() {
       setIsDeleting(false);
     }
   }
-
-  console.log(summaryCards);
 
   return (
     <MainTemplate>

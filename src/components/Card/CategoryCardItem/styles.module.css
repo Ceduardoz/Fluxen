@@ -1,0 +1,66 @@
+/*Categories*/
+.cardCategory {
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+}
+
+.header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.headerContent h2 {
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.actions button {
+  background: var(--btn-secondary-bg);
+  border: none;
+  padding: 0.3rem;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--bg-surface);
+}
+
+.actions button:hover {
+  background: var(--input-bg);
+}
+
+.body {
+  padding: 0.8rem 1rem;
+}
+
+.badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.income {
+  background: var(--success);
+  color: var(--success-bg);
+  color: var(--text);
+}
+
+.expense {
+  border: var(--error-border);
+  background: var(--error-bg);
+  color: var(--text);
+}

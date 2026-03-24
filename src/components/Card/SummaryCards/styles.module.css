@@ -1,0 +1,6 @@
+.content {
+  display: flex;
+  gap: 2rem;
+  height: 25%;
+  padding: 1rem 0;
+}

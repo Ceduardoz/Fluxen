@@ -1,6 +1,6 @@
 import { Pencil, Trash2 } from "lucide-react";
 
-import { lightenColor } from "../../utils/colors";
+import { lightenColor } from "../../../utils/colors";
 import styles from "./styles.module.css";
 
 export default function CategoryCardItem({
