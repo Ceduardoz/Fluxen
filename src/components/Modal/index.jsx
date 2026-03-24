@@ -118,4 +118,44 @@ export const DefaultModal = ({
   );
 };
 
-export default DefaultModal;
+export const ConfirmModal = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  title = "Confirmar ação",
+  message = "Tem certeza que deseja continuar?",
+  confirmText = "Confirmar",
+  cancelText = "Cancelar",
+  isLoading = false,
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.message}>{message}</p>
+
+        <div className={styles.actions}>
+          <button
+            type="button"
+            className={styles.cancelButton}
+            onClick={onClose}
+            disabled={isLoading}
+          >
+            {cancelText}
+          </button>
+
+          <button
+            type="button"
+            className={styles.confirmButton}
+            onClick={onConfirm}
+            disabled={isLoading}
+          >
+            {isLoading ? "Excluindo..." : confirmText}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};

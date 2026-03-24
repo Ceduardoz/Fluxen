@@ -111,7 +111,7 @@ export const TransactionsTable = ({ transactions = [], onDelete, onEdit }) => {
                     </button>
 
                     <button
-                      onClick={() => onDelete(item.id)}
+                      onClick={() => onDelete(item)}
                       className={`${styles.iconesTable} ${styles.deleteIcon}`}
                     >
                       <Trash2 size={18} />

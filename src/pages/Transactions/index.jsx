@@ -8,7 +8,8 @@ import {
 import { getCategories } from "../../services/categoryServices";
 
 import MainTemplate from "../../templates/MainTemplate";
-import DefaultModal from "../../components/Modal";
+import { DefaultModal } from "../../components/Modal";
+import { ConfirmModal } from "../../components/Modal";
 import { TransactionsTable } from "../../components/Table";
 
 import styles from "./styles.module.css";
@@ -59,11 +60,16 @@ function mapTransactionToFormData(transaction) {
 
 export default function Transactions() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [transactionToDelete, setTransactionToDelete] = useState(null);
+
   const [modalVersion, setModalVersion] = useState(0);
   const [transactions, setTransactions] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
@@ -72,8 +78,6 @@ export default function Transactions() {
     try {
       const responseTransactions = await getTransactions();
       const transactionsData = normalizeArray(responseTransactions);
-
-      console.log("TRANSACTIONS API:", transactionsData);
 
       setTransactions(transactionsData);
       setError("");
@@ -123,12 +127,30 @@ export default function Transactions() {
     });
   }, [transactions, searchTerm, selectedMonth]);
 
-  async function handleDeleteTransaction(id) {
-    const confirmDelete = confirm("Deseja realmente excluir esta transação?");
-    if (!confirmDelete) return;
+  function handleOpenDeleteModal(transaction) {
+    setTransactionToDelete(transaction);
+    setIsDeleteModalOpen(true);
+  }
 
-    await deleteTransaction(id);
-    await loadTransactions();
+  function handleCloseDeleteModal() {
+    if (isDeleting) return;
+    setIsDeleteModalOpen(false);
+    setTransactionToDelete(null);
+  }
+
+  async function handleConfirmDeleteTransaction() {
+    if (!transactionToDelete) return;
+
+    try {
+      setIsDeleting(true);
+      await deleteTransaction(transactionToDelete.id);
+      await loadTransactions();
+      handleCloseDeleteModal();
+    } catch (error) {
+      console.error("Erro ao excluir transação:", error);
+    } finally {
+      setIsDeleting(false);
+    }
   }
 
   function handleOpenCreateModal() {
@@ -203,10 +225,20 @@ export default function Transactions() {
       ) : (
         <TransactionsTable
           transactions={filteredTransactions}
-          onDelete={handleDeleteTransaction}
+          onDelete={handleOpenDeleteModal}
           onEdit={handleOpenEditModal}
         />
       )}
+
+      <ConfirmModal
+        isOpen={isDeleteModalOpen}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleConfirmDeleteTransaction}
+        title="Excluir transação"
+        message={`Tem certeza que deseja excluir a transação "${transactionToDelete?.title || ""}"?`}
+        confirmText="Excluir"
+        isLoading={isDeleting}
+      />
     </MainTemplate>
   );
 }

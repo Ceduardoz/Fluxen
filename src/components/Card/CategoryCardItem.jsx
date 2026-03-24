@@ -8,6 +8,7 @@ export default function CategoryCardItem({
   type,
   color,
   isCustom = true,
+  onDelete,
 }) {
   const categoryColor = color || "#6b7280";
 
@@ -29,7 +30,11 @@ export default function CategoryCardItem({
             <button>
               <Pencil color="#545cf4" size={16} />
             </button>
-            <button>
+            <button
+              type="button"
+              className={styles.deleteButton}
+              onClick={onDelete}
+            >
               <Trash2 color="#fd1d47" size={16} />
             </button>
           </div>
