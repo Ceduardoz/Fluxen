@@ -1,19 +1,26 @@
 import { Pencil, Trash2 } from "lucide-react";
+
+import { lightenColor } from "../../utils/colors";
 import styles from "./styles.module.css";
 
 export default function CategoryCardItem({
   title,
-  variant = "default",
   type,
-  icon: Icon,
+  color,
   isCustom = true,
 }) {
+  const categoryColor = color || "#6b7280";
+
   return (
-    <div className={`${styles.cardCategory} ${styles[variant]}`}>
+    <div className={styles.cardCategory}>
       {/* HEADER */}
-      <div className={styles.header}>
+      <div
+        className={styles.header}
+        style={{
+          backgroundColor: categoryColor,
+        }}
+      >
         <div className={styles.headerContent}>
-          {Icon && <Icon size={20} />}
           <h2>{title}</h2>
         </div>
 
@@ -30,7 +37,12 @@ export default function CategoryCardItem({
       </div>
 
       {/* BODY */}
-      <div className={styles.body}>
+      <div
+        className={styles.body}
+        style={{
+          backgroundColor: lightenColor(categoryColor),
+        }}
+      >
         <span
           className={`${styles.badge} ${
             type === "INCOME" ? styles.income : styles.expense

@@ -75,24 +75,6 @@
   --accent-red-1: #ff2d5a;
   --accent-red-2: #ff6b8b;
 
-  /* ========== Colors Categories ========== */
-  --accent-food-1: #fc4069;
-  --accent-food-2: #ff92aa;
-  --accent-leisure-1: #fcae40;
-  --accent-leisure-2: #dcb885;
-  --accent-salary-1: #35d984;
-  --accent-salary-2: #a1f9cb;
-  --accent-housing-1: #b9ac79;
-  --accent-housing-2: #f5f2e7;
-  --accent-education-1: #545cf4;
-  --accent-education-2: #9fa3ef;
-  --accent-health-1: #ffdf5e;
-  --accent-health-2: #fce380;
-  --accent-others-1: #12cde5;
-  --accent-others-2: #ff96df;
-  --accent-transport-1: #bd6019;
-  --accent-transport-2: #d18347;
-
   min-height: 100%;
 }
 

@@ -12,7 +12,8 @@
   padding: 1rem 0;
 }
 
-.card {
+/*Dashboard*/
+.cardDashboard {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,158 +27,13 @@
   padding: 0.8rem;
 }
 
-.card:hover {
+.cardDashboard:hover,
+.cardCategory:hover {
   transform: translateY(-4px);
   filter: brightness(1.1);
 }
 
-.cardCategory {
-  border-radius: 1rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-  min-width: 200px;
-}
-
-/* HEADER */
-.header {
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.headerContent {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.headerContent h2 {
-  font-weight: bold;
-}
-
-/* ACTIONS */
-.actions {
-  display: flex;
-  gap: 0.4rem;
-}
-
-.actions button {
-  background: var(--btn-secondary-bg);
-  border: none;
-  padding: 0.3rem;
-  border-radius: 6px;
-  cursor: pointer;
-  color: var(--bg-surface);
-}
-
-.actions button:hover {
-  background: var(--input-bg);
-}
-
-/* BODY */
-.body {
-  padding: 0.8rem 1rem;
-  background: #f9f9fb61;
-}
-
-/* BADGE */
-.badge {
-  padding: 0.3rem 0.8rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.income {
-  background: var(--success);
-  color: var(--success-bg);
-  color: var(--text);
-}
-
-.expense {
-  border: var(--error-border);
-  background: var(--error-bg);
-  color: var(--text);
-}
-
-/* VARIANTS (HEADER COLORS) */
-.default .header {
-  background: #6b7280;
-}
-
-.food .header {
-  background: var(--accent-food-1);
-}
-
-.housing .header {
-  background: var(--accent-housing-1);
-}
-
-.salary .header {
-  background: var(--accent-salary-1);
-}
-
-.leisure .header {
-  background: var(--accent-leisure-1);
-}
-
-.health .header {
-  background: var(--accent-health-1);
-}
-
-.education .header {
-  background-color: var(--accent-education-1);
-}
-
-.transport .header {
-  background-color: var(--accent-transport-1);
-}
-
-.others .header {
-  background-color: var(--accent-others-1);
-}
-
-/* VARIANTS (Categories) */
-.default {
-  background-color: var(--bg-app);
-}
-
-.food {
-  background-color: var(--accent-food-2);
-}
-
-.housing {
-  background-color: var(--accent-housing-1);
-}
-
-.salary {
-  background-color: var(--accent-salary-2);
-}
-
-.leisure {
-  background-color: var(--accent-leisure-2);
-}
-
-.education {
-  background-color: var(--accent-education-2);
-}
-
-.transport {
-  background-color: var(--accent-transport-2);
-}
-
-.others {
-  background-color: var(--accent-others-2);
-}
-
-.health {
-  background-color: var(--accent-health-2);
-}
-
-/* VARIANTS (Categories) */
+/* VARIANTS (Dashboard) */
 .balance {
   background-image: linear-gradient(
     165deg,
@@ -208,4 +64,72 @@
     var(--accent-orange-1),
     var(--accent-orange-2)
   );
+}
+
+/*Categories*/
+.cardCategory {
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  min-width: 200px;
+}
+
+.header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.headerContent h2 {
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.actions button {
+  background: var(--btn-secondary-bg);
+  border: none;
+  padding: 0.3rem;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--bg-surface);
+}
+
+.actions button:hover {
+  background: var(--input-bg);
+}
+
+.body {
+  padding: 0.8rem 1rem;
+}
+
+.badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.income {
+  background: var(--success);
+  color: var(--success-bg);
+  color: var(--text);
+}
+
+.expense {
+  border: var(--error-border);
+  background: var(--error-bg);
+  color: var(--text);
 }

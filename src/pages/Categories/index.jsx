@@ -8,17 +8,6 @@ import { CategoryCardItem } from "../../components/Card";
 
 import styles from "./styles.module.css";
 
-const categoryVariantMap = {
-  Alimentação: "food",
-  Moradia: "housing",
-  Salário: "salary",
-  Lazer: "leisure",
-  Transporte: "transport",
-  Educação: "education",
-  Outros: "others",
-  Saúde: "health",
-};
-
 export default function Categories() {
   const [summaryCards, setSummaryCards] = useState([]);
 
@@ -30,7 +19,7 @@ export default function Categories() {
         setSummaryCards(
           data.map((category) => ({
             userId: category.userId,
-            variant: categoryVariantMap[category.name] || "default",
+            color: category.color,
             title: category.name,
             categoryType: category.categoryType,
           })),
@@ -54,9 +43,9 @@ export default function Categories() {
               .map((card) => (
                 <CategoryCardItem
                   key={card.title}
-                  variant={card.variant}
                   title={card.title}
                   type={card.categoryType}
+                  color={card.color}
                   isCustom={card.userId === null ? false : true}
                 />
               ))}
@@ -77,9 +66,9 @@ export default function Categories() {
               .map((card) => (
                 <CategoryCardItem
                   key={card.title}
-                  variant={card.variant}
                   title={card.title}
                   type={card.categoryType}
+                  color={card.color}
                   isCustom={card.userId === null ? false : true}
                 />
               ))}
