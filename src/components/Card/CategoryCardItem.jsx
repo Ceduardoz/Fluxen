@@ -8,6 +8,7 @@ export default function CategoryCardItem({
   type,
   color,
   isCustom = true,
+  onEdit,
   onDelete,
 }) {
   const categoryColor = color || "#6b7280";
@@ -27,7 +28,7 @@ export default function CategoryCardItem({
 
         {isCustom && (
           <div className={styles.actions}>
-            <button>
+            <button onClick={onEdit}>
               <Pencil color="#545cf4" size={16} />
             </button>
             <button

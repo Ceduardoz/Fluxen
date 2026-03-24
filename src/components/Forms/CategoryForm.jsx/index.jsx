@@ -1,0 +1,58 @@
+import styles from "./styles.module.css";
+import { DefaultInput } from "../../Inputs";
+import { DefaultButton } from "../../Buttons";
+
+export default function CategoryForm({
+  formData,
+  onChange,
+  onSubmit,
+  categoryToEdit = null,
+  isSaving = false,
+}) {
+  return (
+    <form className={styles.form} onSubmit={onSubmit}>
+      <div className={styles.field}>
+        <label htmlFor="name">Nome</label>
+        <DefaultInput
+          id="name"
+          name="name"
+          type="text"
+          placeholder="Digite o nome da categoria"
+          value={formData.name}
+          onChange={onChange}
+          required
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label htmlFor="color">Cor</label>
+        <DefaultInput
+          id="color"
+          name="color"
+          type="color"
+          value={formData.color}
+          onChange={onChange}
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label htmlFor="categoryType">Tipo</label>
+        <select
+          id="categoryType"
+          name="categoryType"
+          value={formData.categoryType}
+          onChange={onChange}
+        >
+          <option value="EXPENSE">Despesa</option>
+          <option value="INCOME">Receita</option>
+        </select>
+      </div>
+
+      <div className={styles.actions}>
+        <DefaultButton type="submit" disabled={isSaving}>
+          {isSaving ? "Salvando..." : categoryToEdit ? "Atualizar" : "Criar"}
+        </DefaultButton>
+      </div>
+    </form>
+  );
+}

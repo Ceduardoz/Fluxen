@@ -125,7 +125,6 @@ export const ConfirmModal = ({
   title = "Confirmar ação",
   message = "Tem certeza que deseja continuar?",
   confirmText = "Confirmar",
-  cancelText = "Cancelar",
   isLoading = false,
 }) => {
   if (!isOpen) return null;
@@ -133,19 +132,13 @@ export const ConfirmModal = ({
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <button type="button" className={styles.closeButton} onClick={onClose}>
+          <CircleX />
+        </button>
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.message}>{message}</p>
 
         <div className={styles.actions}>
-          <button
-            type="button"
-            className={styles.cancelButton}
-            onClick={onClose}
-            disabled={isLoading}
-          >
-            {cancelText}
-          </button>
-
           <button
             type="button"
             className={styles.confirmButton}
