@@ -10,7 +10,7 @@ import {
   postTransactions,
   patchTransaction,
 } from "../../services/transactionsServices";
-import { FinanceForm } from "../Forms";
+import FinanceForm from "../Forms/FinanceForm";
 import { DefaultButton } from "../Buttons";
 import Message from "../Message";
 

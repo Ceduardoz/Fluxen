@@ -1,7 +1,11 @@
 import styles from "./styles.module.css";
-import { DefaultInput } from "../Inputs";
+import { DefaultInput } from "../../Inputs";
 
-export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
+export default function FinanceForm({
+  formData,
+  setFormData,
+  categories = [],
+}) {
   function handleChange(e) {
     const { name, value, type } = e.target;
 
@@ -137,24 +141,4 @@ export const FinanceForm = ({ formData, setFormData, categories = [] }) => {
       </div>
     </div>
   );
-};
-
-export const FormField = ({ icon: Icon, error, actionText, ...inputProps }) => {
-  return (
-    <div className={styles.fieldWrapper}>
-      <div className={styles.inputGroup}>
-        {Icon && <Icon className={styles.inputIcon} size={20} />}
-
-        <DefaultInput {...inputProps} />
-
-        {actionText && (
-          <button type="button" className={styles.inputAction}>
-            {actionText}
-          </button>
-        )}
-      </div>
-
-      {error && <p className={styles.formError}>{error}</p>}
-    </div>
-  );
-};
+}

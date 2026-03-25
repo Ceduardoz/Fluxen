@@ -15,6 +15,7 @@ import { TransactionsTable } from "../../components/Table";
 import styles from "./styles.module.css";
 import { DefaultButton } from "../../components/Buttons";
 import { TransactionInput } from "../../components/Inputs";
+import FinanceForm from "../../components/Forms/FinanceForm";
 
 function normalizeArray(response) {
   if (Array.isArray(response)) return response;

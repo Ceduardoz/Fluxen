@@ -94,38 +94,5 @@
 
 .field input::placeholder,
 .field textarea::placeholder {
-  color: #999;
-}
-
-/*Form De cadastro de login*/
-.inputGroup {
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 3rem;
-  border: 1px solid var(--input-border);
-  border-radius: 14px;
-  background: var(--input-bg);
-  padding: 0 16px 0 48px;
-}
-
-.formError {
-  color: var(--error);
-}
-
-.inputIcon {
-  position: absolute;
-  left: 16px;
-  font-size: 1.2rem;
   color: var(--text-muted);
-}
-
-.inputAction {
-  border: none;
-  background: transparent;
-  color: var(--brand-600);
-  font-size: 0.95rem;
-  cursor: pointer;
-  padding-left: 12px;
-  white-space: nowrap;
 }

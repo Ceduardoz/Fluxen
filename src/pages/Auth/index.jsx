@@ -9,7 +9,7 @@ import Message from "../../components/Message";
 import { DefaultButton } from "../../components/Buttons";
 import Logo from "../../components/Logo";
 import AuthTemplate from "../../templates/AuthTemplate";
-import { FormField } from "../../components/Forms";
+import LoginRegisterForm from "../../components/Forms/LoginRegisterForm";
 import AuthSideImage from "../../components/AuthSideImage";
 
 const initialFormData = {
@@ -191,7 +191,7 @@ export default function Auth() {
 
             <form onSubmit={handleSubmit} className={styles.form}>
               {fields.map((field) => (
-                <FormField
+                <LoginRegisterForm
                   key={field.name}
                   icon={field.icon}
                   type={field.type}
