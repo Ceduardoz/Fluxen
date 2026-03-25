@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { DefaultInput } from "../../Inputs";
+import DefaultInput from "../../Inputs/DefaultInput";
 
 export default function LoginRegisterForm({
   icon: Icon,

@@ -1,5 +1,6 @@
 import styles from "./styles.module.css";
-import { DefaultInput } from "../../Inputs";
+import ColorInput from "../../Inputs/ColorInput";
+import DefaultInput from "../../Inputs/DefaultInput";
 import { DefaultButton } from "../../Buttons";
 
 export default function CategoryForm({
@@ -26,7 +27,7 @@ export default function CategoryForm({
 
       <div className={styles.field}>
         <label htmlFor="color">Cor</label>
-        <DefaultInput
+        <ColorInput
           id="color"
           name="color"
           type="color"

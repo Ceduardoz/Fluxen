@@ -1,17 +1,3 @@
-.inputDefault {
-  width: 100%;
-  height: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-.inputDefault::placeholder {
-  color: var(--input-placeholder);
-}
-
 .TransactionInput {
   width: 100%;
   height: 100%;
