@@ -10,7 +10,7 @@ import { getCategories } from "../../services/categoryServices";
 import MainTemplate from "../../templates/MainTemplate";
 import TransactionModal from "../../components/Modal/TransactionsModal";
 import ConfirmModal from "../../components/Modal/ConfirmModal";
-import { TransactionsTable } from "../../components/Table";
+import TransactionsTable from "../../components/Table";
 
 import styles from "./styles.module.css";
 import DefaultButton from "../../components/Buttons/DefaultButton";

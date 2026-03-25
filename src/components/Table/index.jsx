@@ -31,7 +31,11 @@ function formatType(type) {
   return type;
 }
 
-export const TransactionsTable = ({ transactions = [], onDelete, onEdit }) => {
+export default function TransactionsTable({
+  transactions = [],
+  onDelete,
+  onEdit,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
@@ -150,4 +154,4 @@ export const TransactionsTable = ({ transactions = [], onDelete, onEdit }) => {
       </div>
     </div>
   );
-};
+}
