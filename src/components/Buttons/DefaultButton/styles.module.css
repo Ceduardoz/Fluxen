@@ -1,4 +1,4 @@
-.buttonDefault {
+.DefaultButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,14 +21,7 @@
     opacity 0.2s ease;
 }
 
-.buttonDefault:hover {
+.DefaultButton:hover {
   opacity: 0.95;
   transform: translateY(-2px);
-}
-
-.buttonIcon {
-  background-color: transparent;
-  color: var(--text);
-  border: none;
-  cursor: pointer;
 }

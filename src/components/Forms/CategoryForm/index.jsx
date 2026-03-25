@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import ColorInput from "../../Inputs/ColorInput";
 import DefaultInput from "../../Inputs/DefaultInput";
-import { DefaultButton } from "../../Buttons";
+import DefaultButton from "../../Buttons/DefaultButton";
 
 export default function CategoryForm({
   formData,

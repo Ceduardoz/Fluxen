@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 
 import { hexToRgba } from "../../utils/colors";
+import IconButton from "../Buttons/IconButton";
 import styles from "./styles.module.css";
 
 function formatDate(date) {
@@ -103,19 +104,19 @@ export const TransactionsTable = ({ transactions = [], onDelete, onEdit }) => {
                   </td>
 
                   <td>
-                    <button
+                    <IconButton
                       onClick={() => onEdit(item)}
                       className={`${styles.iconesTable} ${styles.editIcon}`}
                     >
                       <EditIcon size={18} />
-                    </button>
+                    </IconButton>
 
-                    <button
+                    <IconButton
                       onClick={() => onDelete(item)}
                       className={`${styles.iconesTable} ${styles.deleteIcon}`}
                     >
                       <Trash2 size={18} />
-                    </button>
+                    </IconButton>
                   </td>
                 </tr>
               );

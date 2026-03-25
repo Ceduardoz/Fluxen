@@ -3,7 +3,7 @@ import { SunIcon, Moon, User } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { getMe } from "../../services/authServices";
-import { ButtonIcon } from "../Buttons";
+import IconButton from "../Buttons/IconButton";
 import styles from "./styles.module.css";
 
 export default function Header() {
@@ -66,18 +66,18 @@ export default function Header() {
       <h4 className={styles.NameUser}>{pageTitle}</h4>
 
       <div className={styles.icones}>
-        <ButtonIcon onClick={handleIsLogged}>
+        <IconButton onClick={handleIsLogged}>
           <User />
-        </ButtonIcon>
+        </IconButton>
 
         {/* Botão mudança de tema. */}
-        <ButtonIcon
+        <IconButton
           aria-label="mudar tema"
           title="mudar tema"
           onClick={handleThemeChange}
         >
           {nextThemeIcon[theme]}
-        </ButtonIcon>
+        </IconButton>
       </div>
     </header>
   );

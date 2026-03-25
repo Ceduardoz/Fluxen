@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { loginSchemas, registerSchemas } from "../../schemas/authSchemas";
 import { postLogin, postRegister } from "../../services/authServices";
 import Message from "../../components/Message";
-import { DefaultButton } from "../../components/Buttons";
+import DefaultButton from "../../components/Buttons/DefaultButton";
 import Logo from "../../components/Logo";
 import AuthTemplate from "../../templates/AuthTemplate";
 import LoginRegisterForm from "../../components/Forms/LoginRegisterForm";

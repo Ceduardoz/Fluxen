@@ -8,7 +8,7 @@ import {
   deleteCategory,
 } from "../../services/categoryServices";
 
-import { ButtonIcon } from "../../components/Buttons";
+import IconButton from "../../components/Buttons/IconButton";
 import MainTemplate from "../../templates/MainTemplate";
 import CategoryCardItem from "../../components/Card/CategoryCardItem";
 import ConfirmModal from "../../components/Modal/ConfirmModal";
@@ -166,9 +166,9 @@ export default function Categories() {
         <section className={styles.field}>
           <h2 className={styles.title}>
             Minhas Categorias{" "}
-            <ButtonIcon onClick={handleOpenCreateModal}>
+            <IconButton onClick={handleOpenCreateModal}>
               <CirclePlus />
-            </ButtonIcon>
+            </IconButton>
           </h2>
 
           <div className={styles.cardsGrid}>

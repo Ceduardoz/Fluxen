@@ -11,7 +11,7 @@ import {
 import FinanceForm from "../../Forms/FinanceForm";
 import Message from "../../Message";
 import DefaultModal from "../DefaultModal";
-import { DefaultButton } from "../../Buttons";
+import DefaultButton from "../../Buttons/DefaultButton";
 import styles from "./styles.module.css";
 
 const EMPTY_TRANSACTION_FORM = {
