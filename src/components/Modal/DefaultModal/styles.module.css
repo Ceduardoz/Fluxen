@@ -37,28 +37,6 @@
   color: var(--error);
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 0.4rem;
-}
-
-/*Delete Modal*/
-
-.confirmButton {
-  background: var(--error);
-  color: var(--text);
-  border: 0;
-  border-radius: 0.75rem;
-  padding: 0.75rem 1rem;
-  font: inherit;
-  cursor: pointer;
-}
-
-.confirmButton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
 @keyframes modalAppear {
   from {
     opacity: 0;

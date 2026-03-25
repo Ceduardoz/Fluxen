@@ -8,14 +8,13 @@ import {
 import { getCategories } from "../../services/categoryServices";
 
 import MainTemplate from "../../templates/MainTemplate";
-import { DefaultModal } from "../../components/Modal";
-import { ConfirmModal } from "../../components/Modal";
+import TransactionModal from "../../components/Modal/TransactionsModal";
+import ConfirmModal from "../../components/Modal/ConfirmModal";
 import { TransactionsTable } from "../../components/Table";
 
 import styles from "./styles.module.css";
 import { DefaultButton } from "../../components/Buttons";
 import { TransactionInput } from "../../components/Inputs";
-import FinanceForm from "../../components/Forms/FinanceForm";
 
 function normalizeArray(response) {
   if (Array.isArray(response)) return response;
@@ -204,7 +203,7 @@ export default function Transactions() {
           Adicionar Transação
         </DefaultButton>
 
-        <DefaultModal
+        <TransactionModal
           key={`${selectedTransaction ? `edit-${selectedTransaction.id}` : "create"}-${modalVersion}`}
           isOpen={isModalOpen}
           onClose={handleCloseModal}
@@ -216,7 +215,7 @@ export default function Transactions() {
           <h2>
             {selectedTransaction ? "Editar Finanças" : "Adicionar Finanças"}
           </h2>
-        </DefaultModal>
+        </TransactionModal>
       </section>
 
       {loading ? (

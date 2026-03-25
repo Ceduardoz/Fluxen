@@ -11,8 +11,8 @@ import {
 import { ButtonIcon } from "../../components/Buttons";
 import MainTemplate from "../../templates/MainTemplate";
 import CategoryCardItem from "../../components/Card/CategoryCardItem";
-import { ConfirmModal } from "../../components/Modal/";
-import CategoryFormModal from "../../components/Modal/CategoryModal";
+import ConfirmModal from "../../components/Modal/ConfirmModal";
+import CategoryModal from "../../components/Modal/CategoryModal";
 
 import styles from "./styles.module.css";
 
@@ -190,7 +190,7 @@ export default function Categories() {
         </section>
       </div>
 
-      <CategoryFormModal
+      <CategoryModal
         isOpen={isCategoryModalOpen}
         onClose={handleCloseCategoryModal}
         onSubmit={handleSubmitCategory}

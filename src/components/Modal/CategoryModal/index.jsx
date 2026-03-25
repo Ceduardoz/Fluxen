@@ -1,7 +1,6 @@
-import { CircleX } from "lucide-react";
-
 import styles from "./styles.module.css";
-import CategoryForm from "../../Forms/CategoryForm.jsx";
+import CategoryForm from "../../Forms/CategoryForm/index.jsx";
+import DefaultModal from "../DefaultModal";
 
 export default function CategoryModal({
   isOpen,
@@ -12,27 +11,20 @@ export default function CategoryModal({
   categoryToEdit = null,
   isSaving = false,
 }) {
-  if (!isOpen) return null;
-
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <button type="button" className={styles.closeButton} onClick={onClose}>
-          <CircleX />
-        </button>
-        <h2 className={styles.title}>
-          {categoryToEdit ? "Editar Categoria" : "Nova Categoria"}
-        </h2>
+    <DefaultModal isOpen={isOpen} onClose={onClose}>
+      <h2 className={styles.title}>
+        {categoryToEdit ? "Editar Categoria" : "Nova Categoria"}
+      </h2>
 
-        <CategoryForm
-          formData={formData}
-          onChange={onChange}
-          onSubmit={onSubmit}
-          onCancel={onClose}
-          categoryToEdit={categoryToEdit}
-          isSaving={isSaving}
-        />
-      </div>
-    </div>
+      <CategoryForm
+        formData={formData}
+        onChange={onChange}
+        onSubmit={onSubmit}
+        onCancel={onClose}
+        categoryToEdit={categoryToEdit}
+        isSaving={isSaving}
+      />
+    </DefaultModal>
   );
 }
