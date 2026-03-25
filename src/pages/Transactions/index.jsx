@@ -7,12 +7,13 @@ import {
 } from "../../services/transactionsServices";
 import { getCategories } from "../../services/categoryServices";
 
+import styles from "./styles.module.css";
+
 import MainTemplate from "../../templates/MainTemplate";
 import TransactionModal from "../../components/Modal/TransactionsModal";
 import ConfirmModal from "../../components/Modal/ConfirmModal";
 import TransactionsTable from "../../components/Table";
-
-import styles from "./styles.module.css";
+import LoadingPage from "../../components/LoadingPage";
 import DefaultButton from "../../components/Buttons/DefaultButton";
 import TransactionInput from "../../components/Inputs/TransactionInput";
 
@@ -219,7 +220,7 @@ export default function Transactions() {
       </section>
 
       {loading ? (
-        <p className={styles.loadingAPI}>Carregando transações...</p>
+        <LoadingPage />
       ) : error ? (
         <p className={styles.loadingAPI}>{error}</p>
       ) : (

@@ -5,6 +5,7 @@ import { useAuthGuard } from "../../hooks/useAuthGuard";
 import SummaryCards from "../../components/Card/SummaryCards";
 import DashboardGraphs from "./components/DashboardGraphs";
 import MainTemplate from "../../templates/MainTemplate";
+import LoadingPage from "../../components/LoadingPage";
 
 export default function Dashboard() {
   useAuthGuard();
@@ -92,7 +93,7 @@ export default function Dashboard() {
   return (
     <MainTemplate>
       {loading ? (
-        <p>Carregando dashboard...</p>
+        <LoadingPage />
       ) : (
         <>
           <SummaryCards cards={summaryCards} />

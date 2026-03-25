@@ -8,11 +8,12 @@ import {
   deleteCategory,
 } from "../../services/categoryServices";
 
-import IconButton from "../../components/Buttons/IconButton";
+import ButtonIcon from "../../components/Buttons/IconButton";
 import MainTemplate from "../../templates/MainTemplate";
 import CategoryCardItem from "../../components/Card/CategoryCardItem";
 import ConfirmModal from "../../components/Modal/ConfirmModal";
 import CategoryModal from "../../components/Modal/CategoryModal";
+import LoadingPage from "../../components/LoadingPage";
 
 import styles from "./styles.module.css";
 
@@ -24,6 +25,7 @@ const INITIAL_FORM_DATA = {
 
 export default function Categories() {
   const [summaryCards, setSummaryCards] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [categoryToDelete, setCategoryToDelete] = useState(null);
@@ -37,6 +39,7 @@ export default function Categories() {
 
   async function loadCardsCategories() {
     try {
+      setLoading(true);
       const data = await getCategories();
 
       setSummaryCards(
@@ -51,6 +54,8 @@ export default function Categories() {
     } catch (error) {
       console.error("Erro ao buscar categorias:", error);
       setSummaryCards([]);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -143,72 +148,77 @@ export default function Categories() {
 
   return (
     <MainTemplate>
-      <div className={styles.categoriesWrapper}>
-        <section className={styles.field}>
-          <h2 className={styles.title}>Categorias</h2>
+      {loading ? (
+        <LoadingPage />
+      ) : (
+        <div>
+          <div className={styles.categoriesWrapper}>
+            <section className={styles.field}>
+              <h2 className={styles.title}>Categorias</h2>
+              <div className={styles.cardsGrid}>
+                {summaryCards
+                  .filter((card) => card.userId === null)
+                  .map((card) => (
+                    <CategoryCardItem
+                      key={card.id}
+                      id={card.id}
+                      title={card.title}
+                      type={card.categoryType}
+                      color={card.color}
+                      isCustom={false}
+                    />
+                  ))}
+              </div>
+            </section>
 
-          <div className={styles.cardsGrid}>
-            {summaryCards
-              .filter((card) => card.userId === null)
-              .map((card) => (
-                <CategoryCardItem
-                  key={card.id}
-                  id={card.id}
-                  title={card.title}
-                  type={card.categoryType}
-                  color={card.color}
-                  isCustom={false}
-                />
-              ))}
+            <section className={styles.field}>
+              <h2 className={styles.title}>
+                Minhas Categorias{" "}
+                <ButtonIcon onClick={handleOpenCreateModal}>
+                  <CirclePlus />
+                </ButtonIcon>
+              </h2>
+
+              <div className={styles.cardsGrid}>
+                {summaryCards
+                  .filter((card) => card.userId !== null)
+                  .map((card) => (
+                    <CategoryCardItem
+                      key={card.id}
+                      id={card.id}
+                      title={card.title}
+                      type={card.categoryType}
+                      color={card.color}
+                      isCustom={true}
+                      onEdit={() => handleOpenEditModal(card)}
+                      onDelete={() => handleOpenDeleteModal(card)}
+                    />
+                  ))}
+              </div>
+            </section>
           </div>
-        </section>
 
-        <section className={styles.field}>
-          <h2 className={styles.title}>
-            Minhas Categorias{" "}
-            <IconButton onClick={handleOpenCreateModal}>
-              <CirclePlus />
-            </IconButton>
-          </h2>
+          <CategoryModal
+            isOpen={isCategoryModalOpen}
+            onClose={handleCloseCategoryModal}
+            onSubmit={handleSubmitCategory}
+            formData={formData}
+            onChange={handleChange}
+            categoryToEdit={selectedCategory}
+            isSaving={isSaving}
+          />
 
-          <div className={styles.cardsGrid}>
-            {summaryCards
-              .filter((card) => card.userId !== null)
-              .map((card) => (
-                <CategoryCardItem
-                  key={card.id}
-                  id={card.id}
-                  title={card.title}
-                  type={card.categoryType}
-                  color={card.color}
-                  isCustom={true}
-                  onEdit={() => handleOpenEditModal(card)}
-                  onDelete={() => handleOpenDeleteModal(card)}
-                />
-              ))}
-          </div>
-        </section>
-      </div>
-
-      <CategoryModal
-        isOpen={isCategoryModalOpen}
-        onClose={handleCloseCategoryModal}
-        onSubmit={handleSubmitCategory}
-        formData={formData}
-        onChange={handleChange}
-        categoryToEdit={selectedCategory}
-        isSaving={isSaving}
-      />
-
-      <ConfirmModal
-        isOpen={isDeleteModalOpen}
-        onClose={handleCloseDeleteModal}
-        onConfirm={handleConfirmDeleteCategory}
-        title="Excluir categoria"
-        message={`Tem certeza que deseja excluir a categoria "${categoryToDelete?.title || ""}"?`}
-        confirmText="Excluir"
-        isLoading={isDeleting}
-      />
+          <ConfirmModal
+            isOpen={isDeleteModalOpen}
+            onClose={handleCloseDeleteModal}
+            onConfirm={handleConfirmDeleteCategory}
+            title="Excluir categoria"
+            message={`Tem certeza que deseja excluir a categoria "${categoryToDelete?.title || ""}"?`}
+            confirmText="Excluir"
+            isLoading={isDeleting}
+          />
+        </div>
+      )}
     </MainTemplate>
   );
 }
