@@ -1,34 +1,35 @@
-.filter {
+.categoriesWrapper {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+
   display: flex;
-  justify-content: space-around;
-  gap: 4rem;
+  flex-direction: column;
+  gap: 2rem;
+  padding-right: 0.5rem;
 }
 
-.inputsFilter {
-  width: 100%;
-  height: 3rem;
-  border: none;
-  border-radius: 0.8rem;
-  padding: 0.4rem;
-  font-size: 1.2rem;
-  cursor: pointer;
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.inputsFilter:focus {
-  border-color: var(--brand);
-}
-
-.OpenModalBtn {
-  background-color: var(--brand);
-  color: var(--text-inverse);
+.cardsGrid {
+  display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+}
+.headerVault {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.spacer {
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.loadingAPI {
-  font-size: 2em;
-  text-align: center;
-  line-height: 75vh;
+  width: 300px;
 }
