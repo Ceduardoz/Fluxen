@@ -16,6 +16,7 @@ import CategoryModal from "../../components/Modal/CategoryModal";
 import LoadingPage from "../../components/LoadingPage";
 
 import styles from "./styles.module.css";
+import DefaultButton from "../../components/Buttons/DefaultButton";
 
 const INITIAL_FORM_DATA = {
   name: "",
@@ -154,7 +155,9 @@ export default function Categories() {
         <div>
           <div className={styles.categoriesWrapper}>
             <section className={styles.field}>
-              <h2 className={styles.title}>Categorias</h2>
+              <div className={styles.headerCategories}>
+                <h2 className={styles.title}>Categorias</h2>
+              </div>
               <div className={styles.cardsGrid}>
                 {summaryCards
                   .filter((card) => card.userId === null)
@@ -172,12 +175,14 @@ export default function Categories() {
             </section>
 
             <section className={styles.field}>
-              <h2 className={styles.title}>
-                Minhas Categorias{" "}
-                <ButtonIcon onClick={handleOpenCreateModal}>
-                  <CirclePlus />
-                </ButtonIcon>
-              </h2>
+              <div className={styles.headerCategories}>
+                <h2 className={styles.title}>Minhas Categorias</h2>
+                <div className={styles.spacer}>
+                  <DefaultButton onClick={handleOpenCreateModal}>
+                    <CirclePlus /> Adicionar Categoria
+                  </DefaultButton>
+                </div>
+              </div>
 
               <div className={styles.cardsGrid}>
                 {summaryCards

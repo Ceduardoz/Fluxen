@@ -5,6 +5,7 @@ import Transations from "./pages/Transactions";
 import Dashboard from "./pages/Dashboard";
 import Categories from "./pages/Categories";
 import Auth from "./pages/Auth";
+import Vault from "./pages/Vault";
 
 export default function App() {
   return (
@@ -18,7 +19,7 @@ export default function App() {
         }
       />
       <Route
-        path="/transacoes"
+        path="/transactions"
         element={
           <ProtectedRoute>
             <Transations />
@@ -26,10 +27,18 @@ export default function App() {
         }
       />
       <Route
-        path="/categorias"
+        path="/categories"
         element={
           <ProtectedRoute>
             <Categories />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/vault"
+        element={
+          <ProtectedRoute>
+            <Vault />
           </ProtectedRoute>
         }
       />

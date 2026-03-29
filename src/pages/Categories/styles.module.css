@@ -1,3 +1,16 @@
+.headerCategories {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.spacer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 300px;
+}
+
 .categoriesWrapper {
   flex: 1;
   min-height: 0;
