@@ -29,7 +29,7 @@ const EMPTY_TRANSACTION_FORM = {
   amount: "",
   type: "EXPENSE",
   date: "",
-  accountId: 13,
+  accountId: null,
   categoryId: undefined,
   toAccountId: undefined,
 };
@@ -48,7 +48,7 @@ function mapTransactionToFormData(transaction) {
     amount: transaction.amount ?? "",
     type: transaction.type || "EXPENSE",
     date: formatDateForInput(transaction.date),
-    accountId: transaction.accountId || 13,
+    accountId: transaction.accountId || null,
     categoryId:
       transaction.categoryId ??
       transaction.category_id ??

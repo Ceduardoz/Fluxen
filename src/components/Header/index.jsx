@@ -24,7 +24,7 @@ export default function Header() {
     "/": `Bem Vindo, ${user.name || "usuário"}`,
     "/transactions": "Transações",
     "/categories": "Categorias",
-    "/vault": "Cofre",
+    "/vault": "Metas",
   };
 
   function handleIsLogged() {

@@ -36,7 +36,7 @@ export default function SideBar() {
         to="/vault"
         className={({ isActive }) => (isActive ? `${styles.active}` : "")}
       >
-        Vault
+        Metas
       </NavLink>
     </aside>
   );

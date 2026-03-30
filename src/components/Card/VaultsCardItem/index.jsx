@@ -1,4 +1,9 @@
-import { BanknoteArrowDown, BanknoteArrowUp, Trash2 } from "lucide-react";
+import {
+  BanknoteArrowDown,
+  BanknoteArrowUp,
+  Pencil,
+  Trash2,
+} from "lucide-react";
 
 import styles from "./styles.module.css";
 
@@ -11,6 +16,8 @@ export default function VaultsCardItem({
   isCustom = true,
   onEdit,
   onDelete,
+  onDeposit,
+  onWithdraw,
 }) {
   const vaultColor = color || "#6b7280";
 
@@ -22,28 +29,34 @@ export default function VaultsCardItem({
       }}
     >
       {/* HEADER */}
-      <div
-        className={styles.header}
-        style={{ borderBottom: `2px solid ${vaultColor}` }}
-      >
+      <div className={styles.header} style={{ backgroundColor: vaultColor }}>
         <div className={styles.headerContent}>
-          <h2>{title}</h2>
+          {balance >= targetAmount ? (
+            <h2>
+              <del>{title}</del>
+            </h2>
+          ) : (
+            <h2>{title}</h2>
+          )}
         </div>
 
         {isCustom && (
           <div className={styles.actions}>
-            <button onClick={onEdit}>
+            <button onClick={onWithdraw}>
               <BanknoteArrowDown color="#fd1d47" />
             </button>
-            <button onClick={onEdit}>
+            <button onClick={onDeposit}>
               <BanknoteArrowUp color="#08ad45" />
+            </button>
+            <button onClick={onEdit}>
+              <Pencil color="#545cf4" />
             </button>
             <button
               type="button"
               className={styles.deleteButton}
               onClick={onDelete}
             >
-              <Trash2 color="#fd1d47" size={16} />
+              <Trash2 color="#fd1d47" />
             </button>
           </div>
         )}
@@ -52,8 +65,14 @@ export default function VaultsCardItem({
       <div className={styles.body}>
         <h3>{description}</h3>
         <p>
-          Meta: R${balance} de{" "}
-          <strong style={{ color: vaultColor }}>R${targetAmount}</strong>
+          Meta:
+          {balance >= targetAmount ? (
+            <strong style={{ color: vaultColor }}> R${balance} </strong>
+          ) : (
+            <span> R${balance} </span>
+          )}
+          de
+          <strong style={{ color: vaultColor }}> R${targetAmount}</strong>
         </p>
       </div>
     </div>
