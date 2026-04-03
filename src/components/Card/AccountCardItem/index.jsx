@@ -1,6 +1,7 @@
 import { Pencil, Trash2 } from "lucide-react";
 
 import styles from "./styles.module.css";
+import { BANKS } from "../../../mocks/bankMocks";
 
 export default function AccountCardItem({
   title,
@@ -9,8 +10,14 @@ export default function AccountCardItem({
   onEdit,
   onDelete,
 }) {
+  const bank = BANKS.find((b) => b.name === title);
   return (
-    <div className={styles.cardCategory}>
+    <div
+      className={styles.card}
+      style={{
+        background: bank?.colors[0] || "#f9f9f9",
+      }}
+    >
       {/* HEADER */}
       <div className={styles.header}>
         <div className={styles.headerContent}>
@@ -23,21 +30,21 @@ export default function AccountCardItem({
               <Pencil color="#545cf4" size={16} />
             </button>
             <button
+              onClick={onDelete}
               type="button"
               className={styles.deleteButton}
-              onClick={onDelete}
             >
               <Trash2 color="#fd1d47" size={16} />
             </button>
           </div>
         )}
       </div>
-      <p>
+      <h3>
         {Number(initialBalance).toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",
         })}
-      </p>
+      </h3>
     </div>
   );
 }

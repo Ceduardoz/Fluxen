@@ -16,3 +16,10 @@
 .actions {
   width: 200px;
 }
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

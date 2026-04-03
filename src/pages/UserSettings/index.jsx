@@ -10,10 +10,14 @@ import MainTemplate from "../../templates/MainTemplate";
 import AccountCardItem from "../../components/Card/AccountCardItem";
 import AccountModal from "../../components/Modal/AccountModal";
 import DefaultButton from "../../components/Buttons/DefaultButton";
+import ConfirmModal from "../../components/Modal/ConfirmModal";
 
 export default function UserSettings() {
   const [accounts, setAccounts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [accountToDelete, setAccountToDelete] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [accountToEdit, setAccountToEdit] = useState(null);
 
@@ -22,51 +26,51 @@ export default function UserSettings() {
     initialBalance: "",
   });
 
-  const loadAccounts = async () => {
+  async function loadAccounts() {
     try {
       const data = await getAccount();
       setAccounts(data);
     } catch (err) {
       console.error(err);
     }
-  };
+  }
 
   useEffect(() => {
     loadAccounts();
   }, []);
 
-  const handleOpenModal = () => {
+  function handleOpenModal() {
     setAccountToEdit(null);
     setFormData({
       name: "",
       initialBalance: "",
     });
     setIsModalOpen(true);
-  };
+  }
 
-  const handleEdit = (account) => {
+  function handleEdit(account) {
     setAccountToEdit(account);
     setFormData({
       name: account.name,
       initialBalance: account.initialBalance,
     });
     setIsModalOpen(true);
-  };
+  }
 
-  const handleCloseModal = () => {
+  function handleCloseModal() {
     setIsModalOpen(false);
-  };
+  }
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     const { name, value } = e.target;
 
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
-  };
+  }
 
-  const handleSubmit = async (data) => {
+  async function handleSubmit(data) {
     try {
       setIsSaving(true);
 
@@ -83,17 +87,44 @@ export default function UserSettings() {
     } finally {
       setIsSaving(false);
     }
-  };
+  }
 
-  // 🔥 deletar
-  const handleDelete = async (id) => {
+  async function handleDelete(id) {
     try {
       await deleteAccount(id);
       await loadAccounts();
     } catch (err) {
       console.error(err);
     }
-  };
+  }
+
+  function handleOpenDeleteModal(account) {
+    setAccountToDelete(account);
+    setIsDeleteModalOpen(true);
+  }
+
+  function handleCloseDeleteModal() {
+    if (isDeleting) return;
+    setIsDeleteModalOpen(false);
+    setAccountToDelete(null);
+  }
+
+  async function handleConfirmDeleteAccount() {
+    if (!accountToDelete) return;
+
+    try {
+      setIsDeleting(true);
+
+      await deleteAccount(accountToDelete.id);
+      await loadAccounts();
+
+      handleCloseDeleteModal();
+    } catch (error) {
+      console.error("Erro ao excluir conta:", error);
+    } finally {
+      setIsDeleting(false);
+    }
+  }
 
   return (
     <MainTemplate>
@@ -113,8 +144,8 @@ export default function UserSettings() {
               key={account.id}
               title={account.name}
               initialBalance={account.initialBalance}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
+              onEdit={() => handleEdit(account)}
+              onDelete={() => handleOpenDeleteModal(account)}
             />
           ))}
         </div>
@@ -130,6 +161,16 @@ export default function UserSettings() {
         isSaving={isSaving}
         onEdit={handleEdit}
         onDelete={handleDelete}
+      />
+
+      <ConfirmModal
+        isOpen={isDeleteModalOpen}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleConfirmDeleteAccount}
+        title="Excluir conta"
+        message={`Tem certeza que deseja excluir a conta "${accountToDelete?.name || ""}"?`}
+        confirmText="Excluir"
+        isLoading={isDeleting}
       />
     </MainTemplate>
   );

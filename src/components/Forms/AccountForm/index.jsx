@@ -1,5 +1,6 @@
 import styles from "./styles.module.css";
 
+import { BANKS } from "../../../mocks/bankMocks";
 import DefaultButton from "../../Buttons/DefaultButton";
 import DefaultInput from "../../Inputs/DefaultInput";
 
@@ -13,7 +14,7 @@ export default function AccountForm({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.initialBalance) return;
+    if (!formData.name || formData.initialBalance === "") return;
 
     onSubmit({
       ...formData,
@@ -26,13 +27,15 @@ export default function AccountForm({
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.field}>
         <label className={styles.label}>Nome</label>
-        <DefaultInput
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={onChange}
-          placeholder="Conta principal"
-        />
+        <select name="name" value={formData.name} onChange={onChange}>
+          <option value="">Selecione um banco</option>
+
+          {BANKS.map((bank) => (
+            <option key={bank.name} value={bank.name}>
+              {bank.name}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className={styles.field}>

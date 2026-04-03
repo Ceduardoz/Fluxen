@@ -1,14 +1,15 @@
-/*Categories*/
-.cardCategory {
-  border-radius: 1rem;
+.card {
+  border-radius: 0.8rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-width: 350px;
+  max-width: 300px;
+  min-width: 250px;
+  padding: 1.6rem;
 }
 
 .header {
-  padding: 1rem;
+  gap: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
