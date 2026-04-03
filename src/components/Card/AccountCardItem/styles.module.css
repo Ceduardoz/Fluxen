@@ -21,7 +21,9 @@
   gap: 0.5rem;
 }
 
-.headerContent h2 {
+h2,
+h3 {
+  color: var(--text-inverse);
   font-weight: bold;
 }
 

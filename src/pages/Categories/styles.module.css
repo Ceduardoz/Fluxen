@@ -1,7 +1,19 @@
+.categoriesWrapper {
+  flex: 1;
+  min-height: 0;
+
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .headerCategories {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 20%;
 }
 
 .spacer {
@@ -9,17 +21,6 @@
   align-items: center;
   gap: 1rem;
   width: 300px;
-}
-
-.categoriesWrapper {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding-right: 0.5rem;
 }
 
 .field {

@@ -25,6 +25,7 @@ export default function Header() {
     "/transactions": "Transações",
     "/categories": "Categorias",
     "/vault": "Metas",
+    "/user-settings": "Configurações",
   };
 
   function handleIsLogged() {

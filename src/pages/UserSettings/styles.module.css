@@ -11,6 +11,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  color: var(--text);
 }
 
 .actions {
@@ -19,7 +20,27 @@
 
 .cards {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
+  gap: 16px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding-bottom: 8px;
+}
+
+.cards::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cards::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cards::-webkit-scrollbar-thumb {
+  background-color: var(--brand-400);
+  border-radius: 999px;
+}
+
+.cards::-webkit-scrollbar-thumb:hover {
+  background-color: var(--brand-400);
 }

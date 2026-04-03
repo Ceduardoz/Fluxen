@@ -184,7 +184,7 @@ export default function Categories() {
                 </div>
               </div>
 
-              <div className={styles.cardsGrid}>
+              <div className={`${styles.cardsGrid} ${styles.scrollbar}`}>
                 {summaryCards
                   .filter((card) => card.userId !== null)
                   .map((card) => (
