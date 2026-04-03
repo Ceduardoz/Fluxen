@@ -38,6 +38,13 @@ export default function SideBar() {
       >
         Metas
       </NavLink>
+
+      <NavLink
+        to="/user-settings"
+        className={({ isActive }) => (isActive ? `${styles.active}` : "")}
+      >
+        Configurações
+      </NavLink>
     </aside>
   );
 }

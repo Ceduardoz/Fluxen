@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Categories from "./pages/Categories";
 import Auth from "./pages/Auth";
 import Vault from "./pages/Vault";
+import UserSettings from "./pages/UserSettings";
 
 export default function App() {
   return (
@@ -39,6 +40,14 @@ export default function App() {
         element={
           <ProtectedRoute>
             <Vault />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/user-settings"
+        element={
+          <ProtectedRoute>
+            <UserSettings />
           </ProtectedRoute>
         }
       />
