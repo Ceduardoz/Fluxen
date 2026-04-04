@@ -44,6 +44,7 @@ export default function TransactionModal({
   isOpen,
   onClose,
   categories = [],
+  accounts = [],
   onTransactionCreated,
   transactionToEdit = null,
   initialData = EMPTY_TRANSACTION_FORM,
@@ -130,6 +131,7 @@ export default function TransactionModal({
           formData={formData}
           setFormData={setFormData}
           categories={categories}
+          accounts={accounts}
         />
 
         <DefaultButton type="submit" disabled={isSaving}>

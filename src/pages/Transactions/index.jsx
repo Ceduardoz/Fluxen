@@ -6,6 +6,7 @@ import {
   deleteTransaction,
 } from "../../services/transactionsServices";
 import { getCategories } from "../../services/categoryServices";
+import { getAccount } from "../../services/AccountServices";
 
 import styles from "./styles.module.css";
 
@@ -69,6 +70,7 @@ export default function Transactions() {
   const [modalVersion, setModalVersion] = useState(0);
   const [transactions, setTransactions] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState("");
@@ -100,10 +102,21 @@ export default function Transactions() {
     }
   }
 
+  async function loadAccounts() {
+    try {
+      const response = await getAccount();
+      const data = normalizeArray(response);
+      setAccounts(data);
+    } catch (error) {
+      console.error("Erro ao buscar contas:", error);
+      setAccounts([]);
+    }
+  }
+
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      await Promise.all([loadTransactions(), loadCategories()]);
+      await Promise.all([loadTransactions(), loadCategories(), loadAccounts()]);
       setLoading(false);
     }
 
@@ -209,6 +222,7 @@ export default function Transactions() {
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           categories={categories}
+          accounts={accounts}
           onTransactionCreated={loadTransactions}
           transactionToEdit={selectedTransaction}
           initialData={modalInitialData}

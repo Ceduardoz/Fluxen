@@ -21,6 +21,7 @@
 }
 
 .headerContent h2 {
+  color: var(--text-inverse);
   font-weight: bold;
 }
 
@@ -56,11 +57,11 @@
 .income {
   background: var(--success);
   color: var(--success-bg);
-  color: var(--text);
+  color: var(--text-inverse);
 }
 
 .expense {
   border: var(--error-border);
   background: var(--error-bg);
-  color: var(--text);
+  color: var(--text-inverse);
 }

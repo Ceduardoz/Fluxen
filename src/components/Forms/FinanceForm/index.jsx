@@ -5,6 +5,7 @@ export default function FinanceForm({
   formData,
   setFormData,
   categories = [],
+  accounts = [],
 }) {
   function handleChange(e) {
     const { name, value, type } = e.target;
@@ -30,6 +31,15 @@ export default function FinanceForm({
         selectedCategory && selectedCategory.name !== "Outros"
           ? selectedCategory.categoryType
           : prev.type,
+    }));
+  }
+
+  function handleAccountChange(e) {
+    const value = e.target.value;
+    const accountId = value === "" ? undefined : Number(value);
+    setFormData((prev) => ({
+      ...prev,
+      accountId,
     }));
   }
 
@@ -96,6 +106,19 @@ export default function FinanceForm({
               Despesa
             </label>
           </div>
+          <select
+            id="accountId"
+            name="accountId"
+            value={formData.accountId ?? ""}
+            onChange={handleAccountChange}
+          >
+            <option value="">Selecione uma conta</option>
+            {accounts.map((account) => (
+              <option key={account.id} value={account.id}>
+                {account.name}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 

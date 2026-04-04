@@ -21,7 +21,7 @@ export default function AccountCardItem({
       {/* HEADER */}
       <div className={styles.header}>
         <div className={styles.headerContent}>
-          <h2>{title}</h2>
+          <h3>{title}</h3>
         </div>
 
         {isCustom && (
