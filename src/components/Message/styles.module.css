@@ -1,13 +1,12 @@
 .successMsg {
-  width: 350px;
+  max-width: 350px;
   background-color: var(--success);
   color: var(--text);
   padding: 10px;
   border-radius: 4px;
-  margin-bottom: 16px;
   text-align: center;
   font-weight: 700;
-  margin: 10px auto;
+  margin: 0px auto;
 }
 
 .errorMsg {

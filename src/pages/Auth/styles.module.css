@@ -13,6 +13,7 @@
 .card {
   display: flex;
   justify-content: center;
+  gap: 1rem;
   flex-direction: column;
   width: 500px;
   height: 650px;

@@ -19,7 +19,6 @@
   display: grid;
   grid-template-columns: 15rem 1fr;
   grid-template-rows: auto 1fr;
-  overflow: hidden;
 }
 
 /* sidebar */
@@ -47,7 +46,7 @@
 .main {
   width: 95%;
   min-width: 0;
-  height: 90%;
+  height: 97%;
   min-height: 0;
 
   padding: 24px;

@@ -1,6 +1,12 @@
 .content {
   display: flex;
   gap: 2rem;
-  height: 25%;
+  padding: 1rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(320px, 1fr));
+  gap: 2rem;
   padding: 1rem 0;
 }
