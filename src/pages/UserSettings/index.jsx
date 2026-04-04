@@ -143,7 +143,7 @@ export default function UserSettings() {
             <AccountCardItem
               key={account.id}
               title={account.name}
-              initialBalance={account.initialBalance}
+              initialBalance={account.balance}
               onEdit={() => handleEdit(account)}
               onDelete={() => handleOpenDeleteModal(account)}
             />
