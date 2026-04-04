@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getMe } from "../../services/authServices";
-import { updateUser } from "../../services/UserServices";
+import { updateUser, deleteUser } from "../../services/UserServices";
 
 import styles from "./styles.module.css";
 
@@ -14,9 +14,12 @@ export default function Profile() {
     email: "",
     password: "",
   });
+
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState(undefined);
-  const [loading, setLoading] = useState(false);
+
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false);
 
   useEffect(() => {
     async function fetchUser() {
@@ -48,9 +51,9 @@ export default function Profile() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    setLoading(true);
-
     try {
+      setLoadingUpdate(true);
+
       const payload = {
         name: formData.name,
         email: formData.email,
@@ -64,9 +67,10 @@ export default function Profile() {
 
       setMessageType("success");
       setMessage("Perfil atualizado!");
+
       setTimeout(() => {
         setMessage("");
-      }, 300);
+      }, 2500);
 
       setFormData((prev) => ({
         ...prev,
@@ -77,14 +81,41 @@ export default function Profile() {
       setMessageType("error");
       setMessage("Não foi possível atualizar o perfil.");
     } finally {
-      setLoading(false);
+      setLoadingUpdate(false);
+    }
+  }
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    window.location.reload();
+  }
+
+  async function handleDeleteAccount() {
+    const confirmDelete = window.confirm(
+      "Tem certeza que deseja deletar sua conta? Essa ação não pode ser desfeita.",
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      setLoadingDelete(true);
+
+      await deleteUser();
+
+      localStorage.removeItem("token");
+      window.location.reload();
+    } catch (error) {
+      console.error("Erro ao deletar conta:", error);
+      alert("Erro ao deletar conta. Tente novamente.");
+    } finally {
+      setLoadingDelete(false);
     }
   }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.profileHeader}>
-        <h2>Meu Perfil </h2>
+        <h2>Meu Perfil</h2>
         <Message type={messageType} message={message} />
       </div>
 
@@ -113,15 +144,22 @@ export default function Profile() {
           onChange={handleChange}
         />
       </div>
+
       <div className={styles.action}>
-        <DefaultButton type="submit" disabled={loading}>
-          {loading ? "Salvando..." : "Atualizar"}
+        <DefaultButton type="submit" disabled={loadingUpdate}>
+          {loadingUpdate ? "Salvando..." : "Atualizar"}
         </DefaultButton>
-        <DefaultButton type="submit" disabled={loading}>
-          {loading ? "Salvando..." : "Sair"}
+
+        <DefaultButton type="button" onClick={handleLogout}>
+          Sair
         </DefaultButton>
-        <DefaultButton type="submit" disabled={loading}>
-          {loading ? "Salvando..." : "Deletar conta"}
+
+        <DefaultButton
+          type="button"
+          onClick={handleDeleteAccount}
+          disabled={loadingDelete}
+        >
+          {loadingDelete ? "Deletando..." : "Deletar conta"}
         </DefaultButton>
       </div>
     </form>

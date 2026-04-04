@@ -5,7 +5,7 @@ export async function updateUser(data) {
   return response.data;
 }
 
-export async function deleteVault(id) {
-  const response = await api.delete(`/user/${id}`);
+export async function deleteUser() {
+  const response = await api.delete(`/user`);
   return response.data;
 }
