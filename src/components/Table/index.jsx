@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 
 import { hexToRgba } from "../../utils/colors";
+import { BANKS } from "../../mocks/bankMocks";
 import IconButton from "../Buttons/IconButton";
 import styles from "./styles.module.css";
 
@@ -55,6 +56,7 @@ export default function TransactionsTable({
           <tr>
             <th>Data</th>
             <th>Título</th>
+            <th>Banco</th>
             <th>Categoria</th>
             <th>Tipo</th>
             <th>Valor</th>
@@ -68,10 +70,31 @@ export default function TransactionsTable({
               const isExpense = item.type === "EXPENSE";
               const categoryColor = item.category?.color || "#6b7280";
 
+              const bankData = BANKS.find((b) => b.name === item.account?.name);
+
+              const bankColor = bankData?.colors?.[0] || "#e5e7eb";
+
               return (
                 <tr key={item.id}>
                   <td>{formatDate(item.date)}</td>
+
                   <td>{item.title}</td>
+
+                  <td>
+                    {item.account?.name ? (
+                      <span
+                        className={styles.categoryBadge}
+                        style={{
+                          background: hexToRgba(bankColor),
+                          color: bankColor,
+                        }}
+                      >
+                        {item.account.name}
+                      </span>
+                    ) : (
+                      <span className={styles.categoryFallback}>Sem banco</span>
+                    )}
+                  </td>
 
                   <td>
                     {item.category ? (
@@ -127,7 +150,7 @@ export default function TransactionsTable({
             })
           ) : (
             <tr>
-              <td colSpan="6">Nenhuma transação encontrada.</td>
+              <td colSpan="7">Nenhuma transação encontrada.</td>
             </tr>
           )}
         </tbody>
