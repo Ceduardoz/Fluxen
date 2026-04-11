@@ -75,6 +75,18 @@
   --accent-red-1: #ff2d5a;
   --accent-red-2: #ff6b8b;
 
+  --typeColor-income-border: #42bf707b;
+  --typeCOLORS-income: #42bf70;
+
+  --typeColor-expense-border: #fd1d4672;
+  --typeCOLORS-expense: #fd1d47;
+
+  --typeColor-goal-border: #fff94d2f;
+  --typeCOLORS-goal: #fff94d;
+
+  --typeColor-investiment-border: #4d77ea85;
+  --typeCOLORS-investiment: #4d76ea;
+
   min-height: 100%;
 }
 

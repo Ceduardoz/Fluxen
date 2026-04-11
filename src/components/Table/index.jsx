@@ -28,7 +28,8 @@ function formatMoney(value) {
 function formatType(type) {
   if (type === "INCOME") return "Receita";
   if (type === "EXPENSE") return "Despesa";
-  if (type === "TRANSFER") return "Transferência";
+  if (type === "RESERVE") return "Deposito";
+  if (type === "UNRESERVE") return "Retirada";
   return type;
 }
 
@@ -67,12 +68,25 @@ export default function TransactionsTable({
         <tbody>
           {currentTransactions.length > 0 ? (
             currentTransactions.map((item) => {
-              const isExpense = item.type === "EXPENSE";
               const categoryColor = item.category?.color || "#6b7280";
-
               const bankData = BANKS.find((b) => b.name === item.account?.name);
-
               const bankColor = bankData?.colors?.[0] || "#e5e7eb";
+
+              function getBadgeClass(type) {
+                if (type === "EXPENSE") return styles.expense;
+                if (type === "INCOME") return styles.income;
+                if (type === "RESERVE" || type === "UNRESERVE")
+                  return styles.goal;
+                return styles.defaultBadge;
+              }
+
+              function getValueClass(type) {
+                if (type === "EXPENSE") return styles.expenseValue;
+                if (type === "INCOME") return styles.incomeValue;
+                if (type === "RESERVE" || type === "UNRESERVE")
+                  return styles.goalValue;
+                return "";
+              }
 
               return (
                 <tr key={item.id}>
@@ -115,19 +129,16 @@ export default function TransactionsTable({
                   </td>
 
                   <td>
-                    <span
-                      className={isExpense ? styles.expense : styles.income}
-                    >
+                    <span className={getBadgeClass(item.type)}>
                       {formatType(item.type)}
                     </span>
                   </td>
 
-                  <td
-                    className={
-                      isExpense ? styles.expenseValue : styles.incomeValue
-                    }
-                  >
-                    {formatMoney(item.amount)}
+                  <td className={getValueClass(item.type)}>
+                    {item.type === "UNRESERVE" || item.type === "EXPENSE"
+                      ? `-$
+                    {formatMoney(item.amount)}`
+                      : formatMoney(item.amount)}
                   </td>
 
                   <td>

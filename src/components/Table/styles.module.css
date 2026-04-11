@@ -96,20 +96,31 @@ td {
 .expense {
   padding: 0.3rem 0.7rem;
   border-radius: 0.4rem;
-  background-color: var(--error-border);
-  color: var(--error);
+  background-color: var(--typeColor-expense-border);
+  color: var(--typeCOLORS-expense);
 }
 .income {
   padding: 0.3rem 0.7rem;
   border-radius: 0.4rem;
-  background-color: var(--success-border);
-  color: var(--success);
+  background-color: var(--typeColor-income-border);
+  color: var(--typeCOLORS-income);
+}
+
+.goal {
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.4rem;
+  background-color: var(--typeColor-goal-border);
+  color: var(--typeCOLORS-goal);
 }
 
 .incomeValue {
-  color: var(--success);
+  color: var(--typeCOLORS-income);
 }
 
 .expenseValue {
-  color: var(--error);
+  color: var(--typeCOLORS-expense);
+}
+
+.goalValue {
+  color: var(--typeCOLORS-goal);
 }
