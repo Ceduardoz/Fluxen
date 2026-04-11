@@ -5,7 +5,7 @@ import Transations from "./pages/Transactions";
 import Dashboard from "./pages/Dashboard";
 import Categories from "./pages/Categories";
 import Auth from "./pages/Auth";
-import Vault from "./pages/Vault";
+import Vault from "./pages/Goal";
 import UserSettings from "./pages/UserSettings";
 
 export default function App() {

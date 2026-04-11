@@ -7,7 +7,7 @@ import {
 
 import styles from "./styles.module.css";
 
-export default function VaultsCardItem({
+export default function GoalCardItem({
   title,
   description,
   targetAmount,
@@ -19,17 +19,17 @@ export default function VaultsCardItem({
   onDeposit,
   onWithdraw,
 }) {
-  const vaultColor = color || "#6b7280";
+  const goalColor = color || "#6b7280";
 
   return (
     <div
       className={styles.cardCategory}
       style={{
-        border: `2px solid ${vaultColor}`,
+        border: `2px solid ${goalColor}`,
       }}
     >
       {/* HEADER */}
-      <div className={styles.header} style={{ backgroundColor: vaultColor }}>
+      <div className={styles.header} style={{ backgroundColor: goalColor }}>
         <div className={styles.headerContent}>
           {balance >= targetAmount ? (
             <h2>
@@ -67,12 +67,12 @@ export default function VaultsCardItem({
         <p>
           Meta:
           {balance >= targetAmount ? (
-            <strong style={{ color: vaultColor }}> R${balance} </strong>
+            <strong style={{ color: goalColor }}> R${balance} </strong>
           ) : (
             <span> R${balance} </span>
           )}
           de
-          <strong style={{ color: vaultColor }}> R${targetAmount}</strong>
+          <strong style={{ color: goalColor }}> R${targetAmount}</strong>
         </p>
       </div>
     </div>

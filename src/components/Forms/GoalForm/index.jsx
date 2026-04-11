@@ -3,11 +3,12 @@ import ColorInput from "../../Inputs/ColorInput";
 import DefaultInput from "../../Inputs/DefaultInput";
 import DefaultButton from "../../Buttons/DefaultButton";
 
-export default function VaultForm({
+export default function GoalForm({
   formData,
   onChange,
   onSubmit,
   isSaving = false,
+  accounts = [],
 }) {
   return (
     <form className={styles.form} onSubmit={onSubmit}>
@@ -58,11 +59,30 @@ export default function VaultForm({
               id="color"
               name="color"
               type="color"
-              value={formData.color}
+              value={formData.color || "#7c3aed"}
               onChange={onChange}
             />
           </div>
         </div>
+      </div>
+      <div className={styles.field}>
+        <select
+          id="accountId"
+          name="accountId"
+          value={formData.accountId}
+          onChange={onChange}
+          required
+          className={styles.input}
+        >
+          <option value="" disabled>
+            Selecione uma conta
+          </option>
+          {accounts.map((account) => (
+            <option key={account.id} value={account.id}>
+              {account.name}
+            </option>
+          ))}
+        </select>
       </div>
       <DefaultButton type="submit" disabled={isSaving}>
         {isSaving ? "Salvando..." : "Criar"}

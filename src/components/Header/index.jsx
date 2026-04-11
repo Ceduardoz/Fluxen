@@ -32,7 +32,7 @@ export default function Header() {
     let isLogged = localStorage.getItem("token");
 
     if (!isLogged) return navigate("/auth");
-    return navigate("/settingsAuth");
+    return navigate("/user-settings");
   }
 
   const pageTitle = titles[localtion.pathname] || "dashboard";
