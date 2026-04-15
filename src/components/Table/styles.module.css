@@ -1,8 +1,9 @@
 .containerTable {
   background-color: var(--bg-surface);
   border-radius: 0.8rem;
-  margin: 0.5rem 0rem;
+  margin: 0.5rem 0rem 0rem 0rem;
   padding: 0.5rem;
+  height: 100%;
 }
 
 .title {
@@ -78,7 +79,7 @@ td {
 .pagination button {
   background-color: transparent;
   color: var(--text);
-  padding: 6px 10px;
+  padding: 0px 10px;
   border-radius: 6px;
   border: none;
   cursor: pointer;
