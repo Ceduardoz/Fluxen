@@ -35,7 +35,7 @@ export default function Dashboard() {
           accountBalance: Number(data.accountBalance || 0),
           expenses: Number(data.expenses || 0),
           vault: Number(data.vault || 0),
-          investment: Number(data.investment || 0),
+          investment: Number(data.investments || 0),
         });
 
         setTransactions(
@@ -61,7 +61,7 @@ export default function Dashboard() {
           {
             variant: "investments",
             title: "Investimento",
-            value: `R$ ${Number(data.investment || 0).toFixed(2)}`,
+            value: `R$ ${Number(data.investments || 0).toFixed(2)}`,
           },
         ]);
       } catch (error) {
