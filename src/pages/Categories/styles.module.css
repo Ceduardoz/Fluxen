@@ -2,8 +2,6 @@
   flex: 1;
   min-height: 0;
 
-  overflow-y: auto;
-
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -37,25 +35,8 @@
 }
 
 .cardsGrid {
-  display: flex;
+  display: grid;
   justify-content: center;
-  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   gap: 2.5rem;
-}
-
-.categoriesWrapper::-webkit-scrollbar {
-  width: 8px;
-}
-
-.categoriesWrapper::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.categoriesWrapper::-webkit-scrollbar-thumb {
-  background-color: var(--brand-400);
-  border-radius: 999px;
-}
-
-.categoriesWrapper::-webkit-scrollbar-thumb:hover {
-  background-color: var(--brand-400);
 }

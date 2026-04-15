@@ -1,11 +1,10 @@
 .card {
+  width: 40%;
+  height: 100%;
   border-radius: 0.8rem;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-width: 300px;
-  min-width: 250px;
-  padding: 1.6rem;
+  padding: 1rem 1.6rem;
 }
 
 .header {
@@ -17,6 +16,7 @@
 
 .headerContent {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 0.5rem;
 }
@@ -53,16 +53,4 @@ h3 {
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 700;
-}
-
-.income {
-  background: var(--success);
-  color: var(--success-bg);
-  color: var(--text);
-}
-
-.expense {
-  border: var(--error-border);
-  background: var(--error-bg);
-  color: var(--text);
 }

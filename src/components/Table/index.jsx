@@ -136,8 +136,7 @@ export default function TransactionsTable({
 
                   <td className={getValueClass(item.type)}>
                     {item.type === "UNRESERVE" || item.type === "EXPENSE"
-                      ? `-$
-                    {formatMoney(item.amount)}`
+                      ? `-${formatMoney(item.amount)}`
                       : formatMoney(item.amount)}
                   </td>
 
