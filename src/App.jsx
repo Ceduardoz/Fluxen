@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Categories from "./pages/Categories";
 import Auth from "./pages/Auth";
 import Vault from "./pages/Goal";
+import Investments from "./pages/Investments";
 import UserSettings from "./pages/UserSettings";
 
 export default function App() {
@@ -40,6 +41,14 @@ export default function App() {
         element={
           <ProtectedRoute>
             <Vault />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/investments"
+        element={
+          <ProtectedRoute>
+            <Investments />
           </ProtectedRoute>
         }
       />

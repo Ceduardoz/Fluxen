@@ -1,0 +1,106 @@
+.card {
+  background: var(--bg-surface);
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.infoGroup {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.iconWrapper {
+  color: var(--text);
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.name {
+  font-weight: 600;
+  margin: 0;
+}
+
+.institution {
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.cardBody {
+  margin-bottom: 1rem;
+}
+
+.dataRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.dataItem span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.currentValue {
+  color: var(--success);
+}
+
+.profitBadge {
+  background: var(--typeColor-income-border);
+  color: var(--success);
+  padding: 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.75rem;
+}
+
+.typeTag {
+  background: var(--bg-tag);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.date {
+  font-size: 0.75rem;
+  color: var(--text);
+}
+
+.deleteBtn {
+  color: var(--text);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.deleteBtn:hover {
+  color: var(--error);
+}

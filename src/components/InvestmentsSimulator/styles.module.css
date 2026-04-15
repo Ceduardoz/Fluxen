@@ -1,0 +1,113 @@
+.simulatorContainer {
+  border-radius: 16px;
+  height: 100%;
+}
+
+.helperText {
+  font-size: 0.8rem;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.tabs {
+  display: flex;
+  padding: 4px;
+  border-radius: 10px;
+  gap: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.tab,
+.activeTab {
+  flex: 1;
+  padding: 10px;
+  margin: 0.8rem 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+  border: 2px solid var(--bg-surface);
+}
+
+.tab {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.activeTab {
+  background: var(--bg-surface);
+  color: #fff;
+  box-shadow: 0 4px 12px var(--brand-400);
+}
+
+.resultsWrapper {
+  margin-top: 1rem;
+}
+
+.resultsList {
+  max-height: 350px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Custom Scrollbar */
+.resultsList::-webkit-scrollbar {
+  width: 4px;
+}
+.resultsList::-webkit-scrollbar-thumb {
+  background: var(--brand-400);
+  border-radius: 10px;
+}
+
+.resultRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--text-muted);
+}
+
+.periodLabel {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.valueGroup {
+  text-align: right;
+}
+
+.totalValue {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.profitValue {
+  display: block;
+  font-size: 0.75rem;
+  color: #10b981; /* Verde Sucesso */
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text);
+  font-size: 0.9rem;
+}

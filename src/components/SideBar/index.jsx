@@ -40,6 +40,13 @@ export default function SideBar() {
       </NavLink>
 
       <NavLink
+        to="/investments"
+        className={({ isActive }) => (isActive ? `${styles.active}` : "")}
+      >
+        Investimentos
+      </NavLink>
+
+      <NavLink
         to="/user-settings"
         className={({ isActive }) => (isActive ? `${styles.active}` : "")}
       >
