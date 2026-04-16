@@ -7,6 +7,7 @@ export default function GoalForm({
   formData,
   onChange,
   onSubmit,
+  errors = {},
   isSaving = false,
   accounts = [],
 }) {
@@ -23,8 +24,8 @@ export default function GoalForm({
               placeholder="Digite o nome da caixinha"
               value={formData.name}
               onChange={onChange}
-              required
             />
+            {errors.name && <p className={styles.error}>{errors.name}</p>}
           </div>
 
           <div className={styles.field}>
@@ -37,6 +38,9 @@ export default function GoalForm({
               value={formData.description}
               onChange={onChange}
             />
+            {errors.description && (
+              <p className={styles.error}>{errors.description}</p>
+            )}
           </div>
         </div>
         <div className={styles.fieldGroup}>
@@ -51,6 +55,9 @@ export default function GoalForm({
               value={formData.targetAmount}
               onChange={onChange}
             />
+            {errors.targetAmount && (
+              <p className={styles.error}>{errors.targetAmount}</p>
+            )}
           </div>
 
           <div className={styles.field}>
@@ -62,6 +69,7 @@ export default function GoalForm({
               value={formData.color || "#7c3aed"}
               onChange={onChange}
             />
+            {errors.color && <p className={styles.error}>{errors.color}</p>}
           </div>
         </div>
       </div>
@@ -71,7 +79,6 @@ export default function GoalForm({
           name="accountId"
           value={formData.accountId}
           onChange={onChange}
-          required
           className={styles.input}
         >
           <option value="" disabled>
@@ -83,6 +90,7 @@ export default function GoalForm({
             </option>
           ))}
         </select>
+        {errors.accountId && <p className={styles.error}>{errors.accountId}</p>}
       </div>
       <DefaultButton type="submit" disabled={isSaving}>
         {isSaving ? "Salvando..." : "Criar"}

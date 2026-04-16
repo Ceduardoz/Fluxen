@@ -10,6 +10,8 @@ import {
   getAccountsForGoal,
 } from "../../services/goalServices";
 
+import { createGoalSchema, updateGoalSchema } from "../../schemas/goalSchemas";
+
 import styles from "./styles.module.css";
 
 import MainTemplate from "../../templates/MainTemplate";
@@ -41,7 +43,11 @@ export default function GoalPage() {
   const [isGoalModalOpen, setGoalModalOpen] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
+
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState(undefined);
+  const [errors, setErrors] = useState({});
 
   const [isTransactionModalOpen, setTransactionModalOpen] = useState(false);
   const [transactionType, setTransactionType] = useState(null);
@@ -50,6 +56,7 @@ export default function GoalPage() {
   async function loadData() {
     try {
       setLoading(true);
+
       const [goalsData, accountsData] = await Promise.all([
         getGoals(),
         getAccountsForGoal(),
@@ -83,11 +90,17 @@ export default function GoalPage() {
   function handleOpenCreateModal() {
     setSelectedGoal(null);
     setFormData(INITIAL_FORM_DATA);
+
+    setErrors({});
+    setMessage("");
+    setMessageType(undefined);
+
     setGoalModalOpen(true);
   }
 
   function handleOpenEditModal(goal) {
     setSelectedGoal(goal);
+
     setFormData({
       name: goal.title ?? "",
       description: goal.description ?? "",
@@ -95,18 +108,29 @@ export default function GoalPage() {
       accountId: goal.accountId ?? "",
       color: goal.color ?? "#7c3aed",
     });
+
+    setErrors({});
+    setMessage("");
+    setMessageType(undefined);
+
     setGoalModalOpen(true);
   }
 
   function handleCloseGoalModal() {
     if (isSaving) return;
+
     setGoalModalOpen(false);
     setSelectedGoal(null);
     setFormData(INITIAL_FORM_DATA);
+
+    setErrors({});
+    setMessage("");
+    setMessageType(undefined);
   }
 
   function handleChange(e) {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]:
@@ -117,20 +141,46 @@ export default function GoalPage() {
   async function handleSubmitGoal(e) {
     e.preventDefault();
 
+    setErrors({});
+    setMessage("");
+    setMessageType(undefined);
+
+    const schema = selectedGoal ? updateGoalSchema : createGoalSchema;
+
+    const result = schema.safeParse(formData);
+
+    if (!result.success) {
+      const fieldErrors = result.error.flatten().fieldErrors;
+      setErrors(fieldErrors);
+      return;
+    }
+
     try {
       setIsSaving(true);
 
       if (selectedGoal) {
-        const { accountId: _, ...dataToUpdate } = formData;
+        const { accountId: _, ...dataToUpdate } = result.data;
+
         await patchGoal(selectedGoal.id, dataToUpdate);
+
+        setMessageType("success");
+        setMessage("Meta atualizada com sucesso");
       } else {
-        await postGoal(formData);
+        await postGoal(result.data);
+
+        setMessageType("success");
+        setMessage("Meta criada com sucesso");
       }
 
-      await loadData();
-      handleCloseGoalModal();
+      setTimeout(async () => {
+        handleCloseGoalModal();
+        await loadData();
+      }, 1800);
     } catch (error) {
       console.error("Erro ao salvar meta:", error);
+
+      setMessageType("error");
+      setMessage("Erro ao salvar meta");
     } finally {
       setIsSaving(false);
     }
@@ -143,6 +193,7 @@ export default function GoalPage() {
 
   function handleCloseDeleteModal() {
     if (isDeleting) return;
+
     setIsDeleteModalOpen(false);
     setGoalToDelete(null);
   }
@@ -152,8 +203,10 @@ export default function GoalPage() {
 
     try {
       setIsDeleting(true);
+
       await deleteGoal(goalToDelete.id);
       await loadData();
+
       handleCloseDeleteModal();
     } catch (error) {
       console.error("Erro ao excluir meta:", error);
@@ -171,7 +224,11 @@ export default function GoalPage() {
 
   function handleTransactionChange(e) {
     const { name, value } = e.target;
-    setTransactionForm((prev) => ({ ...prev, [name]: value }));
+
+    setTransactionForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   }
 
   async function handleSubmitTransaction(e) {
@@ -179,6 +236,7 @@ export default function GoalPage() {
 
     try {
       setIsSaving(true);
+
       const amount = Number(transactionForm.amount);
 
       if (!amount || amount <= 0) return;
@@ -188,7 +246,7 @@ export default function GoalPage() {
           transactionType === "deposit"
             ? "Depósito na Meta"
             : "Resgate da Meta",
-        amount: amount,
+        amount,
         type: transactionType === "deposit" ? "RESERVE" : "UNRESERVE",
         date: new Date().toISOString(),
         accountId: selectedGoal.accountId,
@@ -204,6 +262,7 @@ export default function GoalPage() {
         "Erro na transação:",
         error.response?.data?.message || error.message,
       );
+
       alert(error.response?.data?.message || "Erro ao realizar transação");
     } finally {
       setIsSaving(false);
@@ -222,7 +281,8 @@ export default function GoalPage() {
 
               <div className={styles.spacer}>
                 <DefaultButton onClick={handleOpenCreateModal}>
-                  <CirclePlus /> Adicionar Meta
+                  <CirclePlus />
+                  Adicionar Meta
                 </DefaultButton>
               </div>
             </div>
@@ -251,7 +311,6 @@ export default function GoalPage() {
         </div>
       )}
 
-      {/* CREATE / EDIT */}
       <GoalModal
         isOpen={isGoalModalOpen}
         onClose={handleCloseGoalModal}
@@ -260,9 +319,12 @@ export default function GoalPage() {
         onChange={handleChange}
         isSaving={isSaving}
         accounts={accounts}
+        message={message}
+        messageType={messageType}
+        errors={errors}
+        goalToEdit={selectedGoal}
       />
 
-      {/* DELETE */}
       <ConfirmModal
         isOpen={isDeleteModalOpen}
         onClose={handleCloseDeleteModal}
@@ -273,7 +335,6 @@ export default function GoalPage() {
         isLoading={isDeleting}
       />
 
-      {/* TRANSAÇÃO */}
       <DepositWithDrawModal
         isOpen={isTransactionModalOpen}
         onClose={() => setTransactionModalOpen(false)}
@@ -281,7 +342,7 @@ export default function GoalPage() {
         formData={transactionForm}
         onChange={handleTransactionChange}
         type={transactionType}
-        goalName={selectedGoal?.title} // Alterado de vaultName para goalName, ajuste no modal se precisar!
+        goalName={selectedGoal?.title}
         isSaving={isSaving}
       />
     </MainTemplate>
