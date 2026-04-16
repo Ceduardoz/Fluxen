@@ -6,6 +6,7 @@ export default function FinanceForm({
   setFormData,
   categories = [],
   accounts = [],
+  errors = {},
 }) {
   function handleChange(e) {
     const { name, value, type } = e.target;
@@ -18,7 +19,7 @@ export default function FinanceForm({
 
   function handleCategoryChange(e) {
     const value = e.target.value;
-    const categoryId = value === "" ? undefined : Number(value);
+    const categoryId = value === "" ? "" : Number(value);
 
     const selectedCategory = categories.find(
       (category) => category.id === categoryId,
@@ -36,7 +37,8 @@ export default function FinanceForm({
 
   function handleAccountChange(e) {
     const value = e.target.value;
-    const accountId = value === "" ? undefined : Number(value);
+    const accountId = value === "" ? "" : Number(value);
+
     setFormData((prev) => ({
       ...prev,
       accountId,
@@ -63,6 +65,9 @@ export default function FinanceForm({
             value={formData.title}
             onChange={handleChange}
           />
+          {errors.title && (
+            <span className={styles.error}>{errors.title[0]}</span>
+          )}
         </div>
 
         <div className={styles.field}>
@@ -76,12 +81,14 @@ export default function FinanceForm({
             value={formData.amount}
             onChange={handleChange}
           />
+          {errors.amount && (
+            <span className={styles.error}>{errors.amount[0]}</span>
+          )}
         </div>
 
         <div className={styles.field}>
           <span>Tipo</span>
-
-          <div className={`${styles.radioGroup}`}>
+          <div className={styles.radioGroup}>
             <label>
               <DefaultInput
                 type="radio"
@@ -105,20 +112,10 @@ export default function FinanceForm({
               />
               Despesa
             </label>
+            {errors.type && (
+              <span className={styles.error}>{errors.type[0]}</span>
+            )}
           </div>
-          <select
-            id="accountId"
-            name="accountId"
-            value={formData.accountId ?? ""}
-            onChange={handleAccountChange}
-          >
-            <option value="">Selecione uma conta</option>
-            {accounts.map((account) => (
-              <option key={account.id} value={account.id}>
-                {account.name}
-              </option>
-            ))}
-          </select>
         </div>
       </div>
 
@@ -132,12 +129,17 @@ export default function FinanceForm({
             onChange={handleCategoryChange}
           >
             <option value="">Selecione uma categoria</option>
+
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
               </option>
             ))}
           </select>
+
+          {errors.categoryId && (
+            <span className={styles.error}>{errors.categoryId[0]}</span>
+          )}
         </div>
 
         <div className={styles.field}>
@@ -149,17 +151,32 @@ export default function FinanceForm({
             value={formData.date}
             onChange={handleChange}
           />
+
+          {errors.date && (
+            <span className={styles.error}>{errors.date[0]}</span>
+          )}
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="description">Descrição</label>
-          <textarea
-            id="description"
-            name="description"
-            placeholder="Observações sobre a transação"
-            value={formData.description}
-            onChange={handleChange}
-          />
+          <label htmlFor="accountId">Conta</label>
+          <select
+            id="accountId"
+            name="accountId"
+            value={formData.accountId ?? ""}
+            onChange={handleAccountChange}
+          >
+            <option value="">Selecione uma conta</option>
+
+            {accounts.map((account) => (
+              <option key={account.id} value={account.id}>
+                {account.name}
+              </option>
+            ))}
+          </select>
+
+          {errors.accountId && (
+            <span className={styles.error}>{errors.accountId[0]}</span>
+          )}
         </div>
       </div>
     </div>

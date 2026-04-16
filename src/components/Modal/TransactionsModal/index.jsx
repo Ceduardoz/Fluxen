@@ -4,14 +4,17 @@ import {
   transactionsSchemas,
   updateTransactionSchema,
 } from "../../../schemas/transactionsSchemas";
+
 import {
   postTransactions,
   patchTransaction,
 } from "../../../services/transactionsServices";
+
 import FinanceForm from "../../Forms/FinanceForm";
 import Message from "../../Message";
 import DefaultModal from "../DefaultModal";
 import DefaultButton from "../../Buttons/DefaultButton";
+
 import styles from "./styles.module.css";
 
 const EMPTY_TRANSACTION_FORM = {
@@ -106,15 +109,17 @@ export default function TransactionModal({
       }
 
       if (onTransactionCreated) {
-        await onTransactionCreated();
+        setTimeout(async () => {
+          onClose();
+          await onTransactionCreated();
+        }, 1800);
       }
-      setTimeout(() => {
-        onClose();
-      }, 1800);
     } catch (error) {
       console.log(error);
       setMessageType("error");
       setMessage("Erro ao salvar transação");
+      setIsSaving(false);
+    } finally {
       setIsSaving(false);
     }
   }
