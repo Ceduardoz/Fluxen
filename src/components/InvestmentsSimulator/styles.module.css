@@ -52,7 +52,7 @@
 
 .activeTab {
   background: var(--bg-surface);
-  color: #fff;
+  color: var(--text);
   box-shadow: 0 4px 12px var(--brand-400);
 }
 

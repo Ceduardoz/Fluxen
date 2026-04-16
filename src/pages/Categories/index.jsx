@@ -8,15 +8,19 @@ import {
   deleteCategory,
 } from "../../services/categoryServices";
 
-import ButtonIcon from "../../components/Buttons/IconButton";
+import {
+  categorySchema,
+  updateCategorySchema,
+} from "../../schemas/categorySchemas";
+
 import MainTemplate from "../../templates/MainTemplate";
 import CategoryCardItem from "../../components/Card/CategoryCardItem";
 import ConfirmModal from "../../components/Modal/ConfirmModal";
 import CategoryModal from "../../components/Modal/CategoryModal";
 import LoadingPage from "../../components/LoadingPage";
+import DefaultButton from "../../components/Buttons/DefaultButton";
 
 import styles from "./styles.module.css";
-import DefaultButton from "../../components/Buttons/DefaultButton";
 
 const INITIAL_FORM_DATA = {
   name: "",
@@ -37,10 +41,14 @@ export default function Categories() {
   const [isSaving, setIsSaving] = useState(false);
 
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState(undefined);
+  const [errors, setErrors] = useState({});
 
   async function loadCardsCategories() {
     try {
       setLoading(true);
+
       const data = await getCategories();
 
       setSummaryCards(
@@ -67,16 +75,24 @@ export default function Categories() {
   function handleOpenCreateModal() {
     setSelectedCategory(null);
     setFormData(INITIAL_FORM_DATA);
+    setErrors({});
+    setMessage("");
+    setMessageType(undefined);
     setCategoryModalOpen(true);
   }
 
   function handleOpenEditModal(category) {
     setSelectedCategory(category);
+
     setFormData({
       name: category.title ?? "",
       color: category.color ?? "#7c3aed",
       categoryType: category.categoryType ?? "INCOME",
     });
+
+    setErrors({});
+    setMessage("");
+    setMessageType(undefined);
     setCategoryModalOpen(true);
   }
 
@@ -86,6 +102,9 @@ export default function Categories() {
     setCategoryModalOpen(false);
     setSelectedCategory(null);
     setFormData(INITIAL_FORM_DATA);
+    setErrors({});
+    setMessage("");
+    setMessageType(undefined);
   }
 
   function handleChange(e) {
@@ -100,21 +119,43 @@ export default function Categories() {
   async function handleSubmitCategory(e) {
     e.preventDefault();
 
+    setErrors({});
+    setMessage("");
+    setMessageType(undefined);
+
+    const schema = selectedCategory ? updateCategorySchema : categorySchema;
+
+    const result = schema.safeParse(formData);
+
+    if (!result.success) {
+      const fieldErrors = result.error.flatten().fieldErrors;
+      setErrors(fieldErrors);
+      return;
+    }
+
     try {
       setIsSaving(true);
 
-      console.log(formData);
-
       if (selectedCategory) {
-        await updateCategory(selectedCategory.id, formData);
+        await updateCategory(selectedCategory.id, result.data);
+
+        setMessageType("success");
+        setMessage("Categoria atualizada com sucesso");
       } else {
-        await createCategory(formData);
+        setMessageType("success");
+        setMessage("Categoria criada com sucesso");
+        await createCategory(result.data);
       }
 
-      await loadCardsCategories();
-      handleCloseCategoryModal();
+      setTimeout(async () => {
+        handleCloseCategoryModal();
+        await loadCardsCategories();
+      }, 1800);
     } catch (error) {
       console.error("Erro ao salvar categoria:", error);
+
+      setMessageType("error");
+      setMessage("Erro ao salvar categoria");
     } finally {
       setIsSaving(false);
     }
@@ -137,8 +178,10 @@ export default function Categories() {
 
     try {
       setIsDeleting(true);
+
       await deleteCategory(categoryToDelete.id);
       await loadCardsCategories();
+
       handleCloseDeleteModal();
     } catch (error) {
       console.error("Erro ao excluir categoria:", error);
@@ -158,6 +201,7 @@ export default function Categories() {
               <div className={styles.headerCategories}>
                 <h2 className={styles.title}>Categorias</h2>
               </div>
+
               <div className={styles.cardsGrid}>
                 {summaryCards
                   .filter((card) => card.userId === null)
@@ -177,9 +221,11 @@ export default function Categories() {
             <section className={styles.field}>
               <div className={styles.headerCategories}>
                 <h2 className={styles.title}>Minhas Categorias</h2>
+
                 <div className={styles.spacer}>
                   <DefaultButton onClick={handleOpenCreateModal}>
-                    <CirclePlus /> Adicionar Categoria
+                    <CirclePlus />
+                    Adicionar Categoria
                   </DefaultButton>
                 </div>
               </div>
@@ -211,6 +257,9 @@ export default function Categories() {
             onChange={handleChange}
             categoryToEdit={selectedCategory}
             isSaving={isSaving}
+            message={message}
+            messageType={messageType}
+            errors={errors}
           />
 
           <ConfirmModal

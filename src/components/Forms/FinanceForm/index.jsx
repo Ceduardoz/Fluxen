@@ -6,7 +6,6 @@ export default function FinanceForm({
   setFormData,
   categories = [],
   accounts = [],
-  errors = {},
 }) {
   function handleChange(e) {
     const { name, value, type } = e.target;
@@ -64,10 +63,6 @@ export default function FinanceForm({
             value={formData.title}
             onChange={handleChange}
           />
-
-          {errors.title && (
-            <span className={styles.error}>{errors.title[0]}</span>
-          )}
         </div>
 
         <div className={styles.field}>
@@ -81,15 +76,12 @@ export default function FinanceForm({
             value={formData.amount}
             onChange={handleChange}
           />
-
-          {errors.amount && (
-            <span className={styles.error}>{errors.amount[0]}</span>
-          )}
         </div>
 
         <div className={styles.field}>
-          <label>Tipo</label>
-          <div className={styles.radioGroup}>
+          <span>Tipo</span>
+
+          <div className={`${styles.radioGroup}`}>
             <label>
               <DefaultInput
                 type="radio"
@@ -101,6 +93,7 @@ export default function FinanceForm({
               />
               Receita
             </label>
+
             <label>
               <DefaultInput
                 type="radio"
@@ -113,10 +106,19 @@ export default function FinanceForm({
               Despesa
             </label>
           </div>
-
-          {errors.type && (
-            <span className={styles.error}>{errors.type[0]}</span>
-          )}
+          <select
+            id="accountId"
+            name="accountId"
+            value={formData.accountId ?? ""}
+            onChange={handleAccountChange}
+          >
+            <option value="">Selecione uma conta</option>
+            {accounts.map((account) => (
+              <option key={account.id} value={account.id}>
+                {account.name}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
@@ -136,10 +138,6 @@ export default function FinanceForm({
               </option>
             ))}
           </select>
-
-          {errors.categoryId && (
-            <span className={styles.error}>{errors.categoryId[0]}</span>
-          )}
         </div>
 
         <div className={styles.field}>
@@ -151,30 +149,17 @@ export default function FinanceForm({
             value={formData.date}
             onChange={handleChange}
           />
-
-          {errors.date && (
-            <span className={styles.error}>{errors.date[0]}</span>
-          )}
         </div>
-        <div className={styles.field}>
-          <label htmlFor="accountId">Conta</label>
-          <select
-            id="accountId"
-            name="accountId"
-            value={formData.accountId ?? ""}
-            onChange={handleAccountChange}
-          >
-            <option value="">Selecione uma conta</option>
-            {accounts.map((account) => (
-              <option key={account.id} value={account.id}>
-                {account.name}
-              </option>
-            ))}
-          </select>
 
-          {errors.accountId && (
-            <span className={styles.error}>{errors.accountId[0]}</span>
-          )}
+        <div className={styles.field}>
+          <label htmlFor="description">Descrição</label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Observações sobre a transação"
+            value={formData.description}
+            onChange={handleChange}
+          />
         </div>
       </div>
     </div>

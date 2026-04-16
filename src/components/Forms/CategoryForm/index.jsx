@@ -9,6 +9,7 @@ export default function CategoryForm({
   onSubmit,
   categoryToEdit = null,
   isSaving = false,
+  errors = {},
 }) {
   return (
     <form className={styles.form} onSubmit={onSubmit}>
@@ -21,8 +22,9 @@ export default function CategoryForm({
           placeholder="Digite o nome da categoria"
           value={formData.name}
           onChange={onChange}
-          required
         />
+
+        {errors.name && <span className={styles.error}>{errors.name[0]}</span>}
       </div>
 
       <div className={styles.field}>
@@ -34,6 +36,10 @@ export default function CategoryForm({
           value={formData.color}
           onChange={onChange}
         />
+
+        {errors.color && (
+          <span className={styles.error}>{errors.color[0]}</span>
+        )}
       </div>
 
       <div className={styles.field}>
@@ -47,6 +53,10 @@ export default function CategoryForm({
           <option value="EXPENSE">Despesa</option>
           <option value="INCOME">Receita</option>
         </select>
+
+        {errors.categoryType && (
+          <span className={styles.error}>{errors.categoryType[0]}</span>
+        )}
       </div>
 
       <div className={styles.actions}>
