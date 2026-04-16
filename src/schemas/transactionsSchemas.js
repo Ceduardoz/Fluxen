@@ -13,10 +13,17 @@ export const transactionsSchemas = z.object({
       },
     ),
   type: z.enum(["INCOME", "EXPENSE", "TRANSFER"]),
-  date: z.coerce.date(),
-  accountId: z.coerce.number().int().positive("Conta obrigatória"),
+  date: z.coerce.date("Data deve ser obrigatória"),
+  accountId: z.coerce
+    .number({ invalid_type_error: "Conta obrigatória" })
+    .int()
+    .positive("Conta obrigatória"),
   toAccountId: z.coerce.number().int().positive().optional(),
-  categoryId: z.coerce.number().int().positive().optional(),
+  categoryId: z.coerce
+    .number()
+    .int()
+    .positive("Selecione uma categoria")
+    .optional(),
 });
 
 export const updateTransactionSchema = z.object({

@@ -30,7 +30,7 @@ const EMPTY_TRANSACTION_FORM = {
   amount: "",
   type: "EXPENSE",
   date: "",
-  accountId: 1,
+  accountId: null,
   categoryId: undefined,
   toAccountId: undefined,
 };

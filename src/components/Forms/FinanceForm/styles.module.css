@@ -12,12 +12,15 @@
   gap: 0.45rem;
 }
 
-.field label,
+.field label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 1rem 1.2rem 0rem 0rem;
+}
 .field span {
   font-size: 0.95rem;
   font-weight: 600;
-  margin: 1rem 0.8rem 0rem;
-  color: var(--text);
+  margin: 0rem 0.8rem 1rem;
 }
 
 .field input,
@@ -95,4 +98,9 @@
 .field input::placeholder,
 .field textarea::placeholder {
   color: var(--text-muted);
+}
+
+.error {
+  color: var(--error);
+  font-size: 0.85rem;
 }

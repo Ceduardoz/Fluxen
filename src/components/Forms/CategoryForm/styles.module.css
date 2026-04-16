@@ -40,3 +40,7 @@
   border-color: var(--brand);
   box-shadow: 0 0 0 4px var(--shadow-soft);
 }
+
+.actions {
+  margin-top: 1rem;
+}

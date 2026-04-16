@@ -20,7 +20,7 @@ const EMPTY_TRANSACTION_FORM = {
   amount: "",
   type: "EXPENSE",
   date: "",
-  accountId: 14,
+  accountId: undefined,
   categoryId: undefined,
   toAccountId: undefined,
 };
@@ -55,6 +55,7 @@ export default function TransactionModal({
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState(undefined);
   const [isSaving, setIsSaving] = useState(false);
+  const [errors, setErrors] = useState({});
 
   function handleClose() {
     if (isSaving) return;
@@ -63,6 +64,7 @@ export default function TransactionModal({
 
   async function handleTransactionsSubmit(e) {
     e.preventDefault();
+    setErrors({});
 
     setMessage("");
     setMessageType(undefined);
@@ -74,8 +76,8 @@ export default function TransactionModal({
     const res = schema.safeParse(formData);
 
     if (!res.success) {
-      setMessageType("error");
-      setMessage("Preencha os campos corretamente");
+      const fieldErrors = res.error.flatten().fieldErrors;
+      setErrors(fieldErrors);
       return;
     }
 
@@ -106,7 +108,6 @@ export default function TransactionModal({
       if (onTransactionCreated) {
         await onTransactionCreated();
       }
-
       setTimeout(() => {
         onClose();
       }, 1800);
@@ -132,6 +133,7 @@ export default function TransactionModal({
           setFormData={setFormData}
           categories={categories}
           accounts={accounts}
+          errors={errors}
         />
 
         <DefaultButton type="submit" disabled={isSaving}>
