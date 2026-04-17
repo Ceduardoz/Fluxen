@@ -152,7 +152,7 @@ export default function InvestmentPage() {
             <h1 className={styles.title}>Investimentos</h1>
             <div className={styles.spacer}>
               <DefaultButton onClick={handleOpenCreateModal}>
-                <CirclePlus size={20} /> Novo Investimento
+                <CirclePlus size={30} /> Novo Investimento
               </DefaultButton>
             </div>
           </div>

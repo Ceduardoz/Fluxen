@@ -69,7 +69,7 @@ export default function Header({ onMenuClick }) {
 
       <div className={styles.icones}>
         <IconButton onClick={handleIsLogged}>
-          <User size={20} />
+          <User size={24} />
         </IconButton>
 
         <IconButton
