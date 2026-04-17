@@ -12,12 +12,10 @@
   gap: 0.45rem;
 }
 
-.field label,
-.field span {
+.field label {
   font-size: 1.2rem;
   font-weight: 600;
   margin: 1rem 0rem 0rem;
-  color: var(--text);
 }
 
 .field input,
@@ -40,4 +38,11 @@
 .field select:focus {
   border-color: var(--brand);
   box-shadow: 0 0 0 4px var(--shadow-soft);
+}
+
+.error {
+  color: var(--error);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
 }

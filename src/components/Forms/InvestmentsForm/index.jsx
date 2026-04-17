@@ -9,13 +9,10 @@ export default function InvestmentForm({
   investmentToEdit,
   isSaving,
   accounts = [],
+  errors = [],
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!formData.name || !formData.investedAmount || !formData.annualRate) {
-      return alert("Preencha os campos obrigatórios");
-    }
 
     onSubmit({
       ...formData,
@@ -36,6 +33,9 @@ export default function InvestmentForm({
               onChange={onChange}
               placeholder="Ex: Reserva de Emergência"
             />
+            {errors.name && (
+              <span className={styles.error}>{errors.name[0]}</span>
+            )}
           </div>
 
           <div className={styles.row}>
@@ -54,6 +54,9 @@ export default function InvestmentForm({
                   </option>
                 ))}
               </select>
+              {errors.institution && (
+                <span className={styles.error}>{errors.institution[0]}</span>
+              )}
             </div>
 
             <div className={styles.field}>
@@ -64,6 +67,9 @@ export default function InvestmentForm({
                 <option value="LCI">LCI</option>
                 <option value="LCA">LCA</option>
               </select>
+              {errors.type && (
+                <span className={styles.error}>{errors.type[0]}</span>
+              )}
             </div>
           </div>
         </div>
@@ -79,6 +85,9 @@ export default function InvestmentForm({
                 onChange={onChange}
                 placeholder="0.00"
               />
+              {errors.investedAmount && (
+                <span className={styles.error}>{errors.investedAmount[0]}</span>
+              )}
             </div>
 
             <div className={styles.field}>
@@ -93,6 +102,9 @@ export default function InvestmentForm({
               <small className={styles.helperText}>
                 Base atual do CDI: 11,25% ao ano.
               </small>
+              {errors.annualRate && (
+                <span className={styles.error}>{errors.annualRate[0]}</span>
+              )}
             </div>
           </div>
 
@@ -104,6 +116,9 @@ export default function InvestmentForm({
               value={formData.startDate}
               onChange={onChange}
             />
+            {errors.startDate && (
+              <span className={styles.error}>{errors.startDate[0]}</span>
+            )}
           </div>
         </div>
       </div>

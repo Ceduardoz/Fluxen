@@ -7,6 +7,7 @@ import {
   postInvestment,
   deleteInvestment,
 } from "../../services/investmentServices";
+import { createInvestmentSchema } from "../../schemas/investmentSchemas";
 
 import styles from "./styles.module.css";
 
@@ -41,6 +42,10 @@ export default function InvestmentPage() {
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const [accounts, setAccounts] = useState([]);
 
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState(undefined);
+  const [errors, setErrors] = useState({});
+
   async function loadData() {
     try {
       setLoading(true);
@@ -63,13 +68,20 @@ export default function InvestmentPage() {
 
   function handleOpenCreateModal() {
     setFormData(INITIAL_FORM_DATA);
+    setErrors({});
+    setMessage("");
+    setMessageType(undefined);
     setIsModalOpen(true);
   }
 
   function handleCloseModal() {
     if (isSaving) return;
+
     setIsModalOpen(false);
     setFormData(INITIAL_FORM_DATA);
+    setErrors({});
+    setMessage("");
+    setMessageType(undefined);
   }
 
   function handleChange(e) {
@@ -81,13 +93,32 @@ export default function InvestmentPage() {
   }
 
   async function handleSubmit(data) {
+    setErrors({});
+    setMessage("");
+    setMessageType(undefined);
+
+    const result = createInvestmentSchema.safeParse(data);
+
+    if (!result.success) {
+      const fieldErrors = result.error.flatten().fieldErrors;
+      setErrors(fieldErrors);
+      return;
+    }
     try {
       setIsSaving(true);
       await postInvestment(data);
-      await loadData();
-      handleCloseModal();
+
+      setMessageType("success");
+      setMessage("Investimento criado com sucesso");
+
+      setTimeout(async () => {
+        await loadData();
+        handleCloseModal();
+      }, 1000);
     } catch (error) {
       console.error("Erro ao salvar investimento:", error);
+      setMessageType("error");
+      setMessage("Erro ao salvar investimento");
     } finally {
       setIsSaving(false);
     }
@@ -162,6 +193,9 @@ export default function InvestmentPage() {
         onChange={handleChange}
         isSaving={isSaving}
         accounts={accounts}
+        errors={errors}
+        message={message}
+        messageType={messageType}
       />
 
       <ConfirmModal
