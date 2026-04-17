@@ -4,3 +4,12 @@
   align-items: center;
   gap: 3.5rem;
 }
+
+@media (max-width: 1200px) {
+  .currentGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+}

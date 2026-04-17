@@ -2,6 +2,7 @@
   display: flex;
   gap: 2rem;
   padding: 1rem 0;
+  width: 100%;
 }
 
 .grid {
@@ -10,4 +11,27 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   padding: 1rem 0;
+}
+
+/* --- Responsividade --- */
+
+@media (max-width: 768px) {
+  .content,
+  .grid {
+    gap: 1rem;
+  }
+
+  .content {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .content > * {
+    flex: 1 1 calc(50% - 1rem);
+    min-width: 140px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
