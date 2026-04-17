@@ -1,4 +1,4 @@
-.cardCategory {
+.goalCards {
   border-radius: 1rem;
   overflow: hidden;
   display: flex;
@@ -54,4 +54,10 @@
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 700;
+}
+
+@media (max-width: 1200px) {
+  .goalCards {
+    width: 350px;
+  }
 }

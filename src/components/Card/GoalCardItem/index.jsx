@@ -23,7 +23,7 @@ export default function GoalCardItem({
 
   return (
     <div
-      className={styles.cardCategory}
+      className={styles.goalCards}
       style={{
         border: `2px solid ${goalColor}`,
       }}

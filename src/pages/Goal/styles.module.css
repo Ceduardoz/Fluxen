@@ -1,4 +1,4 @@
-.categoriesWrapper {
+.goalsWrapper {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
@@ -31,5 +31,18 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  width: 300px;
+  width: 250px;
+}
+
+@media (max-width: 1200px) {
+  .cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .cardsGrid {
+    display: flex;
+  }
 }
