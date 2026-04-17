@@ -182,7 +182,7 @@ export default function Auth() {
           >
             <header className={styles.logoArea}>
               <Logo />
-              <h2 className={styles.nameLogo}>Finance</h2>
+              <h2 className={styles.nameLogo}>Fluxen</h2>
             </header>
 
             <h3 className={styles.title}>{formTitle}</h3>
@@ -239,8 +239,9 @@ export default function Auth() {
             )}
           </div>
         </article>
-
-        <AuthSideImage isRegister={isRegister} />
+        <div className={styles.authSideImage}>
+          <AuthSideImage isRegister={isRegister} />
+        </div>
       </section>
     </AuthTemplate>
   );

@@ -5,7 +5,8 @@ export default function SideBar({ isOpen, onClose }) {
   return (
     <aside className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
       <div className={styles.logo}>
-        <span>Controle Financeiro</span>
+        <img src="./logo.PNG" alt="logo" className={styles.logoImage} />
+        <span>Fluxen</span>
       </div>
 
       <nav className={styles.menu}>
