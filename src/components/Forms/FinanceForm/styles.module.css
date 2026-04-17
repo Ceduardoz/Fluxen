@@ -1,8 +1,9 @@
 .form {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 4rem;
+  gap: 2rem;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .field {
@@ -103,4 +104,22 @@
 .error {
   color: var(--error);
   font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .form {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    margin: 0;
+    width: 100%;
+  }
+
+  .field label {
+    margin: 0.5rem 0 0.2rem 0;
+  }
 }

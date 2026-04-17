@@ -74,6 +74,9 @@ export default function GoalForm({
         </div>
       </div>
       <div className={styles.field}>
+        <label htmlFor="accountId" className={styles.labelSelect}>
+          Conta
+        </label>
         <select
           id="accountId"
           name="accountId"
