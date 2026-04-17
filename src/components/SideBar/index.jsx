@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom";
+import Logo from "../Logo";
 import styles from "./styles.module.css";
 
 export default function SideBar({ isOpen, onClose }) {
   return (
     <aside className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
       <div className={styles.logo}>
-        <img src="./logo.PNG" alt="logo" className={styles.logoImage} />
+        <Logo />
         <span>Fluxen</span>
       </div>
 
