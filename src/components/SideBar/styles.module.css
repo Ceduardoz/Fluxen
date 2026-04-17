@@ -4,14 +4,17 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  width: 240px;
+  width: 100%;
+  height: 100%;
   padding: 24px 16px;
-  border-radius: 0.8rem 0rem 0rem 0.8rem;
+  transition: transform 0.3s ease-in-out;
 }
 
 .logo {
-  font-size: 1.6em;
-  font-weight: 600;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding-left: 14px;
 }
 
 .menu {
@@ -20,20 +23,41 @@
   gap: 8px;
 }
 
-a {
+.sidebar a {
   color: var(--text-inverse);
-  padding: 10px 14px;
-  border: none;
-  border-radius: 12px;
-  text-align: left;
+  padding: 12px 14px;
   text-decoration: none;
   font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
+  font-weight: 500;
+  border-radius: 12px;
   transition: 0.2s;
 }
 
-a.active {
-  background: var(--bg-surface);
-  color: var(--text);
+.sidebar a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.active {
+  background: var(--bg-surface) !important;
+  color: var(--text) !important;
+}
+
+/* Responsividade da Sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px; /* Largura fixa no mobile */
+    height: 100vh;
+    z-index: 999; /* Fica acima de tudo */
+    border-radius: 0;
+    transform: translateX(-100%); /* Esconde para a esquerda */
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Classe injetada pelo React quando isSidebarOpen for true */
+  .open {
+    transform: translateX(0);
+  }
 }

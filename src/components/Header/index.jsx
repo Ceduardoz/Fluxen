@@ -1,22 +1,21 @@
 import { useState, useEffect } from "react";
-import { SunIcon, Moon, User } from "lucide-react";
+import { SunIcon, Moon, User, Menu } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { getMe } from "../../services/authServices";
 import IconButton from "../Buttons/IconButton";
 import styles from "./styles.module.css";
 
-export default function Header() {
+export default function Header({ onMenuClick }) {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
-  const localtion = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     async function loadUser() {
-      const user = await getMe();
-      setUser(user);
+      const userData = await getMe();
+      setUser(userData);
     }
-
     loadUser();
   }, []);
 
@@ -25,27 +24,19 @@ export default function Header() {
     "/transactions": "Transações",
     "/categories": "Categorias",
     "/vault": "Metas",
+    "/investments": "Investimentos",
     "/user-settings": "Configurações",
   };
 
-  function handleIsLogged() {
-    let isLogged = localStorage.getItem("token");
-
-    if (!isLogged) return navigate("/auth");
-    return navigate("/user-settings");
-  }
-
-  const pageTitle = titles[localtion.pathname] || "dashboard";
+  const pageTitle = titles[location.pathname] || "Dashboard";
 
   const [theme, setTheme] = useState(() => {
     const storageTheme = localStorage.getItem("theme");
-    if (storageTheme === "dark" || storageTheme === "light") {
-      return storageTheme;
-    }
-    return "light";
+    return storageTheme === "dark" || storageTheme === "light"
+      ? storageTheme
+      : "light";
   });
 
-  // Objeto para definir o icone
   const nextThemeIcon = {
     dark: <SunIcon />,
     light: <Moon />,
@@ -53,26 +44,34 @@ export default function Header() {
 
   function handleThemeChange(e) {
     e.preventDefault();
-
     setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
   }
 
-  // Mudança de tema
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  function handleIsLogged() {
+    let token = localStorage.getItem("token");
+    if (!token) return navigate("/auth");
+    return navigate("/user-settings");
+  }
+
   return (
     <header className={styles.header}>
+      {/* Botão de menu que aciona a prop onMenuClick */}
+      <IconButton className={styles.menuButton} onClick={onMenuClick}>
+        <Menu size={24} />
+      </IconButton>
+
       <h4 className={styles.NameUser}>{pageTitle}</h4>
 
       <div className={styles.icones}>
         <IconButton onClick={handleIsLogged}>
-          <User />
+          <User size={20} />
         </IconButton>
 
-        {/* Botão mudança de tema. */}
         <IconButton
           aria-label="mudar tema"
           title="mudar tema"

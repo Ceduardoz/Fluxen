@@ -16,3 +16,16 @@
   justify-content: center;
   gap: 1rem;
 }
+
+.menuButton {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menuButton {
+    display: block;
+    border: none;
+    background-color: transparent;
+    color: var(--text);
+  }
+}

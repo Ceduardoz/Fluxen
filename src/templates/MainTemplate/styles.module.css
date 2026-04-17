@@ -77,3 +77,34 @@
 .main::-webkit-scrollbar-thumb:hover {
   background-color: var(--brand-400);
 }
+
+@media (max-width: 768px) {
+  .page {
+    padding: 0;
+  }
+
+  .frame {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .appShell {
+    grid-template-columns: 1fr; /* Sidebar sai do grid no mobile */
+  }
+
+  .main {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 998; /* Fica abaixo da sidebar, mas acima do conteúdo */
+  }
+}
