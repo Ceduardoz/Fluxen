@@ -42,21 +42,19 @@
   color: var(--text) !important;
 }
 
-/* Responsividade da Sidebar */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 280px; /* Largura fixa no mobile */
+    width: 280px;
     height: 100vh;
-    z-index: 999; /* Fica acima de tudo */
+    z-index: 999;
     border-radius: 0;
-    transform: translateX(-100%); /* Esconde para a esquerda */
+    transform: translateX(-100%);
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.3);
   }
 
-  /* Classe injetada pelo React quando isSidebarOpen for true */
   .open {
     transform: translateX(0);
   }
