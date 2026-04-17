@@ -80,7 +80,7 @@
 
 @media (max-width: 1200px) {
   .page {
-    padding: 0; /* Ocupa a tela toda para aproveitar o espaço do tablet */
+    padding: 0;
   }
 
   .frame {
@@ -90,7 +90,7 @@
   }
 
   .appShell {
-    grid-template-columns: 1fr; /* Remove a coluna da sidebar do grid */
+    grid-template-columns: 0fr;
   }
 
   .main {

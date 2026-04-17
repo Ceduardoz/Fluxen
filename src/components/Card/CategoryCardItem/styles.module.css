@@ -4,7 +4,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  width: 15rem;
+  width: 17rem;
 }
 
 .header {
@@ -64,4 +64,16 @@
   border: var(--error-border);
   background: var(--error-bg);
   color: var(--text-inverse);
+}
+
+@media (max-width: 1200px) {
+  .cardCategory {
+    width: 15rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardCategory {
+    width: 13rem;
+  }
 }

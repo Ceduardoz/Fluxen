@@ -1,24 +1,9 @@
 .categoriesWrapper {
   flex: 1;
   min-height: 0;
-
   display: flex;
   flex-direction: column;
   gap: 2rem;
-}
-
-.headerCategories {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 20%;
-}
-
-.spacer {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: 300px;
 }
 
 .field {
@@ -27,16 +12,84 @@
   gap: 1.5rem;
 }
 
+.headerCategories {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .title {
   display: flex;
   align-items: center;
   gap: 1rem;
   font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.spacer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: auto;
 }
 
 .cardsGrid {
   display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .headerCategories {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .cardsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 120px) {
+  .headerCategories {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerCategories {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .spacer {
+    width: 100%;
+  }
+
+  .spacer button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
 }
