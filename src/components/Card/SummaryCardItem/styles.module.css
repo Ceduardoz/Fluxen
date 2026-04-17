@@ -6,10 +6,28 @@
 }
 
 @media (max-width: 1200px) {
+  h2,
+  h3 {
+    font-size: 1.4rem;
+  }
+
   .currentGroup {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  h2,
+  h3 {
+    font-size: 1.2rem;
+  }
+  .currentGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
   }
 }

@@ -13,9 +13,7 @@
   padding: 1rem 0;
 }
 
-/* --- Responsividade --- */
-
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .content,
   .grid {
     gap: 1rem;
