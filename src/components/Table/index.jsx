@@ -13,7 +13,6 @@ import styles from "./styles.module.css";
 
 function formatDate(date) {
   if (!date) return "-";
-
   const [year, month, day] = String(date).split("T")[0].split("-");
   return `${day}/${month}/${year}`;
 }
@@ -61,7 +60,7 @@ export default function TransactionsTable({
             <th>Categoria</th>
             <th>Tipo</th>
             <th>Valor</th>
-            <th>Ações</th>
+            <th className={styles.actionsHeader}>Ações</th>
           </tr>
         </thead>
 
@@ -90,11 +89,11 @@ export default function TransactionsTable({
 
               return (
                 <tr key={item.id}>
-                  <td>{formatDate(item.date)}</td>
+                  <td data-label="Data">{formatDate(item.date)}</td>
 
-                  <td>{item.title}</td>
+                  <td data-label="Título">{item.title}</td>
 
-                  <td>
+                  <td data-label="Banco">
                     {item.account?.name ? (
                       <span
                         className={styles.categoryBadge}
@@ -110,7 +109,7 @@ export default function TransactionsTable({
                     )}
                   </td>
 
-                  <td>
+                  <td data-label="Categoria">
                     {item.category ? (
                       <span
                         className={styles.categoryBadge}
@@ -128,32 +127,34 @@ export default function TransactionsTable({
                     )}
                   </td>
 
-                  <td>
+                  <td data-label="Tipo">
                     <span className={getBadgeClass(item.type)}>
                       {formatType(item.type)}
                     </span>
                   </td>
 
-                  <td className={getValueClass(item.type)}>
+                  <td data-label="Valor" className={getValueClass(item.type)}>
                     {item.type === "UNRESERVE" || item.type === "EXPENSE"
                       ? `-${formatMoney(item.amount)}`
                       : formatMoney(item.amount)}
                   </td>
 
-                  <td>
-                    <IconButton
-                      onClick={() => onEdit(item)}
-                      className={`${styles.iconesTable} ${styles.editIcon}`}
-                    >
-                      <EditIcon size={18} />
-                    </IconButton>
+                  <td data-label="Ações">
+                    <div className={styles.actionsContainer}>
+                      <IconButton
+                        onClick={() => onEdit(item)}
+                        className={`${styles.iconesTable} ${styles.editIcon}`}
+                      >
+                        <EditIcon size={18} />
+                      </IconButton>
 
-                    <IconButton
-                      onClick={() => onDelete(item)}
-                      className={`${styles.iconesTable} ${styles.deleteIcon}`}
-                    >
-                      <Trash2 size={18} />
-                    </IconButton>
+                      <IconButton
+                        onClick={() => onDelete(item)}
+                        className={`${styles.iconesTable} ${styles.deleteIcon}`}
+                      >
+                        <Trash2 size={18} />
+                      </IconButton>
+                    </div>
                   </td>
                 </tr>
               );

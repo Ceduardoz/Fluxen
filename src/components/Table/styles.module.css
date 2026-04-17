@@ -125,3 +125,50 @@ td {
 .goalValue {
   color: var(--typeCOLORS-goal);
 }
+
+@media (max-width: 768px) {
+  .containerTable {
+    padding: 10px;
+    overflow-x: hidden;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tr {
+    display: block;
+    width: 100%;
+    background: var(--bg-surface);
+    border: 1px solid var(--active-on-surface);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+  }
+
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--active-on-surface);
+    text-align: right;
+    width: 100%;
+  }
+
+  .table td:last-child {
+    border-bottom: none;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    text-align: left;
+    color: var(--text);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    padding-right: 10px;
+  }
+}
