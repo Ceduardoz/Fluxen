@@ -4,6 +4,7 @@
   place-items: center;
   padding: 24px;
   background: var(--bg-surface-2);
+  overflow-x: hidden;
 }
 
 .frame {

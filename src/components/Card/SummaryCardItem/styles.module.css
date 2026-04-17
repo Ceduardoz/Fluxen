@@ -22,7 +22,7 @@
 @media (max-width: 768px) {
   h2,
   h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   .currentGroup {
     display: flex;
