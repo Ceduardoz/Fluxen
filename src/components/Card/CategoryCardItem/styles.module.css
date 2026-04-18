@@ -77,3 +77,9 @@
     width: 12rem;
   }
 }
+
+@media (max-width: 467px) {
+  .cardCategory {
+    width: 10rem;
+  }
+}

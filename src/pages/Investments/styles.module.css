@@ -47,6 +47,21 @@
     gap: 1rem;
   }
 
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .contentLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 467px) {
+  .header {
+    padding: 0;
+    gap: 1rem;
+  }
+
   .contentLayout {
     grid-template-columns: 1fr;
   }

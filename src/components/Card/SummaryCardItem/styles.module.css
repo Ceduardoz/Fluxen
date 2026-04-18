@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 3.5rem;
+  gap: 2.5rem;
 }
 
 @media (max-width: 1200px) {
@@ -29,5 +29,12 @@
     justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
+  }
+}
+
+@media (max-width: 476px) {
+  h2,
+  h3 {
+    font-size: 0.9rem;
   }
 }
