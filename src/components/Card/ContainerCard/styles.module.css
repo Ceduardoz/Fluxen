@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 0.5rem;
   color: var(--text-inverse);
   border: none;
   border-radius: 0.4rem;

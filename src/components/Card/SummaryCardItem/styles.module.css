@@ -6,7 +6,6 @@
 }
 
 @media (max-width: 1200px) {
-  h2,
   h3 {
     font-size: 1.4rem;
   }
@@ -20,7 +19,7 @@
 }
 
 @media (max-width: 768px) {
-  h2,
+  .title,
   h3 {
     font-size: 1.1rem;
   }
@@ -33,7 +32,9 @@
 }
 
 @media (max-width: 476px) {
-  h2,
+  .title {
+    font-size: 0.95rem;
+  }
   h3 {
     font-size: 0.9rem;
   }
@@ -42,6 +43,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0rem;
+    gap: 1rem;
   }
 }

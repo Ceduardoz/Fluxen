@@ -5,7 +5,7 @@ import ContainerCard from "../ContainerCard";
 export default function SummaryCardItem({ variant, title, value }) {
   return (
     <ContainerCard variant={variant}>
-      <h2>{title}</h2>
+      <h2 className={styles.title}>{title}</h2>
 
       <div className={styles.currentGroup}>
         <div className={styles.currentValue}>
