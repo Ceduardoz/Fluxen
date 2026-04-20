@@ -7,6 +7,7 @@ import Categories from "./pages/Categories";
 import Auth from "./pages/Auth";
 import Vault from "./pages/Goal";
 import Investments from "./pages/Investments";
+import About from "./pages/About";
 import UserSettings from "./pages/UserSettings";
 
 export default function App() {
@@ -57,6 +58,14 @@ export default function App() {
         element={
           <ProtectedRoute>
             <UserSettings />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/about"
+        element={
+          <ProtectedRoute>
+            <About />
           </ProtectedRoute>
         }
       />

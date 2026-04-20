@@ -25,6 +25,7 @@ export default function Header({ onMenuClick }) {
     "/categories": "Categorias",
     "/vault": "Metas",
     "/investments": "Investimentos",
+    "/about": "Sobre o Fluxen",
     "/user-settings": "Configurações",
   };
 

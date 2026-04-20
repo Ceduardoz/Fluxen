@@ -52,6 +52,14 @@ export default function SideBar({ isOpen, onClose }) {
         </NavLink>
 
         <NavLink
+          to="/about"
+          className={({ isActive }) => (isActive ? styles.active : "")}
+          onClick={onClose}
+        >
+          Sobre
+        </NavLink>
+
+        <NavLink
           to="/user-settings"
           className={({ isActive }) => (isActive ? styles.active : "")}
           onClick={onClose}
