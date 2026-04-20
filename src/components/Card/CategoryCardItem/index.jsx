@@ -23,7 +23,7 @@ export default function CategoryCardItem({
         }}
       >
         <div className={styles.headerContent}>
-          <h2>{title}</h2>
+          <h2 className={styles.title}>{title}</h2>
         </div>
 
         {isCustom && (

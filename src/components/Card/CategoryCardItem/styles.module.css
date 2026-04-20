@@ -73,6 +73,10 @@
 }
 
 @media (max-width: 768px) {
+  .title {
+    font-size: 1.2rem;
+  }
+
   .cardCategory {
     width: 12rem;
   }
