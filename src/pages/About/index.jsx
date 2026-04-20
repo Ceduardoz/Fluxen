@@ -7,7 +7,7 @@ export default function About() {
       <>
         <h1 className={styles.h1}>Fluxen</h1>
 
-        <section>
+        <section className={styles.section}>
           <h2>Sobre o Fluxen</h2>
           <p>
             O Fluxen nasceu para transformar a relação das pessoas com o
@@ -29,7 +29,7 @@ export default function About() {
           </p>
         </section>
 
-        <section>
+        <section className={styles.section}>
           <h2>Proposta</h2>
           <p>
             Este ecossistema foi projetado para ser o seu braço direito na
@@ -50,7 +50,7 @@ export default function About() {
             </li>
           </ul>
         </section>
-        <section>
+        <section className={styles.section}>
           <h2>Fluxo do Fluxen</h2>
           <ul>
             <li>
@@ -69,7 +69,7 @@ export default function About() {
             </li>
           </ul>
         </section>
-        <section>
+        <section className={styles.section}>
           <h2>Cada Página</h2>
           <h3>&#128202; Dashboard</h3>
           <p>
