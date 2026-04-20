@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { getMe } from "../../services/authServices";
 import { updateUser, deleteUser } from "../../services/UserServices";
 
@@ -14,6 +15,8 @@ export default function Profile() {
     email: "",
     password: "",
   });
+
+  const navigate = Navigate();
 
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState(undefined);
@@ -88,6 +91,7 @@ export default function Profile() {
   function handleLogout() {
     localStorage.removeItem("token");
     window.location.reload();
+    navigate("/");
   }
 
   async function handleDeleteAccount() {
@@ -104,6 +108,7 @@ export default function Profile() {
 
       localStorage.removeItem("token");
       window.location.reload();
+      Navigate("/");
     } catch (error) {
       console.error("Erro ao deletar conta:", error);
       alert("Erro ao deletar conta. Tente novamente.");

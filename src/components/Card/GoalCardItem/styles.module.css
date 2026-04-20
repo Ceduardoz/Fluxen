@@ -49,6 +49,10 @@
   padding: 0.8rem 1rem;
 }
 
+.description {
+  color: var(--text);
+}
+
 .badge {
   padding: 0.3rem 0.8rem;
   border-radius: 999px;

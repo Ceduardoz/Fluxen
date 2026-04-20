@@ -64,7 +64,7 @@ export default function GoalCardItem({
       {/* BODY */}
       <div className={styles.body}>
         <h3>{description}</h3>
-        <p>
+        <p className={styles.description}>
           Meta:
           {balance >= targetAmount ? (
             <strong style={{ color: goalColor }}> R${balance} </strong>
