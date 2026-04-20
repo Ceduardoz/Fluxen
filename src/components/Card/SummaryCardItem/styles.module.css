@@ -37,4 +37,11 @@
   h3 {
     font-size: 0.9rem;
   }
+
+  .currentGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0rem;
+  }
 }
