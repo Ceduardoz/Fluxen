@@ -9,7 +9,6 @@ export default function MainTemplate({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
-    console.log("Cliquei no menu!"); // Adicione este log para testar
     setIsSidebarOpen(!isSidebarOpen);
   };
   const closeSidebar = () => setIsSidebarOpen(false);
