@@ -1,5 +1,5 @@
 .page {
-  min-height: 100dvh;
+  min-height: 100vh;
   display: grid;
   place-items: center;
   padding: 24px;
@@ -9,14 +9,14 @@
 
 .frame {
   width: min(1800px, calc(100vw - 48px));
-  height: calc(100dvh - 48px);
+  height: calc(100vh - 48px);
   background: var(--bg-surface);
   border-radius: 28px;
   box-shadow: 0 18px 50px var(--hover-on-surface);
 }
 
 .appShell {
-  height: 100dvh;
+  height: 100%;
   display: grid;
   grid-template-columns: 15rem 1fr;
   grid-template-rows: auto 1fr;

@@ -62,6 +62,7 @@
   }
 
   .field {
+    gap: 0rem;
     margin: auto;
     width: 230px;
   }

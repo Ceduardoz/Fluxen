@@ -12,6 +12,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
 
 .headerContent {
@@ -84,6 +85,22 @@
 
 @media (max-width: 467px) {
   .cardCategory {
-    width: 9rem;
+    width: 100%;
+  }
+  .header {
+    padding: 0.4rem;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .actions {
+    gap: 0.2rem;
+  }
+
+  .actions button {
+    padding: 0.2rem;
+    font-size: 0.4rem;
   }
 }
